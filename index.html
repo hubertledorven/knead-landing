@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Knead — La gestion pensée pour les pâtissiers</title>
+<meta name="description" content="Knead calcule vos coûts, suit vos marges et gère vos commandes. Conçu par un pâtissier, pour les pâtissiers. Essai gratuit, sans carte bancaire.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#10243f;        /* fond profond, titres */
+    --navy-soft:#1c3454;   /* surfaces navy */
+    --ink:#16202e;         /* texte principal sur clair */
+    --cream:#faf6ef;       /* fond clair */
+    --cream-2:#f3ece0;     /* fond clair alt */
+    --gold:#c8a35a;        /* accent or */
+    --gold-deep:#a9863f;   /* or foncé (hover) */
+    --line:rgba(200,163,90,.35); /* filets dorés */
+    --muted:#5d6b7d;       /* texte secondaire */
+    --muted-light:rgba(250,246,239,.72);
+    --radius:14px;
+    --maxw:1140px;
+    --shadow:0 18px 50px -20px rgba(16,36,63,.45);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    color:var(--ink);
+    background:var(--cream);
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:'Cormorant Garamond',serif;line-height:1.08;font-weight:600;color:var(--navy)}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  .eyebrow{
+    font-family:'Inter',sans-serif;font-size:.72rem;font-weight:600;
+    letter-spacing:.18em;text-transform:uppercase;color:var(--gold-deep);
+    display:inline-flex;align-items:center;gap:.6em;
+  }
+  .eyebrow::before{content:"";width:26px;height:1px;background:var(--gold)}
+  .btn{
+    display:inline-flex;align-items:center;gap:.5em;
+    font-weight:600;font-size:.95rem;cursor:pointer;border:none;
+    padding:.85em 1.5em;border-radius:999px;transition:.2s ease;
+  }
+  .btn-gold{background:var(--gold);color:var(--navy)}
+  .btn-gold:hover{background:var(--gold-deep);transform:translateY(-1px)}
+  .btn-ghost{background:transparent;color:var(--navy);border:1px solid var(--line)}
+  .btn-ghost:hover{border-color:var(--gold);background:rgba(200,163,90,.08)}
+  .btn-light{background:var(--gold);color:var(--navy)}
+  .btn-light:hover{background:#d8b873;transform:translateY(-1px)}
+  :focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
+
+  /* ---------- Header ---------- */
+  header{position:sticky;top:0;z-index:50;background:rgba(250,246,239,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .brand{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:700;color:var(--navy);letter-spacing:.01em}
+  .brand span{color:var(--gold-deep)}
+  .nav-links{display:flex;align-items:center;gap:34px}
+  .nav-links a{font-size:.92rem;font-weight:500;color:var(--muted)}
+  .nav-links a:hover{color:var(--navy)}
+  .nav-cta{display:flex;align-items:center;gap:16px}
+  .menu-toggle{display:none;background:none;border:none;font-size:1.5rem;color:var(--navy);cursor:pointer}
+
+  /* ---------- Hero ---------- */
+  .hero{padding:80px 0 64px;position:relative;overflow:hidden}
+  .hero-top{max-width:760px;margin:0 auto;text-align:center}
+  .hero-top .eyebrow{justify-content:center}
+  .hero h1{font-size:clamp(2.6rem,5vw,4.3rem);letter-spacing:-.01em}
+  .hero h1 .accent{color:var(--gold-deep);font-style:italic;font-weight:500}
+  .hero p.lead{font-size:1.18rem;color:var(--muted);margin:24px auto 32px;max-width:34em}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;align-items:center;justify-content:center}
+  .hero-note{font-size:.85rem;color:var(--muted);margin-top:18px;display:inline-flex;align-items:center;gap:.5em}
+  .hero-note::before{content:"✓";color:var(--gold-deep);font-weight:700}
+
+  /* screenshot produit — large, sous le hero */
+  .hero-shot{margin:54px auto 0;max-width:1000px}
+  .shot{
+    border-radius:16px;overflow:hidden;box-shadow:var(--shadow);
+    border:1px solid rgba(200,163,90,.3);background:var(--navy);
+  }
+  .shot img{width:100%;height:auto;display:block}
+
+  /* stats strip */
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;margin-top:64px}
+  .stat{background:var(--cream);padding:26px 22px;text-align:center}
+  .stat b{display:block;font-family:'Cormorant Garamond',serif;font-size:1.9rem;color:var(--navy);line-height:1.05}
+  .stat span{font-size:.82rem;color:var(--muted);margin-top:6px;display:block}
+
+  /* ---------- Sections ---------- */
+  section{padding:96px 0}
+  .section-head{max-width:38em;margin-bottom:56px}
+  .section-head h2{font-size:clamp(2rem,3.6vw,3rem);margin:14px 0 16px}
+  .section-head p{color:var(--muted);font-size:1.08rem}
+
+  /* Founder story */
+  .founder{background:var(--navy);color:#fff}
+  .founder h2,.founder h3{color:#fff}
+  .founder .eyebrow{color:var(--gold)}
+  .founder .eyebrow::before{background:var(--gold)}
+  .founder-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:60px;align-items:start}
+  .founder-portrait{
+    background:linear-gradient(160deg,var(--navy-soft),#0b1a30);
+    border:1px solid rgba(200,163,90,.3);border-radius:18px;
+    padding:40px 32px;position:sticky;top:96px;
+  }
+  .founder-portrait .mono{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.5rem;color:var(--gold);margin-bottom:8px}
+  .founder-photo{width:100%;max-width:240px;aspect-ratio:1;object-fit:cover;border-radius:14px;border:1px solid rgba(200,163,90,.4);margin-bottom:22px;display:block}
+  .founder-portrait p{color:var(--muted-light);font-size:.92rem}
+  .founder-portrait .sig{margin-top:24px;padding-top:20px;border-top:1px solid rgba(200,163,90,.25);font-weight:600;color:#fff}
+  .founder-body h2{font-size:clamp(1.9rem,3.2vw,2.7rem);margin-bottom:24px}
+  .founder-body p{color:var(--muted-light);font-size:1.06rem;margin-bottom:20px;max-width:34em}
+  .founder-body p strong{color:#fff;font-weight:600}
+
+  /* Features */
+  .feat-pillar{margin-bottom:56px}
+  .feat-pillar:last-child{margin-bottom:0}
+  .feat-pillar > h3{font-size:1.7rem;display:flex;align-items:center;gap:.5em;margin-bottom:24px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+  .feat-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .card{
+    background:#fff;border:1px solid rgba(16,36,63,.08);border-radius:var(--radius);
+    padding:28px 24px;transition:.2s ease;
+  }
+  .card:hover{border-color:var(--gold);transform:translateY(-3px);box-shadow:0 14px 34px -22px rgba(16,36,63,.4)}
+  .card .ic{font-size:1.6rem;display:block;margin-bottom:14px}
+  .card h4{font-family:'Inter',sans-serif;font-size:1.02rem;font-weight:600;color:var(--navy);margin-bottom:8px}
+  .card p{font-size:.92rem;color:var(--muted)}
+
+  /* Pricing */
+  .pricing{background:var(--cream-2)}
+  .price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:start}
+  .plan{background:#fff;border:1px solid rgba(16,36,63,.1);border-radius:18px;padding:34px 30px;position:relative}
+  .plan.featured{border:1.5px solid var(--gold);box-shadow:var(--shadow)}
+  .plan .badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--navy);font-size:.72rem;font-weight:700;letter-spacing:.05em;padding:.4em 1em;border-radius:999px;white-space:nowrap}
+  .plan h3{font-family:'Inter',sans-serif;font-size:1.05rem;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.05em}
+  .plan .price{font-family:'Cormorant Garamond',serif;font-size:3.2rem;color:var(--navy);line-height:1;margin:16px 0 4px}
+  .plan .price small{font-size:1rem;color:var(--muted);font-family:'Inter',sans-serif}
+  .plan .year{font-size:.85rem;color:var(--gold-deep);font-weight:600;margin-bottom:22px}
+  .plan ul{list-style:none;margin:22px 0 26px;display:flex;flex-direction:column;gap:12px}
+  .plan li{font-size:.92rem;color:var(--ink);display:flex;gap:.6em;align-items:flex-start}
+  .plan li::before{content:"✓";color:var(--gold-deep);font-weight:700;flex-shrink:0}
+  .plan li.soon{color:var(--muted)}
+  .plan li.soon::before{content:"◷";color:var(--muted)}
+  .plan .btn{width:100%;justify-content:center}
+  .price-foot{text-align:center;margin-top:34px;font-size:.86rem;color:var(--muted)}
+
+  /* FAQ */
+  .faq-list{max-width:760px;margin:0 auto;border-top:1px solid var(--line)}
+  details{border-bottom:1px solid var(--line)}
+  summary{
+    cursor:pointer;list-style:none;padding:22px 0;font-weight:600;color:var(--navy);
+    font-size:1.05rem;display:flex;justify-content:space-between;align-items:center;gap:1em;
+  }
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--gold-deep);transition:.2s}
+  details[open] summary::after{transform:rotate(45deg)}
+  details p{padding:0 0 22px;color:var(--muted);font-size:.98rem;max-width:62ch}
+
+  /* Final CTA */
+  .final{background:var(--navy);color:#fff;text-align:center}
+  .final h2{color:#fff;font-size:clamp(2.2rem,4vw,3.4rem);margin-bottom:16px}
+  .final h2 em{color:var(--gold);font-style:italic}
+  .final p{color:var(--muted-light);font-size:1.1rem;margin-bottom:32px}
+  .final-points{display:flex;gap:28px;justify-content:center;flex-wrap:wrap;margin-top:30px}
+  .final-points span{font-size:.88rem;color:var(--muted-light);display:flex;align-items:center;gap:.5em}
+  .final-points span::before{content:"✓";color:var(--gold)}
+
+  /* Footer */
+  footer{background:#0b1a30;color:var(--muted-light);padding:46px 0}
+  .foot-grid{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+  .foot-grid .brand{color:#fff}
+  .foot-links{display:flex;gap:26px;font-size:.88rem}
+  .foot-links a:hover{color:var(--gold)}
+  .foot-sign{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--gold);font-size:1.1rem}
+
+  /* ---------- Responsive ---------- */
+  @media(max-width:900px){
+    .founder-grid{grid-template-columns:1fr;gap:36px}
+    .founder-portrait{position:static}
+    .feat-cards{grid-template-columns:1fr 1fr}
+    .price-grid{grid-template-columns:1fr;max-width:440px;margin:0 auto}
+    .stats{grid-template-columns:1fr 1fr}
+    .nav-links{display:none}
+    .nav-links.open{display:flex;position:absolute;top:72px;left:0;right:0;flex-direction:column;background:var(--cream);padding:20px 24px;gap:18px;border-bottom:1px solid var(--line)}
+    .menu-toggle{display:block}
+  }
+  @media(max-width:560px){
+    .feat-cards{grid-template-columns:1fr}
+    .stats{grid-template-columns:1fr 1fr}
+    section{padding:68px 0}
+    .hero{padding:56px 0 48px}
+    .hero-cta{flex-direction:column;align-items:stretch}
+    .hero-cta .btn{justify-content:center}
+  }
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="brand">Knead<span>.</span></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#fonctionnalites">Fonctionnalités</a>
+      <a href="#tarifs">Tarifs</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="https://app.kneadmanager.com/" class="btn btn-gold">Essai gratuit</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<a id="top"></a>
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-top">
+      <span class="eyebrow">Conçu par un pâtissier, pour les pâtissiers</span>
+      <h1>Votre métier, c'est la pâtisserie.<br><span class="accent">Pas la comptabilité.</span></h1>
+      <p class="lead">Knead calcule vos coûts, suit vos marges et gère vos commandes — automatiquement. Vous récupérez vos dimanches soir, et vous connaissez enfin votre vraie marge.</p>
+      <div class="hero-cta">
+        <a href="https://app.kneadmanager.com/" class="btn btn-gold">Commencer l'essai gratuit</a>
+        <a href="#fonctionnalites" class="btn btn-ghost">Découvrir Knead</a>
+      </div>
+      <p class="hero-note">7 jours gratuits, sans carte bancaire — annulation en un clic</p>
+    </div>
+    <div class="hero-shot">
+      <div class="shot">
+        <img src="dashboard.png" alt="Tableau de bord Knead : production du jour, commandes à venir, alertes stock et résumé financier" loading="lazy">
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><b>Jusqu'à 2h</b><span>gagnées par semaine</span></div>
+      <div class="stat"><b>Au centime</b><span>le coût exact de chaque recette</span></div>
+      <div class="stat"><b>Temps réel</b><span>marges recalculées à chaque prix</span></div>
+      <div class="stat"><b>0€</b><span>pour commencer</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDER STORY -->
+<section class="founder" id="histoire">
+  <div class="wrap founder-grid">
+    <aside class="founder-portrait">
+      <img src="hubert.jpg" alt="Hubert, fondateur de Knead, dans son atelier à Sydney" class="founder-photo" onerror="this.style.display='none'">
+      <div class="mono">Hubert</div>
+      <p>Pâtissier depuis 17 ans, fondateur de Knead. Atelier à Sydney.</p>
+      <div class="sig">« J'ai créé Knead pour moi.<br>Aujourd'hui, je le partage. »</div>
+    </aside>
+    <div class="founder-body">
+      <span class="eyebrow">Pourquoi Knead</span>
+      <h2>17 ans en pâtisserie. 17 ans à détester Excel.</h2>
+      <p>Pendant des années, je n'ai jamais su précisément ma marge sur chaque création. Mes food costs, je les faisais le dimanche soir, en pestant. Quand l'IA est arrivée, j'ai essayé — mais ressaisir à la main les prix de tous mes fournisseurs, c'était devenu un autre cauchemar.</p>
+      <p>Travailler seul, c'est aussi gérer les stocks, encaisser les commandes, planifier la production, éditer les factures. <strong>Tout, en même temps.</strong></p>
+      <p>J'ai passé trois ans à suivre les progrès de l'IA. Et j'ai fini par construire l'outil que j'aurais voulu avoir : je photographie une facture, mes ingrédients se mettent à jour et mes marges se recalculent. Une commande arrive, elle apparaît dans mon planning. Un client veut une facture, elle est prête en deux clics.</p>
+      <p><strong>Aujourd'hui, je veux que d'autres pâtissiers récupèrent ce temps et cet argent que j'ai perdus.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="fonctionnalites">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Fonctionnalités</span>
+      <h2>Tout ce qui vous prend du temps, automatisé</h2>
+      <p>De la facture scannée à la marge calculée, en passant par la commande reçue sur votre boutique : Knead s'occupe de l'ingrat pour que vous restiez en cuisine.</p>
+    </div>
+
+    <div class="feat-pillar">
+      <h3>🤖 L'IA qui fait le travail ingrat</h3>
+      <div class="feat-cards">
+        <div class="card"><span class="ic">📸</span><h4>Scan de factures</h4><p>Photographiez une facture fournisseur : l'IA crée vos ingrédients et met à jour les prix. Plus de ressaisie.</p></div>
+        <div class="card"><span class="ic">⚡</span><h4>Food cost en temps réel</h4><p>Le prix du beurre augmente ? Vos marges se recalculent instantanément, sur toutes vos recettes.</p></div>
+        <div class="card"><span class="ic">💬</span><h4>Assistant intégré</h4><p>Posez une question sur votre activité, obtenez une réponse immédiate, sans quitter Knead.</p></div>
+      </div>
+    </div>
+
+    <div class="feat-pillar">
+      <h3>⚙️ L'automatisation qui libère vos dimanches</h3>
+      <div class="feat-cards">
+        <div class="card"><span class="ic">📅</span><h4>Votre semaine, organisée</h4><p>Visualisez toute votre production sur la semaine. Chaque commande se place au bon jour : vous savez quoi préparer, et quand.</p></div>
+        <div class="card"><span class="ic">🛒</span><h4>Commandes → planning</h4><p>Une commande arrive sur votre boutique : elle s'ajoute au planning, le stock est déduit, la facture est prête.</p></div>
+        <div class="card"><span class="ic">📄</span><h4>Factures aux normes</h4><p>Mentions légales obligatoires, numérotation séquentielle, TVA : vos factures sont déjà aux normes françaises. <strong>Conformité à la facture électronique en préparation pour l'échéance 2027.</strong></p></div>
+        <div class="card"><span class="ic">🔔</span><h4>Alertes de stock</h4><p>Plus jamais à court de praliné un samedi matin : Knead vous prévient avant la rupture.</p></div>
+      </div>
+    </div>
+
+    <div class="feat-pillar">
+      <h3>📊 Les chiffres qui font la différence</h3>
+      <div class="feat-cards">
+        <div class="card"><span class="ic">💰</span><h4>Marge par recette</h4><p>Voyez d'un coup d'œil ce qui vous rapporte, et ce qui vous coûte.</p></div>
+        <div class="card"><span class="ic">🎯</span><h4>Seuil de rentabilité</h4><p>Combien d'entremets vendre pour couvrir vos charges ? Knead vous le dit, recette par recette.</p></div>
+        <div class="card"><span class="ic">🌅</span><h4>Tableau du matin</h4><p>Production, commandes, stocks à risque : 30 secondes pour cadrer votre journée.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="tarifs">
+  <div class="wrap">
+    <div class="section-head" style="margin-left:auto;margin-right:auto;text-align:center">
+      <span class="eyebrow" style="justify-content:center">Tarifs</span>
+      <h2>Simple, et sans surprise</h2>
+      <p>Essai gratuit sans carte bancaire. Vous payez quand vous êtes convaincu.</p>
+    </div>
+
+    <div class="price-grid">
+      <div class="plan featured">
+        <span class="badge">★ Le plus choisi</span>
+        <h3>Solo</h3>
+        <div class="price">49€<small>/mois</small></div>
+        <div class="year">ou 470€/an — soit -20%</div>
+        <ul>
+          <li>1 utilisateur</li>
+          <li>20 scans de factures IA / mois</li>
+          <li>Recettes, coûts &amp; marges</li>
+          <li>Intégration Shopify &amp; boutiques</li>
+          <li>Support par email</li>
+        </ul>
+        <a href="https://app.kneadmanager.com/" class="btn btn-gold">Essai gratuit</a>
+      </div>
+
+      <div class="plan">
+        <h3>Équipe</h3>
+        <div class="price">89€<small>/mois</small></div>
+        <div class="year">ou 854€/an — soit -20%</div>
+        <ul>
+          <li>Scans de factures illimités</li>
+          <li>Toutes les fonctionnalités Solo</li>
+          <li>Support prioritaire</li>
+          <li class="soon">Comptes pour votre équipe (bientôt)</li>
+        </ul>
+        <a href="https://app.kneadmanager.com/" class="btn btn-ghost">Essai gratuit</a>
+      </div>
+
+      <div class="plan">
+        <h3>Multi-boutiques</h3>
+        <div class="price">Sur devis</div>
+        <div class="year">Réseaux &amp; franchises</div>
+        <ul>
+          <li>Utilisateurs illimités</li>
+          <li>Boutiques illimitées</li>
+          <li>Toutes les fonctionnalités Équipe</li>
+          <li>Accompagnement dédié</li>
+        </ul>
+        <a href="mailto:contact@kneadmanager.com" class="btn btn-ghost">Nous contacter</a>
+      </div>
+    </div>
+    <p class="price-foot">Aucune carte bancaire requise · Annulation à tout moment · Données hébergées en Europe</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="wrap">
+    <div class="section-head" style="margin-left:auto;margin-right:auto;text-align:center">
+      <span class="eyebrow" style="justify-content:center">Questions fréquentes</span>
+      <h2>Tout ce que vous vous demandez</h2>
+    </div>
+    <div class="faq-list">
+      <details open>
+        <summary>L'essai est-il vraiment gratuit ?</summary>
+        <p>Oui. Vous testez Knead pendant 7 jours, sans carte bancaire. Vous ne payez que si vous décidez de continuer, et vous pouvez annuler à tout moment en un clic.</p>
+      </details>
+      <details>
+        <summary>Je ne suis pas à l'aise avec l'informatique. C'est compliqué ?</summary>
+        <p>Knead a été pensé par un pâtissier, pas par un comptable. Tout se passe dans votre navigateur, sans installation. La prise en main se fait en quelques minutes, et l'assistant intégré répond à vos questions au fur et à mesure.</p>
+      </details>
+      <details>
+        <summary>Comment fonctionne le scan de factures ?</summary>
+        <p>Vous photographiez une facture fournisseur. L'IA lit les ingrédients et les prix, crée ou met à jour vos fiches, puis recalcule automatiquement vos marges. Vous n'avez plus rien à ressaisir.</p>
+      </details>
+      <details>
+        <summary>Puis-je connecter ma boutique en ligne ?</summary>
+        <p>Oui. Knead se connecte à Shopify et aux principales boutiques. Chaque commande reçue s'ajoute à votre planning, déduit le stock et prépare la facture.</p>
+      </details>
+      <details>
+        <summary>Mes données sont-elles en sécurité ?</summary>
+        <p>Vos données sont hébergées en Europe et vous appartiennent. Vous pouvez les exporter ou supprimer votre compte à tout moment.</p>
+      </details>
+      <details>
+        <summary>Et la facture électronique obligatoire ?</summary>
+        <p>Vos factures Knead respectent déjà les mentions légales françaises. Pour la réforme de la facture électronique, l'obligation d'émission concerne les TPE et indépendants à partir de septembre 2027. Nous préparons la conformité (format Factur-X et transmission via plateforme agréée) pour cette échéance, afin que vous soyez prête le moment venu.</p>
+      </details>
+      <details>
+        <summary>Et si je gère plusieurs boutiques ?</summary>
+        <p>L'offre Multi-boutiques est faite pour les réseaux et les franchises : utilisateurs et boutiques illimités, avec un accompagnement dédié. Contactez-nous pour un devis adapté.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final">
+  <div class="wrap">
+    <span class="eyebrow" style="justify-content:center;color:var(--gold)">Tu pâtisses, Knead compte.</span>
+    <h2>Pâtissier·ère, <em>reprenez le contrôle.</em></h2>
+    <p>Rejoignez les pâtissiers qui connaissent enfin leur vraie marge.</p>
+    <a href="https://app.kneadmanager.com/" class="btn btn-light">Commencer l'essai gratuit</a>
+    <div class="final-points">
+      <span>Aucune carte requise</span>
+      <span>Installation en 2 minutes</span>
+      <span>Annulation libre</span>
+      <span>Support inclus</span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap foot-grid">
+    <div>
+      <div class="brand">Knead<span style="color:var(--gold)">.</span></div>
+      <div class="foot-sign">Tu pâtisses, Knead compte.</div>
+    </div>
+    <div class="foot-links">
+      <a href="#fonctionnalites">Fonctionnalités</a>
+      <a href="#tarifs">Tarifs</a>
+      <a href="#faq">FAQ</a>
+      <a href="mailto:contact@kneadmanager.com">Contact</a>
+    </div>
+  </div>
+  <div class="wrap" style="margin-top:24px;font-size:.8rem;opacity:.6">© 2026 Knead · Pastry Management · Tous droits réservés</div>
+</footer>
+
+<script>
+  // Menu mobile
+  var t=document.getElementById('menuToggle'),n=document.getElementById('navLinks');
+  t&&t.addEventListener('click',function(){n.classList.toggle('open')});
+  n&&n.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){n.classList.remove('open')})});
+</script>
+</body>
+</html>
