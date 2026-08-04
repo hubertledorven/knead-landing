@@ -153,14 +153,15 @@
   .founder{background:var(--navy);color:#fff}
   .founder h2,.founder h3{color:#fff}
   .founder .eyebrow{color:var(--gold)}
-  .founder-grid{display:grid;grid-template-columns:340px 1fr;gap:64px;align-items:start}
+  .founder-grid{display:grid;grid-template-columns:minmax(320px,420px) 1fr;gap:56px;align-items:center}
   .founder-portrait{
     background:var(--navy-soft);border:1px solid var(--line-invert);
-    border-radius:var(--radius);padding:28px;position:sticky;top:104px;
+    border-radius:var(--radius);padding:28px;max-width:420px;
   }
   .founder-photo{
-    width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top center;
-    border-radius:var(--radius);margin-bottom:22px;
+    width:100%;height:auto;aspect-ratio:3/4;
+    object-fit:cover;object-position:center 30%;
+    border-radius:12px;margin-bottom:22px;
   }
   .founder-portrait .name{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:1.45rem;color:var(--gold);line-height:1.2}
   .founder-portrait p{color:var(--muted-invert);font-size:.95rem;margin-top:6px}
@@ -248,8 +249,8 @@
 
   /* ---------- Responsive ---------- */
   @media(max-width:900px){
-    .founder-grid{grid-template-columns:1fr;gap:36px}
-    .founder-portrait{position:static;max-width:420px}
+    /* la colonne photo se resserre pour laisser respirer le texte */
+    .founder-grid{grid-template-columns:minmax(280px,360px) 1fr;gap:40px}
     .feat-cards{grid-template-columns:1fr 1fr}
     .price-grid{grid-template-columns:1fr;max-width:440px;margin:0 auto}
     .nav-links{display:none}
@@ -262,6 +263,13 @@
     .nav-cta>.btn{display:none}
     .nav-mobile-cta{display:block}
     .menu-toggle{display:block}
+  }
+  @media(max-width:768px){
+    /* colonne unique : la photo passe devant le texte (ordre du DOM) */
+    .founder-grid{grid-template-columns:1fr;gap:32px}
+    .founder-portrait{max-width:420px;margin:0 auto}
+    /* format carré : -25% de hauteur sans perdre le Saint-Honoré */
+    .founder-photo{aspect-ratio:1/1;object-position:center 25%}
   }
   @media(max-width:560px){
     :root{--pad-section:64px}
