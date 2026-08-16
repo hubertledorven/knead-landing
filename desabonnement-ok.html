@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>C'est fait — Knead</title>
+<meta name="robots" content="noindex, nofollow">
+<!-- Le token de désabonnement transite dans l'URL : aucun referrer sortant,
+     sinon Google Fonts le recevrait dans l'en-tête Referer. -->
+<meta name="referrer" content="no-referrer">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230F1F3D'/%3E%3Ctext x='32' y='45' font-family='Georgia,serif' font-size='38' font-weight='600' text-anchor='middle' fill='%23C9A84C'%3EK%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0F1F3D; --navy-soft:#1A2E4F; --gold:#C9A84C; --gold-ink:#8C6D2F;
+    --light:#F8FAFC; --ink:#1E293B; --muted:#64748B; --line:#E2E8F0;
+    --radius:14px; --shadow:0 4px 24px rgba(15,31,61,.08);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+    font-size:17px; line-height:1.65; color:var(--ink); background:var(--light);
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh; display:flex; flex-direction:column;
+  }
+  .band{background:linear-gradient(135deg,var(--navy),var(--navy-soft));padding:30px 24px;text-align:center}
+  .brand{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.7rem;font-weight:700;color:#fff;text-decoration:none;letter-spacing:-.01em}
+  .brand span{color:var(--gold)}
+  main{flex:1;display:flex;align-items:center;justify-content:center;padding:48px 20px}
+  .card{background:#fff;max-width:520px;width:100%;border-radius:var(--radius);box-shadow:var(--shadow);padding:52px 44px;text-align:center}
+  h1{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(1.9rem,4.5vw,2.5rem);font-weight:600;color:var(--navy);line-height:1.12;margin-bottom:14px}
+  p{color:var(--muted);font-size:1rem;margin-bottom:8px}
+  .rule{width:44px;height:1px;background:var(--line);margin:28px auto}
+  .action{font-size:.95rem}
+  .action a{color:var(--gold-ink);font-weight:500}
+  .sign{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;color:var(--gold-ink);font-size:1.15rem;margin-top:20px}
+  footer{text-align:center;font-size:.8rem;color:var(--muted);padding:0 20px 36px}
+  footer a{color:var(--muted)}
+  @media (max-width:560px){ .card{padding:38px 24px} }
+</style>
+</head>
+<body>
+
+<div class="band"><a class="brand" href="/">kn<span>ea</span>d</a></div>
+
+<main>
+  <div class="card">
+    <h1>C'est fait.</h1>
+    <p>Tu ne recevras plus nos emails.</p>
+    <p class="sign">— Knead</p>
+
+    <div class="rule"></div>
+
+    <!-- Rempli en JS à partir du token présent dans l'URL : sans token
+         exploitable, on n'affiche pas un lien mort mais l'adresse de contact. -->
+    <p class="action" id="resub" hidden><a href="#" id="resub-link">Me réabonner</a></p>
+    <p class="action" id="fallback">Changé d'avis ? Écris-nous à <a href="mailto:hubertledorven@gmail.com">hubertledorven@gmail.com</a>.</p>
+  </div>
+</main>
+
+<footer>Knead · <a href="/">kneadmanager.com</a></footer>
+
+<script>
+  (function () {
+    var FN = "https://gnvszisbdnnfrebgrfwm.supabase.co/functions/v1/unsubscribe";
+    var t = new URLSearchParams(location.search).get("t") || "";
+    // Le token est du base64url : tout le reste est rejeté, pour qu'une valeur
+    // hostile ne puisse pas être injectée dans le href.
+    if (!/^[A-Za-z0-9_-]{16,}$/.test(t)) return;
+
+    document.getElementById("resub-link").href = FN + "?t=" + encodeURIComponent(t) + "&a=on";
+    document.getElementById("resub").hidden = false;
+    document.getElementById("fallback").hidden = true;
+
+    // Le token ne reste pas dans la barre d'adresse ni dans l'historique.
+    history.replaceState(null, "", location.pathname);
+  })();
+</script>
+
+</body>
+</html>
