@@ -1,0 +1,3 @@
+# Source markdown des articles : publiee par Netlify comme le reste du depot,
+# underscore compris. On la renvoie explicitement en 404.
+/_sources/*  /404.html  404
