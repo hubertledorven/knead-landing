@@ -8,4 +8,9 @@ Disallow: /desabonnement-ok.html
 Disallow: /desabonnement-lien-invalide.html
 Disallow: /reabonnement-ok.html
 
+# Source markdown des articles : Netlify publie la racine du depot, y compris
+# les dossiers prefixes d'un underscore. Le fichier reste donc accessible en
+# direct — cette ligne evite au moins qu'il soit indexe en doublon de l'article.
+Disallow: /_sources/
+
 Sitemap: https://kneadmanager.com/sitemap.xml
