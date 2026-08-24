@@ -1,0 +1,11 @@
+# kneadmanager.com — site vitrine (Netlify)
+User-agent: *
+Allow: /
+
+# Pages transactionnelles : cibles de redirection des liens de désabonnement,
+# aucune valeur de recherche et un contenu qui n'a de sens qu'après un clic.
+Disallow: /desabonnement-ok.html
+Disallow: /desabonnement-lien-invalide.html
+Disallow: /reabonnement-ok.html
+
+Sitemap: https://kneadmanager.com/sitemap.xml

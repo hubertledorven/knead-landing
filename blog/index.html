@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le blog de Knead — gestion, coûts et prix en pâtisserie</title>
+<meta name="description" content="Les guides de Knead, écrits par un chef pâtissier : coût de revient, prix de vente, marges, organisation de production. Des méthodes concrètes, chiffrées, applicables dès demain.">
+<link rel="canonical" href="https://kneadmanager.com/blog">
+<meta name="theme-color" content="#0F1F3D">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Knead">
+<meta property="og:title" content="Le blog de Knead — gestion, coûts et prix en pâtisserie">
+<meta property="og:description" content="Les guides de Knead, écrits par un chef pâtissier : coût de revient, prix de vente, marges, organisation de production.">
+<meta property="og:url" content="https://kneadmanager.com/blog">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230F1F3D'/%3E%3Ctext x='32' y='45' font-family='Georgia,serif' font-size='38' font-weight='600' text-anchor='middle' fill='%23C9A84C'%3EK%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* ---- Charte Knead (identique à index.html) ---- */
+    --navy:#0F1F3D;
+    --navy-soft:#1A2E4F;
+    --navy-deep:#0B1729;
+    --gold:#C9A84C;
+    --gold-ink:#8C6D2F;
+    --light:#F8FAFC;
+    --ink:#1E293B;
+    --muted:#64748B;
+    --muted-invert:#CBD5E1;
+    --line:#E2E8F0;
+    --line-invert:rgba(201,168,76,.28);
+
+    --radius:14px;
+    --radius-btn:10px;
+    --maxw:1100px;
+    --measure:680px;
+    --shadow:0 4px 24px rgba(15,31,61,.08);
+    --shadow-hover:0 10px 32px rgba(15,31,61,.12);
+    --pad-section:88px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+    font-size:17px;line-height:1.65;
+    color:var(--ink);background:#fff;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;display:block}
+
+  h1,h2,h3{font-family:'Cormorant Garamond',Georgia,serif;line-height:1.14;font-weight:600;color:var(--navy);letter-spacing:-.005em}
+  h1{font-size:clamp(1.9rem,4.4vw,3rem)}
+  h2{font-size:clamp(1.5rem,3vw,1.9rem)}
+  h3{font-size:clamp(1.25rem,2.2vw,1.4rem)}
+  a{color:inherit;text-decoration:none}
+  .link{
+    color:var(--gold-ink);text-decoration:underline;
+    text-decoration-thickness:1px;text-underline-offset:3px;
+    text-decoration-color:rgba(140,109,47,.45);transition:text-decoration-color .2s ease;
+  }
+  .link:hover{text-decoration-color:currentColor}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  .eyebrow{
+    font-size:.75rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--gold-ink);display:inline-flex;align-items:center;gap:.7em;
+  }
+  .eyebrow::before{content:"";width:24px;height:1px;background:currentColor;opacity:.6}
+
+  .ic{
+    display:block;width:22px;height:22px;flex:0 0 22px;
+    fill:none;stroke:currentColor;stroke-width:1.5;
+    stroke-linecap:round;stroke-linejoin:round;
+  }
+  .ic-lg{width:24px;height:24px;flex-basis:24px}
+
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:.55em;
+    font-family:inherit;font-size:.95rem;font-weight:600;cursor:pointer;
+    padding:14px 28px;border-radius:var(--radius-btn);border:1px solid transparent;
+    transition:transform .2s ease,box-shadow .2s ease,background-color .2s ease,border-color .2s ease;
+  }
+  .btn-primary{background:var(--navy);color:#fff}
+  .btn-primary:hover{background:#16294c;transform:translateY(-1px);box-shadow:var(--shadow-hover)}
+  .btn-invert{background:#fff;color:var(--navy)}
+  .btn-invert:hover{background:var(--light);transform:translateY(-1px);box-shadow:0 10px 32px rgba(0,0,0,.25)}
+  .btn-block{width:100%}
+
+  :focus-visible{outline:2px solid var(--gold-ink);outline-offset:3px;border-radius:4px}
+  .cta-box :focus-visible,footer :focus-visible{outline-color:var(--gold)}
+
+  /* ---------- Header (identique à la landing) ---------- */
+  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .brand{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.65rem;font-weight:700;color:var(--navy)}
+  .brand span{color:var(--gold-ink)}
+  .nav-links{display:flex;align-items:center;gap:34px}
+  .nav-links a{font-size:.95rem;font-weight:500;color:var(--muted)}
+  .nav-links a:hover,.nav-links a[aria-current="page"]{color:var(--navy)}
+  .nav-cta{display:flex;align-items:center;gap:12px}
+  .nav-cta .btn{padding:11px 22px;font-size:.9rem}
+  .nav-mobile-cta{display:none}
+  .menu-toggle{
+    display:none;background:none;border:1px solid var(--line);border-radius:var(--radius-btn);
+    color:var(--navy);cursor:pointer;padding:9px;line-height:0;
+  }
+  .menu-toggle .i-close{display:none}
+  .menu-toggle[aria-expanded="true"] .i-open{display:none}
+  .menu-toggle[aria-expanded="true"] .i-close{display:block}
+
+  /* ---------- Fil d'Ariane ---------- */
+  .crumbs{font-size:.85rem;color:var(--muted);padding-top:32px}
+  .crumbs a:hover{color:var(--navy);text-decoration:underline;text-underline-offset:3px}
+  .crumbs .sep{opacity:.5;margin:0 .5em}
+
+  /* ---------- Footer (identique à la landing) ---------- */
+  footer{background:var(--navy-deep);color:var(--muted-invert);padding:56px 0;margin-top:var(--pad-section)}
+  .foot-grid{display:flex;justify-content:space-between;align-items:flex-start;gap:32px;flex-wrap:wrap}
+  .foot-grid .brand{color:#fff}
+  .foot-sign{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;color:var(--gold);font-size:1.1rem;margin-top:2px}
+  .foot-links{display:flex;gap:26px;font-size:.92rem;flex-wrap:wrap}
+  .foot-links a:hover{color:#fff;text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--gold)}
+  .foot-legal{margin-top:32px;padding-top:24px;border-top:1px solid rgba(255,255,255,.08);font-size:.82rem;color:#94A3B8}
+  .foot-legal a{color:inherit}
+  .foot-legal a:hover{color:#fff;text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--gold)}
+
+  @media(max-width:900px){
+    .nav-links{display:none}
+    .nav-links.open{
+      display:flex;position:absolute;top:72px;left:0;right:0;flex-direction:column;
+      align-items:stretch;background:#fff;padding:20px 24px 24px;gap:20px;
+      border-bottom:1px solid var(--line);box-shadow:var(--shadow);
+    }
+    .nav-links.open a:not(.btn){font-size:1.05rem;color:var(--ink)}
+    .nav-cta>.btn{display:none}
+    .nav-mobile-cta{display:block}
+    .menu-toggle{display:block}
+  }
+  @media(max-width:560px){
+    :root{--pad-section:56px}
+    body{font-size:16px}
+    .btn{width:100%}
+    .nav-cta>.btn{width:auto}
+  }
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+  /* ---------- Index du blog ---------- */
+  .blog-head{max-width:var(--measure);margin:0 auto;padding:56px 0 48px;text-align:center}
+  .blog-head h1{margin:16px 0 18px}
+  .blog-head p{color:var(--muted);font-size:1.1rem;max-width:34em;margin:0 auto}
+  .post-list{max-width:var(--measure);margin:0 auto;display:flex;flex-direction:column;gap:20px}
+  .post{
+    display:block;background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    padding:30px 28px;box-shadow:var(--shadow);
+    transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;
+  }
+  .post:hover{transform:translateY(-1px);box-shadow:var(--shadow-hover);border-color:#CBD5E1}
+  .post h2{font-size:clamp(1.35rem,2.6vw,1.65rem);margin:12px 0 10px}
+  .post p{color:var(--muted);font-size:.98rem;margin-bottom:16px}
+  .post-meta{font-size:.85rem;color:var(--muted);display:flex;align-items:center;gap:.6em;flex-wrap:wrap}
+  .post-meta .dot{opacity:.5}
+  .post-more{color:var(--gold-ink);font-weight:600;font-size:.95rem}
+  .blog-note{max-width:var(--measure);margin:36px auto 0;text-align:center;font-size:.92rem;color:var(--muted)}
+  @media(max-width:560px){ .post{padding:24px 20px} .blog-head{padding:40px 0 32px} }
+</style>
+</head>
+<body>
+
+<!-- Icônes SVG inline, aucune dépendance externe -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+</svg>
+
+<!-- HEADER -->
+<header>
+  <div class="wrap nav">
+    <a href="/" class="brand">Knead<span>.</span></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="/#fonctionnalites">Fonctionnalités</a>
+      <a href="/#tarifs">Tarifs</a>
+      <a href="/blog" aria-current="page">Blog</a>
+      <a href="/#faq">FAQ</a>
+      <a href="https://app.kneadmanager.com/" class="btn btn-primary btn-block nav-mobile-cta">Essai gratuit 7 jours</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="https://app.kneadmanager.com/" class="btn btn-primary">Essai gratuit 7 jours</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="navLinks">
+        <svg class="ic ic-lg i-open" aria-hidden="true"><use href="#i-menu"/></svg>
+        <svg class="ic ic-lg i-close" aria-hidden="true"><use href="#i-x"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <nav class="crumbs" aria-label="Fil d'Ariane">
+    <a href="/">Accueil</a><span class="sep">/</span><span>Blog</span>
+  </nav>
+
+  <div class="blog-head">
+    <span class="eyebrow">Le blog de Knead</span>
+    <h1>Gérer sa pâtisserie sans y laisser ses dimanches</h1>
+    <p>Coût de revient, prix de vente, marges, organisation de production : des méthodes concrètes et chiffrées, écrites par un chef pâtissier qui les applique depuis 17 ans.</p>
+  </div>
+
+  <div class="post-list">
+    <a class="post" href="/blog/comment-fixer-le-prix-d-un-gateau">
+      <span class="eyebrow">Coûts &amp; marges</span>
+      <h2>Comment fixer le prix d'un gâteau ? La méthode complète d'un chef pâtissier</h2>
+      <p>Ingrédients, emballage, temps de travail, ratés, charges fixes, puis coefficient ×2,5 : la méthode complète pour fixer un prix qui couvre vos coûts et paie votre travail — avec un exemple chiffré qui révèle un entremets vendu à perte.</p>
+      <div class="post-meta">
+        <time datetime="2026-08-24">24 août 2026</time>
+        <span class="dot">·</span>
+        <span>6 min de lecture</span>
+        <span class="dot">·</span>
+        <span class="post-more">Lire l'article →</span>
+      </div>
+    </a>
+  </div>
+
+  <p class="blog-note">D'autres guides arrivent. Une question de métier que vous aimeriez voir traitée ? Écrivez-nous : <a class="link" href="mailto:contact@kneadmanager.com">contact@kneadmanager.com</a></p>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="brand">Knead<span style="color:var(--gold)">.</span></div>
+        <div class="foot-sign">Tu pâtisses, Knead compte.</div>
+      </div>
+      <nav class="foot-links">
+        <a href="/#fonctionnalites">Fonctionnalités</a>
+        <a href="/#tarifs">Tarifs</a>
+        <a href="/blog">Blog</a>
+        <a href="/#faq">FAQ</a>
+        <a href="mailto:contact@kneadmanager.com">Contact</a>
+      </nav>
+    </div>
+    <div class="foot-legal">© 2026 Knead · Pastry Management · Tous droits réservés · <a href="/mentions-legales.html">Mentions légales &amp; confidentialité</a></div>
+  </div>
+</footer>
+
+<script>
+  // Menu mobile (même comportement que la landing)
+  var t = document.getElementById('menuToggle'), n = document.getElementById('navLinks');
+  if (t && n) {
+    t.addEventListener('click', function () {
+      var open = n.classList.toggle('open');
+      t.setAttribute('aria-expanded', open ? 'true' : 'false');
+      t.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
+    });
+    n.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        n.classList.remove('open');
+        t.setAttribute('aria-expanded', 'false');
+        t.setAttribute('aria-label', 'Ouvrir le menu');
+      });
+    });
+  }
+</script>
+
+<!-- Schema.org — Blog + fil d'Ariane. À compléter à chaque nouvel article :
+     un blogPost listé ici doit exister dans la liste visible ci-dessus. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "Le blog de Knead",
+  "description": "Coût de revient, prix de vente, marges et organisation de production en pâtisserie.",
+  "inLanguage": "fr-FR",
+  "url": "https://kneadmanager.com/blog",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Knead",
+    "url": "https://kneadmanager.com/"
+  },
+  "blogPost": [
+    {
+      "@type": "BlogPosting",
+      "headline": "Comment fixer le prix d'un gâteau ? La méthode complète d'un chef pâtissier",
+      "url": "https://kneadmanager.com/blog/comment-fixer-le-prix-d-un-gateau",
+      "datePublished": "2026-08-24",
+      "author": { "@type": "Person", "name": "Hubert Le Dorven" }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://kneadmanager.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://kneadmanager.com/blog" }
+  ]
+}
+</script>
+
+</body>
+</html>

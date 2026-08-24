@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comment fixer le prix d'un gâteau ? La méthode d'un chef pâtissier</title>
+<meta name="description" content="Coût de revient, temps de travail, ratés, coefficient ×2,5 : la méthode complète pour fixer le prix de vente d'un gâteau sans vendre à perte. Par un chef pâtissier, 17 ans de métier.">
+<link rel="canonical" href="https://kneadmanager.com/blog/comment-fixer-le-prix-d-un-gateau">
+<meta name="theme-color" content="#0F1F3D">
+<meta property="og:type" content="article">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:site_name" content="Knead">
+<meta property="og:title" content="Comment fixer le prix d'un gâteau ? La méthode d'un chef pâtissier">
+<meta property="og:description" content="Coût de revient, temps de travail, ratés, coefficient ×2,5 : la méthode complète pour fixer le prix de vente d'un gâteau sans vendre à perte.">
+<meta property="og:url" content="https://kneadmanager.com/blog/comment-fixer-le-prix-d-un-gateau">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230F1F3D'/%3E%3Ctext x='32' y='45' font-family='Georgia,serif' font-size='38' font-weight='600' text-anchor='middle' fill='%23C9A84C'%3EK%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* ---- Charte Knead (identique à index.html) ---- */
+    --navy:#0F1F3D;
+    --navy-soft:#1A2E4F;
+    --navy-deep:#0B1729;
+    --gold:#C9A84C;
+    --gold-ink:#8C6D2F;
+    --light:#F8FAFC;
+    --ink:#1E293B;
+    --muted:#64748B;
+    --muted-invert:#CBD5E1;
+    --line:#E2E8F0;
+    --line-invert:rgba(201,168,76,.28);
+
+    --radius:14px;
+    --radius-btn:10px;
+    --maxw:1100px;
+    --measure:680px;
+    --shadow:0 4px 24px rgba(15,31,61,.08);
+    --shadow-hover:0 10px 32px rgba(15,31,61,.12);
+    --pad-section:88px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;
+    font-size:17px;line-height:1.65;
+    color:var(--ink);background:#fff;
+    -webkit-font-smoothing:antialiased;
+  }
+  img{max-width:100%;display:block}
+
+  h1,h2,h3{font-family:'Cormorant Garamond',Georgia,serif;line-height:1.14;font-weight:600;color:var(--navy);letter-spacing:-.005em}
+  h1{font-size:clamp(1.9rem,4.4vw,3rem)}
+  h2{font-size:clamp(1.5rem,3vw,1.9rem)}
+  h3{font-size:clamp(1.25rem,2.2vw,1.4rem)}
+  a{color:inherit;text-decoration:none}
+  .link{
+    color:var(--gold-ink);text-decoration:underline;
+    text-decoration-thickness:1px;text-underline-offset:3px;
+    text-decoration-color:rgba(140,109,47,.45);transition:text-decoration-color .2s ease;
+  }
+  .link:hover{text-decoration-color:currentColor}
+
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+  .eyebrow{
+    font-size:.75rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--gold-ink);display:inline-flex;align-items:center;gap:.7em;
+  }
+  .eyebrow::before{content:"";width:24px;height:1px;background:currentColor;opacity:.6}
+
+  .ic{
+    display:block;width:22px;height:22px;flex:0 0 22px;
+    fill:none;stroke:currentColor;stroke-width:1.5;
+    stroke-linecap:round;stroke-linejoin:round;
+  }
+  .ic-lg{width:24px;height:24px;flex-basis:24px}
+
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:.55em;
+    font-family:inherit;font-size:.95rem;font-weight:600;cursor:pointer;
+    padding:14px 28px;border-radius:var(--radius-btn);border:1px solid transparent;
+    transition:transform .2s ease,box-shadow .2s ease,background-color .2s ease,border-color .2s ease;
+  }
+  .btn-primary{background:var(--navy);color:#fff}
+  .btn-primary:hover{background:#16294c;transform:translateY(-1px);box-shadow:var(--shadow-hover)}
+  .btn-invert{background:#fff;color:var(--navy)}
+  .btn-invert:hover{background:var(--light);transform:translateY(-1px);box-shadow:0 10px 32px rgba(0,0,0,.25)}
+  .btn-block{width:100%}
+
+  :focus-visible{outline:2px solid var(--gold-ink);outline-offset:3px;border-radius:4px}
+  .cta-box :focus-visible,footer :focus-visible{outline-color:var(--gold)}
+
+  /* ---------- Header (identique à la landing) ---------- */
+  header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.88);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .brand{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.65rem;font-weight:700;color:var(--navy)}
+  .brand span{color:var(--gold-ink)}
+  .nav-links{display:flex;align-items:center;gap:34px}
+  .nav-links a{font-size:.95rem;font-weight:500;color:var(--muted)}
+  .nav-links a:hover,.nav-links a[aria-current="page"]{color:var(--navy)}
+  .nav-cta{display:flex;align-items:center;gap:12px}
+  .nav-cta .btn{padding:11px 22px;font-size:.9rem}
+  .nav-mobile-cta{display:none}
+  .menu-toggle{
+    display:none;background:none;border:1px solid var(--line);border-radius:var(--radius-btn);
+    color:var(--navy);cursor:pointer;padding:9px;line-height:0;
+  }
+  .menu-toggle .i-close{display:none}
+  .menu-toggle[aria-expanded="true"] .i-open{display:none}
+  .menu-toggle[aria-expanded="true"] .i-close{display:block}
+
+  /* ---------- Fil d'Ariane ---------- */
+  .crumbs{font-size:.85rem;color:var(--muted);padding-top:32px}
+  .crumbs a:hover{color:var(--navy);text-decoration:underline;text-underline-offset:3px}
+  .crumbs .sep{opacity:.5;margin:0 .5em}
+
+  /* ---------- Footer (identique à la landing) ---------- */
+  footer{background:var(--navy-deep);color:var(--muted-invert);padding:56px 0;margin-top:var(--pad-section)}
+  .foot-grid{display:flex;justify-content:space-between;align-items:flex-start;gap:32px;flex-wrap:wrap}
+  .foot-grid .brand{color:#fff}
+  .foot-sign{font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;color:var(--gold);font-size:1.1rem;margin-top:2px}
+  .foot-links{display:flex;gap:26px;font-size:.92rem;flex-wrap:wrap}
+  .foot-links a:hover{color:#fff;text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--gold)}
+  .foot-legal{margin-top:32px;padding-top:24px;border-top:1px solid rgba(255,255,255,.08);font-size:.82rem;color:#94A3B8}
+  .foot-legal a{color:inherit}
+  .foot-legal a:hover{color:#fff;text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--gold)}
+
+  @media(max-width:900px){
+    .nav-links{display:none}
+    .nav-links.open{
+      display:flex;position:absolute;top:72px;left:0;right:0;flex-direction:column;
+      align-items:stretch;background:#fff;padding:20px 24px 24px;gap:20px;
+      border-bottom:1px solid var(--line);box-shadow:var(--shadow);
+    }
+    .nav-links.open a:not(.btn){font-size:1.05rem;color:var(--ink)}
+    .nav-cta>.btn{display:none}
+    .nav-mobile-cta{display:block}
+    .menu-toggle{display:block}
+  }
+  @media(max-width:560px){
+    :root{--pad-section:56px}
+    body{font-size:16px}
+    .btn{width:100%}
+    .nav-cta>.btn{width:auto}
+  }
+  @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+  /* ---------- Article ---------- */
+  .article{max-width:var(--measure);margin:0 auto;padding:0 24px}
+  .article-head{padding:28px 0 0}
+  .article-head h1{margin:14px 0 18px}
+  .article-meta{
+    font-size:.88rem;color:var(--muted);display:flex;align-items:center;
+    gap:.6em;flex-wrap:wrap;padding-bottom:28px;border-bottom:1px solid var(--line);
+  }
+  .article-meta .dot{opacity:.5}
+  .lead{font-size:1.15rem;color:var(--muted);margin:28px 0 0}
+  .article-body{padding-bottom:8px}
+  .article-body h2{margin:48px 0 18px}
+  .article-body p{margin-bottom:20px}
+  .article-body p strong{color:var(--navy);font-weight:600}
+  .article-body p:last-child{margin-bottom:0}
+  .signature{
+    margin-top:44px;padding-top:24px;border-top:1px solid var(--line);
+    font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;
+    font-size:1.1rem;color:var(--muted);
+  }
+  .signature .sign-gold{color:var(--gold-ink)}
+
+  /* ---------- Encart CTA de fin d'article ---------- */
+  .cta-box{
+    background:var(--navy);color:#fff;border-radius:var(--radius);
+    padding:40px 36px;margin:48px 0 0;text-align:center;
+  }
+  .cta-box h2{color:#fff;margin:0 0 12px;font-size:clamp(1.5rem,3vw,1.9rem)}
+  .cta-box h2 em{color:var(--gold);font-style:italic}
+  .cta-box p{color:var(--muted-invert);margin:0 auto 26px;max-width:34em}
+  .cta-note{font-size:.85rem;color:var(--muted-invert);margin-top:18px;display:flex;align-items:center;justify-content:center;gap:.5em}
+  .cta-note .ic{color:var(--gold)}
+  @media(max-width:560px){ .cta-box{padding:32px 22px} }
+</style>
+</head>
+<body>
+
+<!-- Icônes SVG inline, aucune dépendance externe -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+</svg>
+
+<!-- HEADER -->
+<header>
+  <div class="wrap nav">
+    <a href="/" class="brand">Knead<span>.</span></a>
+    <nav class="nav-links" id="navLinks">
+      <a href="/#fonctionnalites">Fonctionnalités</a>
+      <a href="/#tarifs">Tarifs</a>
+      <a href="/blog">Blog</a>
+      <a href="/#faq">FAQ</a>
+      <a href="https://app.kneadmanager.com/" class="btn btn-primary btn-block nav-mobile-cta">Essai gratuit 7 jours</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="https://app.kneadmanager.com/" class="btn btn-primary">Essai gratuit 7 jours</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="navLinks">
+        <svg class="ic ic-lg i-open" aria-hidden="true"><use href="#i-menu"/></svg>
+        <svg class="ic ic-lg i-close" aria-hidden="true"><use href="#i-x"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="article">
+  <nav class="crumbs" aria-label="Fil d'Ariane">
+    <a href="/">Accueil</a><span class="sep">/</span><a href="/blog">Blog</a><span class="sep">/</span><span>Fixer le prix d'un gâteau</span>
+  </nav>
+</div>
+
+<article class="article">
+  <header class="article-head">
+    <span class="eyebrow">Coûts &amp; marges</span>
+    <h1>Comment fixer le prix d'un gâteau ? La méthode complète d'un chef pâtissier</h1>
+    <div class="article-meta">
+      <span>Par Hubert Le Dorven, chef pâtissier</span>
+      <span class="dot">·</span>
+      <time datetime="2026-08-24">24 août 2026</time>
+      <span class="dot">·</span>
+      <span>6 min de lecture</span>
+    </div>
+    <p class="lead">Si vous fixez vos prix « au feeling », ou en regardant ce que fait la pâtisserie d'à côté, cet article est pour vous. Après 17 ans en pâtisserie, je peux vous dire que c'est l'erreur la plus répandue du métier — et la plus coûteuse. Voici la méthode complète pour fixer un prix juste : celui qui couvre vos coûts, paie votre travail, et fait vivre votre activité.</p>
+  </header>
+
+  <div class="article-body">
+    <h2>Pourquoi le « feeling » vous fait perdre de l'argent</h2>
+    <p>Le feeling arrondit toujours vers le bas. On a peur de paraître cher, on se compare au supermarché, on se dit que « le client ne paiera jamais plus ». Résultat : la plupart des pâtissiers indépendants vendent certaines de leurs créations à perte sans le savoir. Pas par manque de talent — par manque de calcul. Le prix du voisin n'est pas une référence : vous ne connaissez ni ses coûts, ni sa marge. Il perd peut-être de l'argent, lui aussi.</p>
+
+    <h2>Étape 1 : calculer le vrai coût de revient (pas juste les ingrédients)</h2>
+    <p>Le coût de revient d'un gâteau, ce n'est pas la somme de vos ingrédients. C'est la somme de tout ce que ce gâteau vous coûte réellement :</p>
+    <p><strong>Les ingrédients</strong>, pesés au gramme près, aux prix d'achat actuels — pas ceux d'il y a dix-huit mois. Le beurre, les œufs, la crème et les fruits bougent en permanence ; un coût de revient calculé une fois pour toutes est un coût de revient faux.</p>
+    <p><strong>L'emballage</strong> : la boîte, le carton doré, le ruban, l'étiquette allergènes, le sac. Sur un entremets, cela représente facilement 2 à 3 € que presque personne ne compte.</p>
+    <p><strong>Votre temps de travail.</strong> C'est le grand oublié. Pesée, pochage, cuisson, montage, décoration, nettoyage : ces heures ont une valeur. Fixez-vous un taux horaire (même modeste pour commencer — 15 à 20 €/h) et chronométrez honnêtement une production. Si vous ne payez pas votre temps, c'est votre activité qui paie vos heures — et elle ne pourra jamais vous salarier.</p>
+    <p><strong>Les ratés et les pertes.</strong> La ganache qui tranche, les fruits abîmés, les invendus : comptez forfaitairement 5 % de votre coût matière. C'est la réalité de toute production.</p>
+    <p><strong>Une quote-part de charges fixes</strong> : électricité, eau, assurance, abonnements, amortissement du matériel. Divisez vos charges mensuelles par votre nombre de gâteaux produits dans le mois pour obtenir un montant par pièce.</p>
+
+    <h2>Étape 2 : appliquer le bon coefficient</h2>
+    <p>Une fois le coût de revient complet établi, la règle de base du métier est simple : <strong>votre prix de vente doit être au minimum 2,5 fois votre coût de revient complet</strong> (coefficient 2,5 à 3 selon votre positionnement).</p>
+    <p>Pourquoi si « cher » ? Parce que ce coefficient ne couvre pas que le gâteau : il finance vos charges sociales, votre TVA le cas échéant, vos périodes creuses, vos congés, votre matériel à renouveler — et le développement de votre activité. En dessous de ×2,5, vous ne construisez pas une entreprise : vous financez un hobby qui vous épuise.</p>
+
+    <h2>Exemple chiffré : un entremets 6 personnes</h2>
+    <p>Prenons un entremets vendu couramment autour de 30 €. Ingrédients : 6,80 €. Emballage complet : 2,20 €. Temps de travail : 1 h 15 à 18 €/h, soit 22,50 €... et l'on voit déjà le problème. Avec 5 % de pertes (0,45 €) et 1,50 € de charges fixes, le coût de revient complet atteint 33,45 €. Vendu 30 €, cet entremets vous fait perdre de l'argent à chaque vente — avant même de parler de marge.</p>
+    <p>C'est exactement pour cela que le calcul complet change tout : il révèle que le problème n'est pas votre prix « trop élevé », mais votre production trop lente, votre recette trop coûteuse, ou un prix de vente à repositionner (ici, autour de 45-50 € en boutique, ou en format revisité). Sans le calcul, vous ne pouvez même pas poser la question.</p>
+
+    <h2>Étape 3 : réviser ses prix régulièrement</h2>
+    <p>Un prix juste ne le reste pas. Les matières premières ont connu des hausses historiques ces dernières années ; un tarif fixé il y a deux ans est presque certainement devenu déficitaire sur plusieurs créations. La bonne pratique : <strong>réviser ses prix à chaque saison</strong>, ou dès qu'un ingrédient majeur (beurre, chocolat, fruits) évolue sensiblement. Vos clients comprennent une hausse expliquée ; votre banquier ne comprendra pas une trésorerie à sec.</p>
+
+    <h2>Les 3 erreurs les plus fréquentes</h2>
+    <p><strong>Copier les prix des autres</strong> — vous copiez peut-être leurs pertes. <strong>Oublier son temps</strong> — c'est le coût le plus important d'une production artisanale. <strong>Ne jamais réviser</strong> — un prix est une photo à un instant T, pas un tatouage.</p>
+
+    <h2>Automatiser le calcul (et ne plus jamais y penser)</h2>
+    <p>Tout ce que décrit cet article peut se faire sur un tableur — c'est d'ailleurs ainsi que j'ai fait pendant des années, tous les dimanches soirs. C'est aussi pour en finir avec ces dimanches que j'ai construit Knead : vous photographiez vos factures fournisseurs, vos prix d'achat se mettent à jour, et le coût de revient complet de chaque recette — temps et pertes compris — se recalcule automatiquement, avec votre marge réelle en face. Quand le beurre augmente, vous le savez le jour même, pas au bilan.</p>
+  </div>
+
+  <aside class="cta-box">
+    <h2>Vos coûts de revient, <em>calculés pour vous</em></h2>
+    <p>Scan des factures fournisseurs, prix d'achat toujours à jour, coût de revient et marge réelle sur chaque recette.</p>
+    <a href="https://app.kneadmanager.com/" class="btn btn-invert">Essayez Knead gratuitement pendant 7 jours →</a>
+    <div class="cta-note"><svg class="ic" aria-hidden="true"><use href="#i-check"/></svg> Sans carte bancaire</div>
+  </aside>
+
+  <p class="signature">Hubert, chef pâtissier depuis 17 ans, fondateur de Knead. <span class="sign-gold">Tu pâtisses, Knead compte.</span></p>
+</article>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="brand">Knead<span style="color:var(--gold)">.</span></div>
+        <div class="foot-sign">Tu pâtisses, Knead compte.</div>
+      </div>
+      <nav class="foot-links">
+        <a href="/#fonctionnalites">Fonctionnalités</a>
+        <a href="/#tarifs">Tarifs</a>
+        <a href="/blog">Blog</a>
+        <a href="/#faq">FAQ</a>
+        <a href="mailto:contact@kneadmanager.com">Contact</a>
+      </nav>
+    </div>
+    <div class="foot-legal">© 2026 Knead · Pastry Management · Tous droits réservés · <a href="/mentions-legales.html">Mentions légales &amp; confidentialité</a></div>
+  </div>
+</footer>
+
+<script>
+  // Menu mobile (même comportement que la landing)
+  var t = document.getElementById('menuToggle'), n = document.getElementById('navLinks');
+  if (t && n) {
+    t.addEventListener('click', function () {
+      var open = n.classList.toggle('open');
+      t.setAttribute('aria-expanded', open ? 'true' : 'false');
+      t.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
+    });
+    n.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        n.classList.remove('open');
+        t.setAttribute('aria-expanded', 'false');
+        t.setAttribute('aria-label', 'Ouvrir le menu');
+      });
+    });
+  }
+</script>
+
+<!-- Schema.org — BlogPosting + fil d'Ariane. Le champ headline doit rester
+     identique au <h1> visible : un balisage divergent est une pénalité. -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Comment fixer le prix d'un gâteau ? La méthode complète d'un chef pâtissier",
+  "description": "Coût de revient, temps de travail, ratés, coefficient ×2,5 : la méthode complète pour fixer le prix de vente d'un gâteau sans vendre à perte.",
+  "inLanguage": "fr-FR",
+  "datePublished": "2026-08-24",
+  "dateModified": "2026-08-24",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://kneadmanager.com/blog/comment-fixer-le-prix-d-un-gateau"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Hubert Le Dorven",
+    "jobTitle": "Chef pâtissier",
+    "url": "https://kneadmanager.com/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Knead",
+    "url": "https://kneadmanager.com/"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://kneadmanager.com/" },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://kneadmanager.com/blog" },
+    { "@type": "ListItem", "position": 3, "name": "Comment fixer le prix d'un gâteau ?", "item": "https://kneadmanager.com/blog/comment-fixer-le-prix-d-un-gateau" }
+  ]
+}
+</script>
+
+</body>
+</html>
