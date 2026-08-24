@@ -7,13 +7,13 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://kneadmanager.com/blog</loc>
+    <loc>https://kneadmanager.com/blog/</loc>
     <lastmod>2026-08-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://kneadmanager.com/blog/comment-fixer-le-prix-d-un-gateau</loc>
+    <loc>https://kneadmanager.com/blog/comment-fixer-le-prix-d-un-gateau/</loc>
     <lastmod>2026-08-24</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.8</priority>
