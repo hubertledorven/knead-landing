@@ -209,6 +209,11 @@
   .plan .price{font-family:'Cormorant Garamond',Georgia,serif;font-size:3rem;color:var(--navy);line-height:1;margin:16px 0 4px}
   .plan .price small{font-size:1rem;color:var(--muted);font-family:inherit;font-weight:400}
   .plan .year{font-size:.88rem;color:var(--gold-ink);font-weight:600}
+  /* Offre de lancement : le cadeau, juste sous le prix. */
+  .plan .offer{margin-top:10px;font-size:.82rem;line-height:1.5;color:var(--muted)}
+  .plan .offer b{color:var(--navy)}
+  /* Les conditions, sous le bouton : là où l'on décide de cliquer. */
+  .plan .note{margin-top:10px;font-size:.78rem;line-height:1.45;color:var(--muted);text-align:center}
   .plan ul{list-style:none;margin:24px 0 28px;display:flex;flex-direction:column;gap:12px;flex:1}
   .plan li{font-size:.95rem;color:var(--ink);display:flex;gap:.65em;align-items:flex-start}
   .plan li .ic{color:var(--gold-ink);margin-top:2px}
@@ -325,10 +330,10 @@
       <a href="#tarifs">Tarifs</a>
       <a href="/blog/">Blog</a>
       <a href="#faq">FAQ</a>
-      <a href="https://app.kneadmanager.com/" class="btn btn-primary btn-block nav-mobile-cta">Essai gratuit 7 jours</a>
+      <a href="https://app.kneadmanager.com/#signup" class="btn btn-primary btn-block nav-mobile-cta">Essai gratuit 7 jours</a>
     </nav>
     <div class="nav-cta">
-      <a href="https://app.kneadmanager.com/" class="btn btn-primary">Essai gratuit 7 jours</a>
+      <a href="https://app.kneadmanager.com/#signup" class="btn btn-primary">Essai gratuit 7 jours</a>
       <button class="menu-toggle" id="menuToggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="navLinks">
         <svg class="ic ic-lg i-open" aria-hidden="true"><use href="#i-menu"/></svg>
         <svg class="ic ic-lg i-close" aria-hidden="true"><use href="#i-x"/></svg>
@@ -345,7 +350,7 @@
       <span class="eyebrow">Le logiciel de gestion conçu par un pâtissier, pour les pâtissiers</span>
       <h1>Votre métier, c'est la pâtisserie.<br><span class="accent">Pas la comptabilité.</span></h1>
       <p class="lead">Knead calcule vos coûts, suit vos marges et gère vos commandes, automatiquement. Vous récupérez vos dimanches soir, et vous connaissez enfin votre vraie marge.</p>
-      <a href="https://app.kneadmanager.com/" class="btn btn-primary">Essai gratuit 7 jours</a>
+      <a href="https://app.kneadmanager.com/#signup" class="btn btn-primary">Essai gratuit 7 jours</a>
       <p class="hero-note">
         <svg class="ic ic-sm" aria-hidden="true"><use href="#i-check"/></svg>
         7 jours gratuits, sans carte bancaire, annulation en un clic
@@ -489,20 +494,24 @@
           <li><svg class="ic ic-sm" aria-hidden="true"><use href="#i-check"/></svg>Intégration Shopify &amp; boutiques</li>
           <li><svg class="ic ic-sm" aria-hidden="true"><use href="#i-check"/></svg>Support par email</li>
         </ul>
-        <a href="https://app.kneadmanager.com/" class="btn btn-primary btn-block">Essai gratuit 7 jours</a>
+        <a href="https://app.kneadmanager.com/#signup" class="btn btn-primary btn-block">Essai gratuit 7 jours</a>
+        <p class="note">Aucune carte bancaire pour l'essai de 7&nbsp;jours.</p>
       </div>
 
       <div class="plan">
+        <span class="badge">1 mois offert</span>
         <h3>Équipe</h3>
         <div class="price">89&nbsp;€<small>/mois</small></div>
         <div class="year">ou 854&nbsp;€/an, soit -20&nbsp;%</div>
+        <div class="offer"><b>Offre de lancement :</b> 1 mois d'essai offert, dès maintenant.</div>
         <ul>
           <li><svg class="ic ic-sm" aria-hidden="true"><use href="#i-check"/></svg>Scans de factures illimités</li>
           <li><svg class="ic ic-sm" aria-hidden="true"><use href="#i-check"/></svg>Toutes les fonctionnalités Solo</li>
           <li><svg class="ic ic-sm" aria-hidden="true"><use href="#i-check"/></svg>Support prioritaire</li>
           <li class="soon"><svg class="ic ic-sm" aria-hidden="true"><use href="#i-clock"/></svg>Comptes pour votre équipe (bientôt)</li>
         </ul>
-        <a href="https://app.kneadmanager.com/" class="btn btn-secondary btn-block">Essai gratuit 7 jours</a>
+        <a href="https://app.kneadmanager.com/#signup" class="btn btn-secondary btn-block">Commencer — 1 mois offert</a>
+        <p class="note">Carte bancaire demandée à l'abonnement. Aucun débit avant 30&nbsp;jours, annulation en un clic.</p>
       </div>
 
       <div class="plan">
@@ -518,7 +527,7 @@
         <a href="mailto:contact@kneadmanager.com" class="btn btn-secondary btn-block">Nous contacter</a>
       </div>
     </div>
-    <p class="price-foot">Aucune carte bancaire requise · Annulation à tout moment · Données hébergées en Europe</p>
+    <p class="price-foot">Essai sans carte bancaire · Annulation à tout moment · Données hébergées en Europe</p>
   </div>
 </section>
 
@@ -532,7 +541,7 @@
     <div class="faq-list">
       <details open>
         <summary>L'essai est-il vraiment gratuit ?<svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></summary>
-        <p>Oui. Vous testez Knead pendant 7 jours, sans carte bancaire. Vous ne payez que si vous décidez de continuer, et vous pouvez annuler à tout moment en un clic.</p>
+        <p>Oui. Vous testez Knead pendant 7 jours, sans carte bancaire. Vous ne payez que si vous décidez de continuer, et vous pouvez annuler à tout moment en un clic. Et si vous choisissez le plan Équipe, votre premier mois d'abonnement est offert : la carte est demandée, rien n'est prélevé avant 30 jours.</p>
       </details>
       <details>
         <summary>Comment calculer le prix de vente d'un gâteau ?<svg class="ic" aria-hidden="true"><use href="#i-plus"/></svg></summary>
@@ -572,7 +581,7 @@
     <span class="eyebrow">Tu pâtisses, Knead compte.</span>
     <h2>Pâtissier·ère, <em>reprenez le contrôle.</em></h2>
     <p>Rejoignez les pâtissiers qui connaissent enfin leur vraie marge.</p>
-    <a href="https://app.kneadmanager.com/" class="btn btn-invert">Essai gratuit 7 jours</a>
+    <a href="https://app.kneadmanager.com/#signup" class="btn btn-invert">Essai gratuit 7 jours</a>
     <div class="final-points">
       <span><svg class="ic ic-sm" aria-hidden="true"><use href="#i-check"/></svg>Aucune carte requise</span>
       <span><svg class="ic ic-sm" aria-hidden="true"><use href="#i-check"/></svg>Installation en 2 minutes</span>
@@ -634,7 +643,7 @@
       "name": "L'essai est-il vraiment gratuit ?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Oui. Vous testez Knead pendant 7 jours, sans carte bancaire. Vous ne payez que si vous décidez de continuer, et vous pouvez annuler à tout moment en un clic."
+        "text": "Oui. Vous testez Knead pendant 7 jours, sans carte bancaire. Vous ne payez que si vous décidez de continuer, et vous pouvez annuler à tout moment en un clic. Et si vous choisissez le plan Équipe, votre premier mois d'abonnement est offert : la carte est demandée, rien n'est prélevé avant 30 jours."
       }
     },
     {
