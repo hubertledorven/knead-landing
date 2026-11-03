@@ -24,6 +24,7 @@ import Footer from '../components/Footer.astro';
       var q = new URLSearchParams(location.search), d = document.documentElement;
       d.dataset.titres = q.get('titres') === 'a' ? 'a' : 'b';
       d.dataset.fond = q.get('fond') === 'bleu' ? 'bleu' : 'dore';
+      d.dataset.tag = q.get('tag') === 'populaire' ? 'populaire' : 'sans';
     })();
   </script>
 
@@ -54,6 +55,11 @@ import Footer from '../components/Footer.astro';
         <span>Fond hero</span>
         <a href="#" data-set="fond" data-value="dore">Doré</a>
         <a href="#" data-set="fond" data-value="bleu">Bleu</a>
+      </div>
+      <div class="row">
+        <span>Étiquette</span>
+        <a href="#" data-set="tag" data-value="sans">Sans</a>
+        <a href="#" data-set="tag" data-value="populaire">Populaire</a>
       </div>
     </div>
   </details>
