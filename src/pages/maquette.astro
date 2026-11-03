@@ -3,7 +3,6 @@
 import Base from '../layouts/Base.astro';
 import Header from '../components/Header.astro';
 import HeroCentre from '../components/HeroCentre.astro';
-import HeroNavy from '../components/HeroNavy.astro';
 import Proof from '../components/Proof.astro';
 import Problem from '../components/Problem.astro';
 import Guide from '../components/Guide.astro';
@@ -24,14 +23,12 @@ import Footer from '../components/Footer.astro';
     (function () {
       var q = new URLSearchParams(location.search), d = document.documentElement;
       d.dataset.titres = q.get('titres') === 'a' ? 'a' : 'b';
-      d.dataset.hero = q.get('hero') === '2' ? '2' : '1';
     })();
   </script>
 
   <Header />
   <main>
-    <div class="variant" data-variant="1"><HeroCentre /></div>
-    <div class="variant" data-variant="2"><HeroNavy /></div>
+    <HeroCentre />
     <Proof apercu />
     <Problem />
     <Guide />
@@ -48,9 +45,6 @@ import Footer from '../components/Footer.astro';
     <span>Titres</span>
     <a href="#" data-set="titres" data-value="a">A</a>
     <a href="#" data-set="titres" data-value="b">B</a>
-    <span class="sep">Hero</span>
-    <a href="#" data-set="hero" data-value="1">1</a>
-    <a href="#" data-set="hero" data-value="2">2</a>
   </div>
 
   <script is:inline>
@@ -80,9 +74,6 @@ import Footer from '../components/Footer.astro';
 </Base>
 
 <style is:global>
-  html[data-hero="1"] .variant[data-variant="2"],
-  html[data-hero="2"] .variant[data-variant="1"] { display: none; }
-
   .benefits-space { padding-top: 64px; }
 
   .switcher {
@@ -92,7 +83,6 @@ import Footer from '../components/Footer.astro';
     box-shadow: 0 8px 28px rgba(15, 31, 61, .18);
     font-size: .875rem; font-weight: 600; color: var(--ink-2); white-space: nowrap;
   }
-  .switcher .sep { margin-left: 10px; }
   .switcher a {
     display: grid; place-items: center; min-width: 36px; height: 36px;
     border-radius: 6px; color: var(--navy); text-decoration: none;
