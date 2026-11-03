@@ -1,5 +1,8 @@
 ---
+import { Image } from 'astro:assets';
 import { temoignages } from '../data/temoignages';
+
+const signup = 'https://app.kneadmanager.com/#signup';
 
 interface Props {
   /** Affiche des emplacements explicites tant qu'aucun témoignage réel n'est disponible. */
@@ -16,26 +19,38 @@ const emplacements = [
   'Ce qui a changé dans sa semaine.',
   'Une courte citation.',
 ];
+// Le mur s'adapte au nombre de citations : pas de colonnes vides avec une ou deux citations.
+const colonnes = Math.min(liste.length || emplacements.length, 3);
 ---
 {(liste.length > 0 || apercu) && (
   <section class="testimonials">
     <div class="wrap">
       <h2>Ils ont arrêté de calculer le dimanche soir</h2>
-      <div class="wall">
+      <div class:list={['wall', `cols-${colonnes}`]}>
         {liste.length > 0
           ? liste.map((t) => (
               <figure class="item">
                 <blockquote>« {t.citation} »</blockquote>
-                <figcaption><strong>{t.nom}</strong><br />{t.boutique}{t.ville ? `, ${t.ville}` : ''}</figcaption>
+                <figcaption>
+                  {t.photo && <Image src={t.photo} alt="" width={44} height={44} widths={[44, 88]} sizes="44px" format="webp" />}
+                  <span><strong>{t.nom}</strong><br />{t.boutique}{t.ville ? `, ${t.ville}` : ''}</span>
+                </figcaption>
               </figure>
             ))
           : emplacements.map((texte) => (
               <figure class="item slot">
                 <span class="tag">Témoignage à venir</span>
                 <blockquote>{texte}</blockquote>
-                <figcaption><strong>Prénom Nom</strong><br />Boutique, ville</figcaption>
+                <figcaption>
+                  <span class="slot-photo" aria-hidden="true"></span>
+                  <span><strong>Prénom Nom</strong><br />Boutique, ville</span>
+                </figcaption>
               </figure>
             ))}
+      </div>
+      <div class="action">
+        <p>À vous d'essayer.</p>
+        <a href={signup} class="btn">Essai gratuit 7 jours</a>
       </div>
     </div>
   </section>
@@ -45,19 +60,27 @@ const emplacements = [
   .testimonials { padding-block: 96px; background: var(--paper); }
   h2 { max-width: 16em; margin-bottom: 48px; }
   /* Colonnes de hauteurs variables, pour des citations de longueurs différentes. */
-  .wall { columns: 3; column-gap: 16px; }
+  .wall { columns: 3; column-gap: 16px; margin-inline: auto; }
+  .cols-1 { columns: 1; max-width: 640px; }
+  .cols-2 { columns: 2; max-width: 860px; }
   .item { break-inside: avoid; margin-bottom: 16px; padding: 28px; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); }
   blockquote { font-size: 1.125rem; line-height: 1.5; color: var(--ink); }
-  figcaption { margin-top: 20px; font-size: 1rem; line-height: 1.4; color: var(--ink-2); }
+  figcaption { display: flex; align-items: center; gap: 12px; margin-top: 20px; font-size: 1rem; line-height: 1.4; color: var(--ink-2); }
   figcaption strong { color: var(--navy); font-weight: 600; }
+  figcaption img, .slot-photo { flex: none; width: 44px; height: 44px; border-radius: 50%; object-fit: cover; }
+  .slot-photo { border: 1.5px dashed #B9B5A7; }
+  .action { margin-top: 48px; text-align: center; }
+  .action p { margin-bottom: 20px; font-family: var(--title); font-size: clamp(1.375rem, 2vw, 1.625rem); font-weight: 400; letter-spacing: var(--title-track); line-height: 1.25; color: var(--navy); }
   .slot { border: 1.5px dashed #B9B5A7; background: transparent; }
   .tag { display: block; margin-bottom: 12px; font-size: .875rem; font-weight: 600; color: var(--gold-ink); }
 
-  @media (max-width: 960px) { .wall { columns: 2; } }
+  @media (max-width: 960px) { .cols-3 { columns: 2; } }
   @media (max-width: 640px) {
     .testimonials { padding-block: 64px; }
     h2 { margin-bottom: 32px; }
     .wall { columns: 1; }
     .item { padding: 22px; }
+    .action { margin-top: 32px; }
+    .action .btn { width: 100%; }
   }
 </style>
