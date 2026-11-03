@@ -18,11 +18,19 @@ const signup = 'https://app.kneadmanager.com/#signup';
 
 <style>
   .final { padding-block: 72px; }
-  .box { display: flex; align-items: center; justify-content: space-between; gap: 40px 64px; padding: 64px; background: var(--navy); border-radius: var(--radius-lg); color: #fff; }
+  .box { display: flex; align-items: center; justify-content: space-between; gap: 40px 64px; padding: 64px; background: linear-gradient(160deg, var(--navy) 20%, #2F4770); border-radius: var(--radius-lg); color: #fff; }
   /* Bandeau titre à gauche, action à droite : le seul titre qui reste aligné à gauche. */
   h2 { max-width: 15em; margin-inline: 0; text-align: left; color: #fff; }
   p { margin-top: 16px; color: var(--on-navy-2); }
   .action { flex: none; text-align: center; }
+  /* Même dégradé que le bouton de la carte Solo, sans ombre sur ce fond sombre. */
+  .btn-gold {
+    --btn-shadow: none;
+    --btn-shadow-hover: none;
+    min-height: 60px; padding-inline: 30px; font-size: 1.1875rem;
+    background: linear-gradient(to bottom, var(--gold), #DBBF6E);
+  }
+  .btn-gold:hover { background: linear-gradient(to bottom, #D6B863, #E4CC85); }
   .note { margin-top: 12px; font-size: 1rem; }
 
   @media (max-width: 860px) {
