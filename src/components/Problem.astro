@@ -43,6 +43,8 @@
         </div>
       </div>
     </figure>
+
+    <p class="next">Et si c'était le cas de l'un de vos gâteaux&nbsp;?</p>
   </div>
 </section>
 
@@ -54,12 +56,27 @@
   ul { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-block: 56px; }
   /* Douleurs en cartes façon notification. Sous-grille : les textes démarrent à la même hauteur. */
   li {
-    display: grid; grid-row: span 2; grid-template-rows: subgrid; row-gap: 8px;
+    position: relative; display: grid; grid-row: span 2; grid-template-rows: subgrid; row-gap: 8px;
     padding: 20px 22px; background: #fff; border: 1px solid var(--line); border-radius: 12px;
     box-shadow: 0 14px 34px rgba(15, 31, 61, .1); color: var(--ink-2);
   }
-  li strong { position: relative; padding-left: 20px; color: var(--navy); font-weight: 600; }
-  li i { position: absolute; top: .5em; left: 2px; width: 9px; height: 9px; background: var(--loss); border-radius: 50%; box-shadow: 0 0 0 4px #FBEDEA; }
+  li strong { color: var(--navy); font-weight: 600; }
+  /* Point d'alerte posé sur l'angle arrondi de la carte, avec un léger clignotement décalé d'une carte à l'autre. */
+  li i {
+    position: absolute; top: -2px; left: -2px; width: 10px; height: 10px; background: var(--loss); border-radius: 50%;
+    box-shadow: 0 0 0 3px rgba(180, 35, 24, .22);
+    animation: alerte 2.6s ease-in-out infinite;
+  }
+  li:nth-child(2) i { animation-delay: -.65s; }
+  li:nth-child(3) i { animation-delay: -1.3s; }
+  li:nth-child(4) i { animation-delay: -1.95s; }
+  @keyframes alerte {
+    0%, 100% { opacity: 1; box-shadow: 0 0 0 3px rgba(180, 35, 24, .22); }
+    50% { opacity: .55; box-shadow: 0 0 0 6px rgba(180, 35, 24, .06); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    li i { animation: none; }
+  }
 
   .example { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: 48px; align-items: center; padding: 48px 40px; background: linear-gradient(135deg, #FBFAF6, #F6F2E8); border-radius: var(--radius-lg); }
   figcaption { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; color: var(--ink-2); }
@@ -77,6 +94,7 @@
   .big { margin-top: 16px; font-family: var(--title); font-size: clamp(2.25rem, 4.2vw, 3.5rem); font-weight: var(--title-weight); letter-spacing: var(--title-track); line-height: 1.05; color: var(--navy); white-space: nowrap; }
   .real .big { color: var(--loss); }
   .sub { margin-top: 10px; font-size: 1rem; color: var(--ink-2); }
+  .next { margin-top: 48px; text-align: center; font-family: var(--title); font-size: clamp(1.375rem, 2vw, 1.625rem); font-weight: 400; letter-spacing: var(--title-track); line-height: 1.25; color: var(--navy); text-wrap: balance; }
 
   @media (max-width: 960px) {
     ul { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-block: 40px; }
@@ -90,5 +108,6 @@
     .compare { grid-template-columns: minmax(0, 1fr); gap: 28px; }
     .arrow { width: 36px; height: 36px; margin: -18px 0 0 -18px; rotate: 90deg; }
     .compare > div { padding: 22px 20px; }
+    .next { margin-top: 32px; }
   }
 </style>
