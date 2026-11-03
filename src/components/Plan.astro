@@ -1,7 +1,6 @@
 ---
-const signup = 'https://app.kneadmanager.com/#signup';
 const etapes = [
-  { titre: 'Photographiez vos factures', texte: "L'IA lit les ingrédients et les prix, et crée vos fiches. Rien à ressaisir." },
+  { titre: 'Photographiez vos factures', texte: 'Vos ingrédients et vos prix se créent tout seuls. Rien à ressaisir.' },
   { titre: 'Ajoutez vos recettes', texte: 'Scannez-les ou saisissez-les. Knead calcule le coût de chacune, au centime.' },
   { titre: 'Ajustez vos prix', texte: 'Vous voyez ce qui rapporte et ce qui coûte, et vous décidez en connaissance de cause.' },
 ];
@@ -10,33 +9,49 @@ const etapes = [
   <div class="wrap">
     <h2>Vos vraies marges en trois étapes</h2>
     <ol>
+      <svg class="curve" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><path d="M16.7 84C30 84 36 50 50 50S70 16 83.3 16" vector-effect="non-scaling-stroke" /></svg>
       {etapes.map((e, i) => (
         <li>
           <span class="num" aria-hidden="true">{i + 1}</span>
-          <h3>{e.titre}</h3>
-          <p>{e.texte}</p>
+          <div class="step">
+            <h3>{e.titre}</h3>
+            <p>{e.texte}</p>
+          </div>
         </li>
       ))}
     </ol>
-    <div class="action"><a href={signup} class="btn btn-gold">Essai gratuit 7 jours</a></div>
   </div>
 </section>
 
 <style>
-  .plan { padding-block: 96px; background: var(--navy); color: #fff; }
+  .plan { padding-block: 96px; background: linear-gradient(160deg, var(--navy) 20%, #2F4770); color: #fff; }
   h2 { color: #fff; }
-  ol { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-block: 48px 40px; }
-  li { padding: 32px 28px 36px; background: var(--navy-soft); border-radius: var(--radius-lg); }
-  .num { display: block; margin-bottom: 28px; font-family: var(--title); font-size: 3.25rem; font-weight: var(--title-weight); line-height: 1; color: var(--gold); }
+
+  /* Escalier montant : chaque étape est plus haute que la précédente, reliée par une courbe. */
+  ol { position: relative; list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 56px; }
+  .curve { position: absolute; top: 0; left: 0; width: 100%; height: 140px; pointer-events: none; }
+  .curve path { fill: none; stroke: var(--gold); stroke-opacity: .65; stroke-width: 1.5; stroke-dasharray: 5 6; }
+  li { position: relative; display: flex; flex-direction: column; gap: 20px; }
+  li:nth-of-type(1) { margin-top: 96px; }
+  li:nth-of-type(2) { margin-top: 48px; }
+  .num {
+    position: relative; display: grid; place-items: center; flex: none; align-self: center; width: 44px; height: 44px;
+    background: var(--navy-soft); border: 1.5px solid var(--gold); border-radius: 50%;
+    font-family: var(--title); font-size: 1.25rem; font-weight: var(--title-weight); line-height: 1; color: var(--gold);
+  }
+  .step { flex: 1; padding: 28px; background: rgba(255, 255, 255, .08); border-radius: var(--radius-lg); }
   h3 { color: #fff; }
-  li p { margin-top: 12px; color: var(--on-navy-2); }
-  .action { text-align: center; }
+  .step p { margin-top: 12px; color: var(--on-navy-2); }
 
   @media (max-width: 860px) {
     .plan { padding-block: 64px; }
     ol { grid-template-columns: minmax(0, 1fr); margin-top: 32px; }
-    li { padding: 24px; }
-    .num { margin-bottom: 14px; font-size: 2.5rem; }
-    .btn { width: 100%; }
+    .curve { display: none; }
+    li, li:nth-of-type(1), li:nth-of-type(2) { margin-top: 0; }
+    li { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 14px; align-items: start; }
+    /* Ligne verticale jusqu'à la dernière pastille. */
+    li:not(:last-of-type)::after { content: ''; position: absolute; top: 44px; bottom: -16px; left: 21px; border-left: 1.5px dashed rgba(201, 168, 76, .6); }
+    .num { align-self: start; }
+    .step { padding: 20px; }
   }
 </style>
