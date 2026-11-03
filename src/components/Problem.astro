@@ -1,0 +1,61 @@
+<section class="problem">
+  <div class="wrap grid">
+    <div class="copy">
+      <h2>Ce gâteau vous <span class="nowrap">rapporte-t-il</span> vraiment de l'argent&nbsp;?</h2>
+      <p class="intro">Le prix tient dans votre tête, le coût dans un vieux fichier Excel. Et le dimanche soir, vous refaites les calculs sans être sûr du résultat.</p>
+      <ul>
+        <li><strong>Vos prix d'achat bougent.</strong> Beurre, crème, chocolat&nbsp;: un coût calculé une fois pour toutes devient vite faux.</li>
+        <li><strong>Votre temps n'apparaît nulle part.</strong> C'est pourtant le poste le plus lourd d'une production artisanale.</li>
+        <li><strong>Vous découvrez le problème trop tard.</strong> Quand la trésorerie baisse, le mal est déjà fait.</li>
+      </ul>
+    </div>
+
+    <figure class="example">
+      <figcaption>Entremets 6 personnes, vendu 30&nbsp;€</figcaption>
+      <div class="compare">
+        <div>
+          <p class="label">Avec les seuls ingrédients et l'emballage</p>
+          <p class="big">+21,00&nbsp;€</p>
+          <p class="sub">Coût compté&nbsp;: 9,00&nbsp;€</p>
+        </div>
+        <div class="real">
+          <p class="label">Avec le temps, les pertes et les charges</p>
+          <p class="big">−3,45&nbsp;€</p>
+          <p class="sub">Coût réel&nbsp;: 33,45&nbsp;€</p>
+        </div>
+      </div>
+      <a href="/blog/comment-fixer-le-prix-d-un-gateau/">Lire le calcul complet</a>
+    </figure>
+  </div>
+</section>
+
+<style>
+  .problem { padding-block: 40px 104px; }
+  .nowrap { white-space: nowrap; }
+  .grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 72px; align-items: center; }
+  .intro { margin-top: 20px; font-size: 1.25rem; line-height: 1.5; color: var(--ink-2); }
+  ul { list-style: none; margin-top: 32px; }
+  li { padding-block: 16px; border-top: 1px solid var(--line); color: var(--ink-2); }
+  li strong { color: var(--navy); font-weight: 600; }
+
+  .example { padding: 36px; background: var(--paper); border-radius: var(--radius-lg); }
+  figcaption { font-weight: 600; color: var(--navy); }
+  .compare { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-block: 20px 24px; }
+  .compare > div { padding: 22px 20px; background: #fff; border: 1px solid var(--line); border-radius: 10px; }
+  .label { min-height: 4.2em; font-size: .9375rem; line-height: 1.4; color: var(--ink-2); }
+  .big { margin-top: 10px; font-family: var(--title); font-size: clamp(2rem, 3.4vw, 2.75rem); font-weight: var(--title-weight); letter-spacing: var(--title-track); line-height: 1.1; color: var(--navy); white-space: nowrap; }
+  .real .big { color: var(--loss); }
+  .sub { margin-top: 8px; font-size: .9375rem; color: var(--ink-2); }
+  .example a { font-weight: 600; color: var(--navy); text-underline-offset: 4px; text-decoration-color: var(--gold-ink); }
+
+  @media (max-width: 960px) {
+    .grid { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+  }
+  @media (max-width: 560px) {
+    .problem { padding-bottom: 72px; }
+    .intro { font-size: 1.125rem; }
+    .example { padding: 24px 18px; }
+    .compare { grid-template-columns: minmax(0, 1fr); }
+    .label { min-height: 0; }
+  }
+</style>

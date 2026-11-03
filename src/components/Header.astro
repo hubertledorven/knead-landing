@@ -1,0 +1,52 @@
+---
+const signup = 'https://app.kneadmanager.com/#signup';
+---
+<header class="site-header">
+  <div class="wrap bar">
+    <a href="/" class="brand">Knead<span>.</span></a>
+    <nav class="links" id="site-nav" aria-label="Navigation principale">
+      <a href="#benefices">Fonctionnalités</a>
+      <a href="#tarifs">Tarifs</a>
+      <a href="/blog/">Blog</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a href={signup} class="btn btn-sm">Essai gratuit</a>
+    <button class="toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="site-nav">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+    </button>
+  </div>
+</header>
+
+<style>
+  .site-header { position: relative; z-index: 5; background: #fff; }
+  .bar { display: flex; align-items: center; justify-content: space-between; gap: 12px 24px; height: 76px; }
+  .brand { font-family: var(--logo); font-size: 1.875rem; font-weight: 600; color: var(--navy); text-decoration: none; }
+  .brand span { color: var(--gold-ink); }
+  .links { display: flex; gap: 32px; margin-left: 24px; margin-right: auto; }
+  .links a { font-size: 1rem; font-weight: 500; color: var(--ink-2); text-decoration: none; }
+  .links a:hover { color: var(--navy); }
+  .toggle { display: none; width: 44px; height: 44px; padding: 10px; background: none; border: 1px solid var(--line); border-radius: var(--radius); color: var(--navy); cursor: pointer; }
+  .toggle svg { display: block; width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; }
+
+  @media (max-width: 760px) {
+    .btn { margin-left: auto; }
+    .toggle { display: block; }
+    .links { display: none; position: absolute; top: 76px; left: 0; right: 0; flex-direction: column; gap: 0; margin: 0; padding: 8px var(--gutter) 16px; background: #fff; border-bottom: 1px solid var(--line); box-shadow: 0 16px 28px rgba(15, 31, 61, .1); }
+    .links.open { display: flex; }
+    .links a { padding-block: 13px; font-size: 1.125rem; color: var(--navy); }
+  }
+</style>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('.toggle');
+  const nav = document.getElementById('site-nav');
+  if (toggle && nav) {
+    const setOpen = (open: boolean) => {
+      nav.classList.toggle('open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
+    };
+    toggle.addEventListener('click', () => setOpen(!nav.classList.contains('open')));
+    nav.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+  }
+</script>

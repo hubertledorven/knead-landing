@@ -1,0 +1,178 @@
+---
+const signup = 'https://app.kneadmanager.com/#signup';
+
+const factures = [
+  { nom: 'Beurre de tourage', prix: '9,85 €/kg', statut: '+7 %', hausse: true },
+  { nom: 'Crème 35 %', prix: '4,35 €/L', statut: '+6 %', hausse: true },
+  { nom: 'Chocolat noir 70 %', prix: '13,50 €/kg', statut: 'Inchangé', hausse: false },
+  { nom: 'Praliné noisette', prix: '18,40 €/kg', statut: 'Créé', hausse: false },
+];
+const recettes = [
+  { nom: 'Entremets', cout: '33,45 €', prix: '30,00 €', marge: '−3,45 €', perte: true },
+  { nom: 'Flan 8 parts', cout: '12,40 €', prix: '32,00 €', marge: '+19,60 €' },
+  { nom: 'Tarte citron', cout: '14,80 €', prix: '34,00 €', marge: '+19,20 €' },
+  { nom: 'Saint-Honoré', cout: '38,50 €', prix: '78,00 €', marge: '+39,50 €' },
+];
+const semaine = [
+  { jour: 'Mar', items: ['Pâte sucrée', 'Flan ×6', 'Choux'] },
+  { jour: 'Mer', items: ['Biscuits', 'Crémeux', 'Glaçage'] },
+  { jour: 'Jeu', items: ['Entremets ×2', 'Madeleines', 'Tartes ×4'] },
+  { jour: 'Ven', items: ['Saint-Honoré', 'Flan ×8', 'Montage'] },
+  { jour: 'Sam', items: ['Vitrine', 'Retraits', 'Livraison'] },
+];
+---
+<section class="benefits" id="benefices">
+  <div class="wrap">
+    <h2>Ce que Knead change dans votre semaine</h2>
+
+    <div class="bento">
+      <article class="card span-5">
+        <div class="text">
+          <h3>Photographiez la facture, vos prix se mettent à jour</h3>
+          <p>L'IA lit les ingrédients et les prix, puis crée ou met à jour vos fiches. Vous n'avez plus rien à ressaisir.</p>
+        </div>
+        <div class="ui" aria-hidden="true">
+          <div class="ui-head"><b>Facture fournisseur</b><span>4 lignes lues</span></div>
+          <ul class="rows">
+            {factures.map((f) => (
+              <li><span>{f.nom}</span><span class="end"><b>{f.prix}</b><em class:list={{ up: f.hausse }}>{f.statut}</em></span></li>
+            ))}
+          </ul>
+        </div>
+      </article>
+
+      <article class="card span-7 split">
+        <div class="text">
+          <h3>Repérez ce qui vous fait perdre de l'argent</h3>
+          <p>Le coût de chaque recette, temps de travail et pertes compris, avec la marge en face. Quand le beurre augmente, vos marges se recalculent.</p>
+        </div>
+        <div class="ui" aria-hidden="true">
+          <div class="ui-head"><b>Marge par recette</b><span>Exemple</span></div>
+          <div class="margins">
+            <div class="m-row m-head"><span>Recette</span><span>Coût</span><span>Prix</span><span>Marge</span></div>
+            {recettes.map((r) => (
+              <div class:list={['m-row', { loss: r.perte }]}>
+                <span>{r.nom}</span><span>{r.cout}</span><span>{r.prix}</span><b>{r.marge}</b>
+              </div>
+            ))}
+          </div>
+        </div>
+      </article>
+
+      <article class="card span-7">
+        <div class="text">
+          <h3>Votre semaine de production, jour par jour</h3>
+          <p>Chaque commande se place au bon jour&nbsp;: vous savez quoi préparer, et quand.</p>
+        </div>
+        <div class="ui" aria-hidden="true">
+          <div class="week">
+            {semaine.map((d) => (
+              <div class="day">
+                <b>{d.jour}</b>
+                {d.items.map((i) => <span>{i}</span>)}
+              </div>
+            ))}
+          </div>
+        </div>
+      </article>
+
+      <article class="card span-5">
+        <div class="text">
+          <h3>Prévenu avant la rupture</h3>
+          <p>Plus jamais à court de praliné un samedi matin&nbsp;: Knead vous prévient à temps.</p>
+        </div>
+        <div class="ui" aria-hidden="true">
+          <div class="ui-head"><b>Stocks</b><span>Exemple</span></div>
+          <div class="stock">
+            <div class="stock-line"><span>Praliné noisette</span><b class="low">1,2 kg</b></div>
+            <div class="gauge"><i class="g-low"></i></div>
+            <p class="stock-note">Sous votre seuil de 2 kg</p>
+            <div class="stock-line"><span>Beurre de tourage</span><b>8 kg</b></div>
+            <div class="gauge"><i class="g-ok"></i></div>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="after">
+      <p><strong>Et aussi&nbsp;:</strong> devis et factures, suivi des pertes, hygiène et PMS, assistant intégré.</p>
+      <a href={signup} class="btn">Essayer gratuitement 7 jours</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .benefits { padding-block: 40px 104px; }
+  h2 { max-width: 16em; margin-bottom: 48px; }
+  .bento { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 16px; }
+  .span-5 { grid-column: span 5; }
+  .span-7 { grid-column: span 7; }
+
+  .card {
+    display: flex; flex-direction: column; justify-content: space-between; gap: 28px;
+    padding: 36px 36px 0; background: var(--paper); border-radius: var(--radius-lg); overflow: hidden;
+  }
+  .text p { margin-top: 12px; color: var(--ink-2); }
+  .split { flex-direction: row; gap: 32px; }
+  .split .text { flex: 1 1 38%; min-width: 0; padding-bottom: 36px; }
+  .split .ui { flex: 1 1 62%; min-width: 0; align-self: flex-end; }
+
+  /* Fragments d'interface : données d'exemple, à aligner sur l'app réelle. */
+  .ui {
+    padding: 20px 22px; background: #fff; border: 1px solid var(--line); border-bottom: 0;
+    border-radius: 10px 10px 0 0; font-size: .9375rem; line-height: 1.35;
+    font-variant-numeric: tabular-nums;
+  }
+  .ui-head { display: flex; justify-content: space-between; gap: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--line); color: var(--ink-2); }
+  .ui-head b { color: var(--navy); font-weight: 600; }
+  .rows { list-style: none; }
+  .rows li { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 10px 0; border-bottom: 1px solid #F0EEE7; }
+  .rows li:last-child { border-bottom: 0; }
+  .rows b { font-weight: 600; color: var(--navy); white-space: nowrap; }
+  .end { display: flex; align-items: baseline; gap: 12px; }
+  .end em { font-style: normal; font-size: .875rem; color: var(--ink-2); min-width: 4.2em; text-align: right; }
+  .end em.up { color: var(--loss); font-weight: 600; }
+  .m-row { display: grid; grid-template-columns: minmax(0, 1fr) 60px 60px 68px; gap: 8px; align-items: baseline; padding: 12px 0; border-bottom: 1px solid #F0EEE7; font-size: .875rem; }
+  .m-row:last-child { border-bottom: 0; padding-bottom: 20px; }
+  .m-row > :not(:first-child) { text-align: right; white-space: nowrap; }
+  .m-row b { font-weight: 600; color: var(--navy); }
+  .m-head { padding-bottom: 8px; font-size: .8125rem; color: var(--ink-2); }
+  .loss, .loss b { color: var(--loss); font-weight: 600; }
+
+  .week { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; }
+  .day { display: flex; flex-direction: column; gap: 6px; padding-bottom: 12px; }
+  .day b { padding-bottom: 8px; font-weight: 600; color: var(--navy); }
+  .day span { padding: 7px 8px; background: var(--paper); border-left: 2px solid var(--navy); border-radius: 3px; font-size: .8125rem; }
+
+  .stock { padding-top: 14px; }
+  .stock-line { display: flex; justify-content: space-between; gap: 12px; }
+  .stock-line b { font-weight: 600; color: var(--navy); }
+  .stock-line b.low, .stock-note { color: var(--loss); }
+  .stock-note { margin: 6px 0 18px; font-size: .875rem; font-weight: 600; }
+  .gauge { height: 6px; margin-top: 8px; background: #EEECE5; border-radius: 3px; overflow: hidden; }
+  .gauge i { display: block; height: 100%; }
+  .g-low { width: 24%; background: var(--loss); }
+  .g-ok { width: 80%; background: var(--ok); margin-bottom: 0; }
+  .stock > .gauge:last-child { margin-bottom: 16px; }
+
+  .after { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px 40px; margin-top: 40px; }
+  .after p { color: var(--ink-2); }
+  .after strong { color: var(--navy); font-weight: 600; }
+
+  @media (max-width: 960px) {
+    .span-5, .span-7 { grid-column: span 12; }
+  }
+  @media (max-width: 640px) {
+    .benefits { padding-bottom: 72px; }
+    .card { padding: 28px 20px 0; }
+    .split { flex-direction: column; gap: 28px; }
+    .split .text { padding-bottom: 0; }
+    .split .ui { align-self: stretch; }
+    .m-row { grid-template-columns: minmax(0, 1fr) 60px 68px; }
+    .m-row > :nth-child(2) { display: none; }
+    .ui { padding: 16px; }
+    .week { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .day:nth-child(n + 4) { display: none; }
+    .after .btn { width: 100%; }
+  }
+</style>

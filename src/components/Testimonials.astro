@@ -1,0 +1,63 @@
+---
+import { temoignages } from '../data/temoignages';
+
+interface Props {
+  /** Affiche des emplacements explicites tant qu'aucun témoignage réel n'est disponible. */
+  apercu?: boolean;
+}
+const { apercu = false } = Astro.props;
+// La citation mise en avant sous le hero n'est pas répétée ici.
+const vedette = temoignages.find((x) => x.enAvant) ?? temoignages[0];
+const liste = temoignages.filter((x) => x !== vedette);
+const emplacements = [
+  'Avant Knead : comment la personne calculait ses coûts.',
+  'Le résultat concret : une marge corrigée, un prix revu, du temps gagné. Un chiffre réel si possible.',
+  'Une objection levée : la prise en main, le temps de mise en route.',
+  'Ce qui a changé dans sa semaine.',
+  'Une courte citation.',
+];
+---
+{(liste.length > 0 || apercu) && (
+  <section class="testimonials">
+    <div class="wrap">
+      <h2>Ils ont arrêté de calculer le dimanche soir</h2>
+      <div class="wall">
+        {liste.length > 0
+          ? liste.map((t) => (
+              <figure class="item">
+                <blockquote>« {t.citation} »</blockquote>
+                <figcaption><strong>{t.nom}</strong><br />{t.boutique}{t.ville ? `, ${t.ville}` : ''}</figcaption>
+              </figure>
+            ))
+          : emplacements.map((texte) => (
+              <figure class="item slot">
+                <span class="tag">Témoignage à venir</span>
+                <blockquote>{texte}</blockquote>
+                <figcaption><strong>Prénom Nom</strong><br />Boutique, ville</figcaption>
+              </figure>
+            ))}
+      </div>
+    </div>
+  </section>
+)}
+
+<style>
+  .testimonials { padding-block: 96px; background: var(--paper); }
+  h2 { max-width: 16em; margin-bottom: 48px; }
+  /* Colonnes de hauteurs variables, pour des citations de longueurs différentes. */
+  .wall { columns: 3; column-gap: 16px; }
+  .item { break-inside: avoid; margin-bottom: 16px; padding: 28px; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); }
+  blockquote { font-size: 1.125rem; line-height: 1.5; color: var(--ink); }
+  figcaption { margin-top: 20px; font-size: 1rem; line-height: 1.4; color: var(--ink-2); }
+  figcaption strong { color: var(--navy); font-weight: 600; }
+  .slot { border: 1.5px dashed #B9B5A7; background: transparent; }
+  .tag { display: block; margin-bottom: 12px; font-size: .875rem; font-weight: 600; color: var(--gold-ink); }
+
+  @media (max-width: 960px) { .wall { columns: 2; } }
+  @media (max-width: 640px) {
+    .testimonials { padding-block: 64px; }
+    h2 { margin-bottom: 32px; }
+    .wall { columns: 1; }
+    .item { padding: 22px; }
+  }
+</style>

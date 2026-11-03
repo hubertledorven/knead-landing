@@ -1,0 +1,31 @@
+<footer>
+  <div class="wrap">
+    <div class="top">
+      <div>
+        <a href="/" class="brand">Knead<span>.</span></a>
+        <p class="sign">Tu pâtisses, Knead compte.</p>
+      </div>
+      <nav aria-label="Pied de page">
+        <a href="#benefices">Fonctionnalités</a>
+        <a href="#tarifs">Tarifs</a>
+        <a href="/blog/">Blog</a>
+        <a href="#faq">FAQ</a>
+        <a href="mailto:contact@kneadmanager.com">Contact</a>
+      </nav>
+    </div>
+    <p class="legal">© 2026 Knead. Tous droits réservés. <a href="/mentions-legales.html">Mentions légales et confidentialité</a></p>
+  </div>
+</footer>
+
+<style>
+  footer { padding-block: 56px 40px; background: #0B1729; color: var(--on-navy-2); }
+  .top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 32px; }
+  .brand { font-family: var(--logo); font-size: 1.875rem; font-weight: 600; color: #fff; text-decoration: none; }
+  .brand span { color: var(--gold); }
+  .sign { margin-top: 4px; font-size: 1rem; }
+  nav { display: flex; flex-wrap: wrap; gap: 12px 28px; font-size: 1rem; }
+  nav a { text-decoration: none; }
+  nav a:hover, .legal a:hover { color: #fff; text-decoration: underline; text-underline-offset: 4px; }
+  .legal { margin-top: 36px; padding-top: 22px; border-top: 1px solid rgba(255, 255, 255, .1); font-size: .9375rem; }
+  :focus-visible { outline-color: var(--gold); }
+</style>

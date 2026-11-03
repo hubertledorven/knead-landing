@@ -1,0 +1,64 @@
+---
+import { Image } from 'astro:assets';
+import capture from '../assets/hero-dashboard.png';
+import portrait from '../assets/hubert-portrait.jpg';
+
+const signup = 'https://app.kneadmanager.com/#signup';
+---
+<section class="hero">
+  <div class="wrap copy">
+    <h1>Sachez enfin ce que chaque gâteau vous rapporte.</h1>
+    <p class="lead">Photographiez vos factures fournisseurs. Knead met vos prix d'achat à jour et recalcule le coût et la marge de chaque recette, sans tableur le dimanche soir.</p>
+    <a href={signup} class="btn">Essayer gratuitement 7 jours</a>
+    <p class="note">Sans carte bancaire. Annulation en un clic.</p>
+    <div class="founder">
+      <Image src={portrait} alt="" width={44} height={44} widths={[44, 88]} sizes="44px" format="webp" />
+      <p>Conçu par <strong>Hubert Le Dorven</strong>, pâtissier depuis 17 ans.</p>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="wrap">
+      <div class="shot">
+        <Image
+          src={capture}
+          alt="Tableau de bord Knead : production du jour, commandes à venir et stocks à commander"
+          widths={[640, 960, 1152, 1600, 2304]}
+          sizes="(max-width: 1200px) 100vw, 1152px"
+          format="webp"
+          loading="eager"
+          fetchpriority="high"
+        />
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .copy { display: flex; flex-direction: column; align-items: center; padding-block: 56px 56px; text-align: center; }
+  h1 { max-width: 15em; }
+  .lead { margin-top: 24px; font-size: 1.25rem; line-height: 1.5; color: var(--ink-2); max-width: 36em; }
+  .btn { margin-top: 32px; }
+  .note { margin-top: 14px; font-size: 1rem; color: var(--ink-2); }
+  .founder { display: flex; align-items: center; gap: 12px; margin-top: 24px; font-size: 1rem; color: var(--ink-2); text-align: left; }
+  .founder img { width: 44px; height: 44px; border-radius: 50%; flex: none; }
+  .founder strong { color: var(--navy); font-weight: 600; }
+
+  /* Le bloc navy démarre à mi-hauteur de la capture, coupée en bas. */
+  .band { overflow: hidden; background: linear-gradient(to bottom, #fff 0, #fff 96px, var(--navy) 96px); }
+  .shot {
+    height: 560px; overflow: hidden;
+    border-radius: 12px 12px 0 0;
+    box-shadow: 0 0 0 1px var(--line), 0 24px 60px rgba(15, 31, 61, .25);
+  }
+  .shot img { width: 100%; }
+
+  @media (max-width: 760px) {
+    .copy { padding-block: 32px 40px; }
+    .lead { font-size: 1.125rem; }
+    .btn { width: 100%; }
+    .band { background: linear-gradient(to bottom, #fff 0, #fff 56px, var(--navy) 56px); }
+    .shot { height: 260px; }
+    .shot img { width: 720px; max-width: none; }
+  }
+</style>

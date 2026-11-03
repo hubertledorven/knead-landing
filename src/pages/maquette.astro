@@ -1,0 +1,101 @@
+---
+// Page de travail de la refonte : à supprimer quand les sections passent dans index.astro.
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import HeroCentre from '../components/HeroCentre.astro';
+import HeroNavy from '../components/HeroNavy.astro';
+import Proof from '../components/Proof.astro';
+import Problem from '../components/Problem.astro';
+import Guide from '../components/Guide.astro';
+import Plan from '../components/Plan.astro';
+import Benefits from '../components/Benefits.astro';
+import Testimonials from '../components/Testimonials.astro';
+import Pricing from '../components/Pricing.astro';
+import Faq from '../components/Faq.astro';
+import FinalCta from '../components/FinalCta.astro';
+import Footer from '../components/Footer.astro';
+---
+<Base
+  title="Maquette — Knead"
+  description="Maquette de travail de la refonte de la landing Knead."
+  noindex
+>
+  <script is:inline>
+    (function () {
+      var q = new URLSearchParams(location.search), d = document.documentElement;
+      d.dataset.titres = q.get('titres') === 'a' ? 'a' : 'b';
+      d.dataset.hero = q.get('hero') === '2' ? '2' : '1';
+    })();
+  </script>
+
+  <Header />
+  <main>
+    <div class="variant" data-variant="1"><HeroCentre /></div>
+    <div class="variant" data-variant="2"><HeroNavy /></div>
+    <Proof apercu />
+    <Problem />
+    <Guide />
+    <Plan />
+    <div class="benefits-space"><Benefits /></div>
+    <Testimonials apercu />
+    <Pricing />
+    <Faq />
+    <FinalCta />
+  </main>
+  <Footer />
+
+  <div class="switcher" role="group" aria-label="Comparer les propositions">
+    <span>Titres</span>
+    <a href="#" data-set="titres" data-value="a">A</a>
+    <a href="#" data-set="titres" data-value="b">B</a>
+    <span class="sep">Hero</span>
+    <a href="#" data-set="hero" data-value="1">1</a>
+    <a href="#" data-set="hero" data-value="2">2</a>
+  </div>
+
+  <script is:inline>
+    (function () {
+      var d = document.documentElement;
+      var links = document.querySelectorAll('.switcher a');
+      function sync() {
+        links.forEach(function (a) {
+          var on = d.dataset[a.dataset.set] === a.dataset.value;
+          a.setAttribute('aria-current', on ? 'true' : 'false');
+        });
+      }
+      links.forEach(function (a) {
+        a.addEventListener('click', function (e) {
+          e.preventDefault();
+          d.dataset[a.dataset.set] = a.dataset.value;
+          // L'URL garde le choix, pour pouvoir envoyer une combinaison précise au client.
+          var q = new URLSearchParams(location.search);
+          q.set(a.dataset.set, a.dataset.value);
+          history.replaceState(null, '', location.pathname + '?' + q.toString());
+          sync();
+        });
+      });
+      sync();
+    })();
+  </script>
+</Base>
+
+<style is:global>
+  html[data-hero="1"] .variant[data-variant="2"],
+  html[data-hero="2"] .variant[data-variant="1"] { display: none; }
+
+  .benefits-space { padding-top: 64px; }
+
+  .switcher {
+    position: fixed; left: 50%; bottom: 88px; z-index: 10; transform: translateX(-50%);
+    display: flex; align-items: center; gap: 6px; padding: 8px 10px;
+    background: #fff; border: 1px solid var(--line); border-radius: 10px;
+    box-shadow: 0 8px 28px rgba(15, 31, 61, .18);
+    font-size: .875rem; font-weight: 600; color: var(--ink-2); white-space: nowrap;
+  }
+  .switcher .sep { margin-left: 10px; }
+  .switcher a {
+    display: grid; place-items: center; min-width: 36px; height: 36px;
+    border-radius: 6px; color: var(--navy); text-decoration: none;
+  }
+  .switcher a[aria-current="true"] { background: var(--navy); color: #fff; }
+</style>

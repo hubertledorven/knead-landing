@@ -1,0 +1,41 @@
+---
+const signup = 'https://app.kneadmanager.com/#signup';
+const etapes = [
+  { titre: 'Photographiez vos factures', texte: "L'IA lit les ingrédients et les prix, et crée vos fiches. Rien à ressaisir." },
+  { titre: 'Ajoutez vos recettes', texte: 'Scannez-les ou saisissez-les. Knead calcule le coût de chacune, au centime.' },
+  { titre: 'Ajustez vos prix', texte: 'Vous voyez ce qui rapporte et ce qui coûte, et vous décidez en connaissance de cause.' },
+];
+---
+<section class="plan">
+  <div class="wrap">
+    <h2>Vos vraies marges en trois étapes</h2>
+    <ol>
+      {etapes.map((e, i) => (
+        <li>
+          <span class="num" aria-hidden="true">{i + 1}</span>
+          <h3>{e.titre}</h3>
+          <p>{e.texte}</p>
+        </li>
+      ))}
+    </ol>
+    <a href={signup} class="btn btn-gold">Essayer gratuitement 7 jours</a>
+  </div>
+</section>
+
+<style>
+  .plan { padding-block: 96px; background: var(--navy); color: #fff; }
+  h2 { color: #fff; }
+  ol { list-style: none; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-block: 48px 40px; }
+  li { padding: 32px 28px 36px; background: var(--navy-soft); border-radius: var(--radius-lg); }
+  .num { display: block; margin-bottom: 28px; font-family: var(--title); font-size: 3.25rem; font-weight: var(--title-weight); line-height: 1; color: var(--gold); }
+  h3 { color: #fff; }
+  li p { margin-top: 12px; color: var(--on-navy-2); }
+
+  @media (max-width: 860px) {
+    .plan { padding-block: 64px; }
+    ol { grid-template-columns: minmax(0, 1fr); margin-top: 32px; }
+    li { padding: 24px; }
+    .num { margin-bottom: 14px; font-size: 2.5rem; }
+    .btn { width: 100%; }
+  }
+</style>

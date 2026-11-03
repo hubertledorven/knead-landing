@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
+<style is:inline>
   :root{
     /* ---- Charte Knead ---- */
     --navy:#0F1F3D;          /* fond des sections fortes, titres */
@@ -358,7 +358,7 @@
     </div>
 
     <div class="hero-shot">
-      <img src="dashboard.png" width="2940" height="1912"
+      <img src="/dashboard.png" width="2940" height="1912"
            alt="Tableau de bord Knead : production du jour, commandes à venir, alertes stock et résumé financier"
            fetchpriority="high" decoding="async">
     </div>
@@ -376,7 +376,7 @@
 <section class="founder" id="histoire">
   <div class="wrap founder-grid">
     <aside class="founder-portrait">
-      <img src="hubert.jpg" width="800" height="1066" class="founder-photo" loading="lazy" decoding="async"
+      <img src="/hubert.jpg" width="800" height="1066" class="founder-photo" loading="lazy" decoding="async"
            alt="Hubert, fondateur de Knead" onerror="this.style.display='none'">
       <div class="name">Hubert</div>
       <p>Pâtissier depuis 17 ans, fondateur de Knead.</p>
@@ -611,7 +611,7 @@
   </div>
 </footer>
 
-<script>
+<script is:inline>
   // Menu mobile
   var t = document.getElementById('menuToggle'), n = document.getElementById('navLinks');
   if (t && n) {
@@ -633,7 +633,7 @@
 <!-- Schema.org FAQPage — généré à partir des <details> de la section #faq.
      Toute modification d'une question ou d'une réponse doit être reportée ici :
      un balisage qui ne correspond plus au texte visible est une pénalité, pas un bonus. -->
-<script type="application/ld+json">
+<script type="application/ld+json" is:inline>
 {
   "@context": "https://schema.org",
   "@type": "FAQPage",

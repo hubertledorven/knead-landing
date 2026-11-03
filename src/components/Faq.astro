@@ -1,0 +1,52 @@
+---
+import { faq } from '../data/faq';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map((f) => ({
+    '@type': 'Question',
+    name: f.question,
+    acceptedAnswer: { '@type': 'Answer', text: f.reponse },
+  })),
+};
+---
+<section class="faq" id="faq">
+  <div class="wrap grid">
+    <div>
+      <h2>Vos questions, avant de vous lancer</h2>
+      <p class="contact">Une autre question&nbsp;? <a href="mailto:contact@kneadmanager.com">Écrivez-nous</a></p>
+    </div>
+    <div class="list">
+      {faq.map((f, i) => (
+        <details open={i === 0}>
+          <summary>{f.question}</summary>
+          <p>{f.reponse}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+</section>
+
+<style>
+  .faq { padding-block: 96px; background: var(--paper); }
+  .grid { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 72px; align-items: start; }
+  .contact { margin-top: 20px; color: var(--ink-2); }
+  .contact a { font-weight: 600; color: var(--navy); text-underline-offset: 4px; text-decoration-color: var(--gold-ink); }
+  .list { border-top: 1px solid #D9D6CB; }
+  details { border-bottom: 1px solid #D9D6CB; }
+  summary {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 20px;
+    padding-block: 20px; font-weight: 600; color: var(--navy); cursor: pointer; list-style: none;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: '+'; flex: none; font-size: 1.5rem; font-weight: 400; line-height: 1; color: var(--gold-ink); }
+  details[open] summary::after { content: '−'; }
+  details p { max-width: 38em; padding-bottom: 24px; color: var(--ink-2); }
+
+  @media (max-width: 860px) {
+    .faq { padding-block: 64px; }
+    .grid { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  }
+</style>

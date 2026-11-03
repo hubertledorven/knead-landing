@@ -1,0 +1,35 @@
+---
+const signup = 'https://app.kneadmanager.com/#signup';
+---
+<section class="final">
+  <div class="wrap">
+    <div class="box">
+      <div>
+        <h2>Combien vous rapporte vraiment votre meilleure vente&nbsp;?</h2>
+        <p>Faites le calcul avec vos propres factures, pendant 7 jours gratuits.</p>
+      </div>
+      <div class="action">
+        <a href={signup} class="btn btn-gold">Essayer gratuitement 7 jours</a>
+        <p class="note">Sans carte bancaire. Annulation en un clic.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .final { padding-block: 72px; }
+  .box { display: flex; align-items: center; justify-content: space-between; gap: 40px 64px; padding: 64px; background: var(--navy); border-radius: var(--radius-lg); color: #fff; }
+  h2 { max-width: 15em; color: #fff; }
+  p { margin-top: 16px; color: var(--on-navy-2); }
+  .action { flex: none; text-align: center; }
+  .note { margin-top: 12px; font-size: 1rem; }
+
+  @media (max-width: 860px) {
+    .box { flex-direction: column; align-items: stretch; padding: 40px 24px; }
+    .btn { width: 100%; }
+  }
+  @media (max-width: 560px) {
+    .final { padding-block: 40px; }
+    .final .wrap { padding-inline: 16px; }
+  }
+</style>
