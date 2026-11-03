@@ -23,6 +23,7 @@ import Footer from '../components/Footer.astro';
     (function () {
       var q = new URLSearchParams(location.search), d = document.documentElement;
       d.dataset.titres = q.get('titres') === 'a' ? 'a' : 'b';
+      d.dataset.fond = q.get('fond') === 'bleu' ? 'bleu' : 'dore';
     })();
   </script>
 
@@ -41,11 +42,21 @@ import Footer from '../components/Footer.astro';
   </main>
   <Footer />
 
-  <div class="switcher" role="group" aria-label="Comparer les propositions">
-    <span>Titres</span>
-    <a href="#" data-set="titres" data-value="a">A</a>
-    <a href="#" data-set="titres" data-value="b">B</a>
-  </div>
+  <details class="switcher">
+    <summary>Options</summary>
+    <div class="options" role="group" aria-label="Comparer les propositions">
+      <div class="row">
+        <span>Titres</span>
+        <a href="#" data-set="titres" data-value="a">A</a>
+        <a href="#" data-set="titres" data-value="b">B</a>
+      </div>
+      <div class="row">
+        <span>Fond</span>
+        <a href="#" data-set="fond" data-value="dore">Doré</a>
+        <a href="#" data-set="fond" data-value="bleu">Bleu</a>
+      </div>
+    </div>
+  </details>
 
   <script is:inline>
     (function () {
@@ -77,14 +88,23 @@ import Footer from '../components/Footer.astro';
   .benefits-space { padding-top: 64px; }
 
   .switcher {
-    position: fixed; left: 50%; bottom: 88px; z-index: 10; transform: translateX(-50%);
-    display: flex; align-items: center; gap: 6px; padding: 8px 10px;
-    background: #fff; border: 1px solid var(--line); border-radius: 10px;
-    box-shadow: 0 8px 28px rgba(15, 31, 61, .18);
+    position: fixed; right: 16px; bottom: 16px; z-index: 10;
     font-size: .875rem; font-weight: 600; color: var(--ink-2); white-space: nowrap;
   }
+  .switcher summary {
+    display: flex; align-items: center; min-height: 44px; padding-inline: 16px;
+    background: var(--navy); border-radius: 10px; color: #fff; cursor: pointer; list-style: none;
+    box-shadow: 0 8px 28px rgba(15, 31, 61, .28);
+  }
+  .switcher summary::-webkit-details-marker { display: none; }
+  .switcher .options {
+    position: absolute; right: 0; bottom: calc(100% + 8px); display: flex; flex-direction: column; gap: 6px; padding: 10px 12px;
+    background: #fff; border: 1px solid var(--line); border-radius: 10px;
+    box-shadow: 0 8px 28px rgba(15, 31, 61, .18);
+  }
+  .switcher .row { display: grid; grid-template-columns: 48px 56px 56px; align-items: center; gap: 4px; }
   .switcher a {
-    display: grid; place-items: center; min-width: 36px; height: 36px;
+    display: grid; place-items: center; min-width: 36px; height: 36px; padding-inline: 8px;
     border-radius: 6px; color: var(--navy); text-decoration: none;
   }
   .switcher a[aria-current="true"] { background: var(--navy); color: #fff; }

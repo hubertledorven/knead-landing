@@ -29,6 +29,7 @@ const signup = 'https://app.kneadmanager.com/#signup';
   </div>
 
   <div class="band">
+    <div class="panel" aria-hidden="true"></div>
     <div class="wrap">
       <div class="stage">
         <div class="shot">
@@ -75,7 +76,7 @@ const signup = 'https://app.kneadmanager.com/#signup';
     mask-image: radial-gradient(ellipse 62% 78% at 50% 34%, #000 25%, transparent 100%);
   }
 
-  .copy { position: relative; display: flex; flex-direction: column; align-items: center; padding-block: 72px 80px; text-align: center; }
+  .copy { position: relative; display: flex; flex-direction: column; align-items: center; padding-block: 72px; text-align: center; }
   h1 { max-width: 15em; }
   /* Trait doré dessiné à la main sous les mots clés. */
   .mark {
@@ -83,7 +84,15 @@ const signup = 'https://app.kneadmanager.com/#signup';
     background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 14' preserveAspectRatio='none'%3E%3Cpath d='M3 9C60 3 118 3 170 6s92 3 127-1' fill='none' stroke='%23C9A84C' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E") center bottom / 100% .2em no-repeat;
   }
   .lead { margin-top: 32px; font-size: 1.25rem; line-height: 1.5; color: var(--ink-2); max-width: 36em; }
-  .btn { margin-top: 40px; }
+  /* Bouton principal : navy avec léger dégradé et halo doré. */
+  .btn {
+    --btn-shadow: 0 0 0 1px rgba(201, 168, 76, .4), 0 10px 30px rgba(201, 168, 76, .45);
+    --btn-shadow-hover: 0 0 0 1px rgba(201, 168, 76, .6), 0 14px 38px rgba(201, 168, 76, .6);
+    margin-top: 40px; min-height: 60px; padding-inline: 30px; font-size: 1.1875rem;
+    background: linear-gradient(to bottom, #3F5F94, var(--navy));
+  }
+  .btn:hover { background: linear-gradient(to bottom, #4C6DA3, var(--navy-soft)); }
+
   .note { margin-top: 18px; font-size: 1rem; color: var(--ink-2); }
 
   /* Éléments flottants, affichés seulement quand ils ont la place de part et d'autre du texte. */
@@ -127,19 +136,33 @@ const signup = 'https://app.kneadmanager.com/#signup';
     .deco { animation: none; }
   }
 
-  /* Le bloc navy démarre à mi-hauteur de la capture, coupée en bas. */
-  .band { position: relative; overflow: hidden; }
-  .band::before {
-    content: ''; position: absolute; inset: 96px 0 0;
-    background:
-      radial-gradient(ellipse 720px 320px at 50% 0, rgba(201, 168, 76, .3), transparent 75%),
-      var(--navy);
+  /* Doré très clair derrière la capture : un arc qui s'éclaircit vers le haut. */
+  .band { position: relative; overflow: hidden; padding-top: 24px; }
+  .panel {
+    position: absolute; inset: 0;
+    background: radial-gradient(
+      ellipse 80% 100% at 50% 100%,
+      rgba(233, 216, 165, 1) 58%,
+      rgba(238, 225, 186, .85) 74%,
+      rgba(243, 234, 208, .42) 89%,
+      rgba(247, 241, 224, 0) 100%
+    );
+  }
+  /* Variante de comparaison, pilotée par le sélecteur de la maquette. */
+  :global(html[data-fond="bleu"]) .panel {
+    background: radial-gradient(
+      ellipse 80% 100% at 50% 100%,
+      rgba(190, 205, 228, 1) 58%,
+      rgba(205, 217, 235, .85) 74%,
+      rgba(222, 230, 242, .42) 89%,
+      rgba(235, 240, 248, 0) 100%
+    );
   }
   .band .wrap { position: relative; }
   .shot {
     height: 560px; overflow: hidden;
     border-radius: 12px 12px 0 0;
-    box-shadow: 0 0 0 1px var(--line), 0 24px 60px rgba(15, 31, 61, .25);
+    box-shadow: 0 0 0 1px rgba(15, 31, 61, .08), 0 24px 60px rgba(15, 31, 61, .22);
   }
   .shot img { width: 100%; }
 
@@ -158,11 +181,11 @@ const signup = 'https://app.kneadmanager.com/#signup';
   .float-b { top: 356px; right: 12px; }
 
   @media (max-width: 760px) {
-    .copy { padding-block: 48px 56px; }
+    .copy { padding-block: 48px 40px; }
     .lead { margin-top: 24px; font-size: 1.125rem; }
     .btn { margin-top: 32px; }
     .btn { width: 100%; }
-    .band::before { top: 56px; background: var(--navy); }
+    .band { padding-top: 16px; }
     .shot { height: 260px; }
     .shot img { width: 720px; max-width: none; }
     .float { width: min(230px, 66%); padding: 10px 12px; }
