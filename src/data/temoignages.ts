@@ -5,6 +5,8 @@ export interface Temoignage {
   nom: string;
   boutique: string;
   ville?: string;
+  /** Portrait importé depuis src/assets, facultatif. Affiché en rond à côté du nom. */
+  photo?: ImageMetadata;
   /** Citation affichée en grand sous le hero. */
   enAvant?: boolean;
 }

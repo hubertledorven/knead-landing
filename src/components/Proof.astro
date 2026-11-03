@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import { temoignages } from '../data/temoignages';
 
 interface Props {
@@ -12,7 +13,10 @@ const t = temoignages.find((x) => x.enAvant) ?? temoignages[0];
   <section class="proof">
     <figure class="wrap">
       <blockquote>« {t.citation} »</blockquote>
-      <figcaption><strong>{t.nom}</strong>, {t.boutique}{t.ville ? `, ${t.ville}` : ''}</figcaption>
+      <figcaption>
+        {t.photo && <Image src={t.photo} alt="" width={48} height={48} widths={[48, 96]} sizes="48px" format="webp" />}
+        <span><strong>{t.nom}</strong>, {t.boutique}{t.ville ? `, ${t.ville}` : ''}</span>
+      </figcaption>
     </figure>
   </section>
 ) : apercu && (
@@ -21,7 +25,7 @@ const t = temoignages.find((x) => x.enAvant) ?? temoignages[0];
       <div class="slot">
         <span class="tag">Emplacement à remplir, visible seulement sur la maquette</span>
         <p class="slot-quote">Citation du client&nbsp;: un résultat concret, en une ou deux phrases.</p>
-        <p class="slot-who">Prénom Nom, boutique, ville</p>
+        <p class="slot-who"><span class="slot-photo" aria-hidden="true"></span>Prénom Nom, boutique, ville</p>
       </div>
     </div>
   </section>
@@ -30,9 +34,11 @@ const t = temoignages.find((x) => x.enAvant) ?? temoignages[0];
 <style>
   .proof { padding-block: 88px; text-align: center; }
   figure, .slot { max-width: 860px; margin-inline: auto; }
-  blockquote, .slot-quote { font-family: var(--title); font-size: clamp(1.625rem, 2.8vw, 2.25rem); font-weight: 500; letter-spacing: var(--title-track); line-height: 1.25; color: var(--navy); }
-  figcaption, .slot-who { margin-top: 24px; font-size: 1.0625rem; color: var(--ink-2); }
+  blockquote, .slot-quote { font-family: var(--title); font-size: clamp(1.5rem, 2.4vw, 1.875rem); font-weight: 500; letter-spacing: var(--title-track); line-height: 1.25; color: var(--navy); }
+  figcaption, .slot-who { display: flex; justify-content: center; align-items: center; gap: 12px; margin-top: 24px; font-size: 1.0625rem; color: var(--ink-2); }
   figcaption strong { color: var(--navy); font-weight: 600; }
+  figcaption img, .slot-photo { flex: none; width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
+  .slot-photo { border: 1.5px dashed #B9B5A7; }
   .slot { padding: 32px 24px 40px; border: 1.5px dashed #B9B5A7; border-radius: var(--radius); }
   .tag { display: block; margin-bottom: 20px; font-size: .875rem; font-weight: 600; color: var(--gold-ink); }
   @media (max-width: 560px) { .proof { padding-block: 56px; } }
