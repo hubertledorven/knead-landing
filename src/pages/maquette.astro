@@ -102,7 +102,8 @@ import Footer from '../components/Footer.astro';
     background: #fff; border: 1px solid var(--line); border-radius: 10px;
     box-shadow: 0 8px 28px rgba(15, 31, 61, .18);
   }
-  .switcher .row { display: grid; grid-template-columns: 48px 56px 56px; align-items: center; gap: 4px; }
+  .switcher .row { display: flex; align-items: center; gap: 4px; }
+  .switcher .row span { width: 48px; }
   .switcher a {
     display: grid; place-items: center; min-width: 36px; height: 36px; padding-inline: 8px;
     border-radius: 6px; color: var(--navy); text-decoration: none;

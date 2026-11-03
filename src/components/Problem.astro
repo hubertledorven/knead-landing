@@ -1,13 +1,25 @@
 <section class="problem">
   <div class="wrap">
-    <h2>Le beurre augmente.<br>Combien gagnez-vous sur chaque éclair&nbsp;?</h2>
+    <h2>Le beurre augmente.<br>Combien gagnez-vous sur chaque gâteau&nbsp;?</h2>
     <p class="intro">Le prix tient dans votre tête, le coût dans un vieux fichier Excel. Et le dimanche soir, vous refaites les calculs sans être sûr du résultat.</p>
 
     <ul>
-      <li><strong>Vos prix d'achat bougent.</strong> Beurre, crème, chocolat&nbsp;: un coût calculé une fois pour toutes devient vite faux.</li>
-      <li><strong>Votre temps n'apparaît nulle part.</strong> C'est pourtant le poste le plus lourd d'une production artisanale.</li>
-      <li><strong>Vous découvrez le problème trop tard.</strong> Quand la trésorerie baisse, le mal est déjà fait.</li>
-      <li><strong>Et la production ne prévient pas.</strong> Une commande oubliée ou une rupture de stock en plein travail, et toute la journée déraille.</li>
+      <li>
+        <strong><i aria-hidden="true"></i>Vos prix d'achat bougent.</strong>
+        <p>Beurre, crème, chocolat&nbsp;: un coût calculé une fois pour toutes devient vite faux.</p>
+      </li>
+      <li>
+        <strong><i aria-hidden="true"></i>Votre temps n'apparaît nulle part.</strong>
+        <p>C'est pourtant le poste le plus lourd d'une production artisanale.</p>
+      </li>
+      <li>
+        <strong><i aria-hidden="true"></i>Vous découvrez le problème trop tard.</strong>
+        <p>Quand la trésorerie baisse, le mal est déjà fait.</p>
+      </li>
+      <li>
+        <strong><i aria-hidden="true"></i>Et la production ne prévient pas.</strong>
+        <p>Une commande oubliée, et la journée déraille.</p>
+      </li>
     </ul>
 
     <figure class="example">
@@ -22,7 +34,9 @@
           <p class="big">+21,00&nbsp;€</p>
           <p class="sub">Coût compté&nbsp;: 9,00&nbsp;€</p>
         </div>
+        <span class="arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" /></svg></span>
         <div class="real">
+          <span class="tag">Vente à perte</span>
           <p class="label">Avec le temps, les pertes et les charges</p>
           <p class="big">−3,45&nbsp;€</p>
           <p class="sub">Coût réel&nbsp;: 33,45&nbsp;€</p>
@@ -37,18 +51,28 @@
   h2 { max-width: 24em; }
   .intro { max-width: 36em; margin: 20px auto 0; font-size: 1.25rem; line-height: 1.5; text-align: center; color: var(--ink-2); }
 
-  ul { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px; margin-block: 56px; }
-  /* Sous-grille : les textes démarrent à la même hauteur, même si un intitulé tient sur une ligne. */
-  li { display: grid; grid-row: span 2; grid-template-rows: subgrid; row-gap: 6px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--ink-2); }
-  li strong { color: var(--navy); font-weight: 600; }
+  ul { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-block: 56px; }
+  /* Douleurs en cartes façon notification. Sous-grille : les textes démarrent à la même hauteur. */
+  li {
+    display: grid; grid-row: span 2; grid-template-rows: subgrid; row-gap: 8px;
+    padding: 20px 22px; background: #fff; border: 1px solid var(--line); border-radius: 12px;
+    box-shadow: 0 14px 34px rgba(15, 31, 61, .1); color: var(--ink-2);
+  }
+  li strong { position: relative; padding-left: 20px; color: var(--navy); font-weight: 600; }
+  li i { position: absolute; top: .5em; left: 2px; width: 9px; height: 9px; background: var(--loss); border-radius: 50%; box-shadow: 0 0 0 4px #FBEDEA; }
 
-  .example { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: 48px; align-items: center; padding: 40px; background: var(--paper); border-radius: var(--radius-lg); }
+  .example { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: 48px; align-items: center; padding: 48px 40px; background: linear-gradient(135deg, #FBFAF6, #F6F2E8); border-radius: var(--radius-lg); }
   figcaption { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; color: var(--ink-2); }
   figcaption strong { font-family: var(--title); font-size: clamp(1.5rem, 2vw, 1.75rem); font-weight: var(--title-weight); letter-spacing: var(--title-track); line-height: 1.18; color: var(--navy); text-wrap: balance; }
   figcaption a { margin-top: 8px; font-weight: 600; color: var(--navy); text-underline-offset: 4px; text-decoration-color: var(--gold-ink); }
 
-  .compare { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
-  .compare > div { padding: 28px; background: #fff; border: 1px solid var(--line); border-radius: 10px; }
+  .compare { position: relative; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+  .compare > div { position: relative; padding: 28px; background: rgba(255, 255, 255, .7); border-radius: 12px; }
+  /* La vraie marge est la carte qui doit sauter aux yeux. */
+  .compare > .real { background: #fff; box-shadow: 0 0 0 1.5px var(--loss), 0 18px 40px rgba(180, 35, 24, .16); }
+  .tag { position: absolute; top: -13px; left: 24px; padding: 4px 12px; background: var(--loss); border-radius: 999px; font-size: .8125rem; font-weight: 600; color: #fff; white-space: nowrap; }
+  .arrow { position: absolute; z-index: 1; top: 50%; left: 50%; display: grid; place-items: center; width: 40px; height: 40px; margin: -20px 0 0 -20px; background: var(--navy); border-radius: 50%; }
+  .arrow svg { width: 18px; height: 18px; fill: none; stroke: var(--gold); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
   .label { font-size: 1rem; line-height: 1.4; color: var(--ink-2); }
   .big { margin-top: 16px; font-family: var(--title); font-size: clamp(2.25rem, 4.2vw, 3.5rem); font-weight: var(--title-weight); letter-spacing: var(--title-track); line-height: 1.05; color: var(--navy); white-space: nowrap; }
   .real .big { color: var(--loss); }
@@ -61,9 +85,10 @@
   @media (max-width: 560px) {
     .problem { padding-bottom: 72px; }
     .intro { font-size: 1.125rem; }
-    ul { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+    ul { grid-template-columns: minmax(0, 1fr); }
     .example { padding: 24px 18px; }
-    .compare { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+    .compare { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+    .arrow { width: 36px; height: 36px; margin: -18px 0 0 -18px; rotate: 90deg; }
     .compare > div { padding: 22px 20px; }
   }
 </style>
