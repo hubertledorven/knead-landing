@@ -7,7 +7,7 @@ const formules = [
     prix: '49',
     annuel: 'ou 470 €/an, soit −20 %',
     pointsForts: ['1 utilisateur', '15 scans IA par mois (factures et recettes)', 'Recettes, coûts et marges', 'Import des commandes Shopify en un clic', 'Support par email'],
-    cta: 'Essayer gratuitement 7 jours',
+    cta: 'Essai gratuit 7 jours',
     href: signup,
     note: "Aucune carte bancaire pour l'essai de 7 jours.",
     vedette: true,
@@ -81,7 +81,8 @@ const formules = [
   svg { flex: none; width: 18px; height: 18px; margin-top: 2px; fill: none; stroke: var(--gold-ink); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
   .foot { margin-top: auto; }
   .btn { width: 100%; }
-  .btn-line { background: #fff; color: var(--navy); border: 1px solid var(--navy); }
+  /* Sans ombre : le bouton doré de la formule mise en avant reste le plus visible. */
+  .btn-line { --btn-shadow: none; --btn-shadow-hover: none; background: #fff; color: var(--navy); border: 1px solid var(--navy); }
   .btn-line:hover { background: var(--paper); }
   .note { margin-top: 12px; font-size: .9375rem; line-height: 1.4; color: var(--ink-2); }
 
