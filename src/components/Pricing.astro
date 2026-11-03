@@ -67,7 +67,7 @@ const formules = [
 <style>
   .pricing { padding-block: 104px; }
   h2 { max-width: 17em; }
-  .intro { margin-top: 16px; font-size: 1.25rem; color: var(--ink-2); }
+  .intro { margin-top: 16px; font-size: 1.25rem; text-align: center; color: var(--ink-2); }
   .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-items: stretch; margin-top: 64px; }
 
   .plan { display: flex; flex-direction: column; padding: 32px; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); }
@@ -91,10 +91,10 @@ const formules = [
   .featured ul { border-top-color: rgba(255, 255, 255, .16); }
   .featured svg { stroke: var(--gold); }
 
-  .after { margin-top: 32px; font-size: 1rem; color: var(--ink-2); }
+  .after { margin-top: 32px; font-size: 1rem; text-align: center; color: var(--ink-2); }
 
   @media (max-width: 960px) {
-    .grid { grid-template-columns: minmax(0, 1fr); max-width: 520px; }
+    .grid { grid-template-columns: minmax(0, 1fr); max-width: 520px; margin-inline: auto; }
     .featured { margin-block: 0; padding-block: 32px; }
   }
   @media (max-width: 560px) {

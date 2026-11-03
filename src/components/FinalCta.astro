@@ -19,7 +19,8 @@ const signup = 'https://app.kneadmanager.com/#signup';
 <style>
   .final { padding-block: 72px; }
   .box { display: flex; align-items: center; justify-content: space-between; gap: 40px 64px; padding: 64px; background: var(--navy); border-radius: var(--radius-lg); color: #fff; }
-  h2 { max-width: 15em; color: #fff; }
+  /* Bandeau titre à gauche, action à droite : le seul titre qui reste aligné à gauche. */
+  h2 { max-width: 15em; margin-inline: 0; text-align: left; color: #fff; }
   p { margin-top: 16px; color: var(--on-navy-2); }
   .action { flex: none; text-align: center; }
   .note { margin-top: 12px; font-size: 1rem; }

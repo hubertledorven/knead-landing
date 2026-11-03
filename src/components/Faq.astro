@@ -12,8 +12,8 @@ const schema = {
 };
 ---
 <section class="faq" id="faq">
-  <div class="wrap grid">
-    <div>
+  <div class="wrap">
+    <div class="head">
       <h2>Vos questions, avant de vous lancer</h2>
       <p class="contact">Une autre question&nbsp;? <a href="mailto:contact@kneadmanager.com">Écrivez-nous</a></p>
     </div>
@@ -31,10 +31,10 @@ const schema = {
 
 <style>
   .faq { padding-block: 96px; background: var(--paper); }
-  .grid { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: 72px; align-items: start; }
-  .contact { margin-top: 20px; color: var(--ink-2); }
+  .head { margin-bottom: 48px; text-align: center; }
+  .contact { margin-top: 16px; color: var(--ink-2); }
   .contact a { font-weight: 600; color: var(--navy); text-underline-offset: 4px; text-decoration-color: var(--gold-ink); }
-  .list { border-top: 1px solid #D9D6CB; }
+  .list { max-width: 800px; margin-inline: auto; border-top: 1px solid #D9D6CB; }
   details { border-bottom: 1px solid #D9D6CB; }
   summary {
     display: flex; justify-content: space-between; align-items: baseline; gap: 20px;
@@ -47,6 +47,6 @@ const schema = {
 
   @media (max-width: 860px) {
     .faq { padding-block: 64px; }
-    .grid { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+    .head { margin-bottom: 32px; }
   }
 </style>

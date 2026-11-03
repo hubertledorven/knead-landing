@@ -18,7 +18,7 @@ const etapes = [
         </li>
       ))}
     </ol>
-    <a href={signup} class="btn btn-gold">Essayer gratuitement 7 jours</a>
+    <div class="action"><a href={signup} class="btn btn-gold">Essayer gratuitement 7 jours</a></div>
   </div>
 </section>
 
@@ -30,6 +30,7 @@ const etapes = [
   .num { display: block; margin-bottom: 28px; font-family: var(--title); font-size: 3.25rem; font-weight: var(--title-weight); line-height: 1; color: var(--gold); }
   h3 { color: #fff; }
   li p { margin-top: 12px; color: var(--on-navy-2); }
+  .action { text-align: center; }
 
   @media (max-width: 860px) {
     .plan { padding-block: 64px; }

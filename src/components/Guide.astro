@@ -3,36 +3,39 @@ import { Image } from 'astro:assets';
 import photo from '../assets/hubert.jpg';
 ---
 <section class="guide" id="histoire">
-  <div class="wrap grid">
+  <div class="wrap">
+    <h2>17 ans en pâtisserie.<br>17 ans à détester Excel.</h2>
+    <div class="grid">
     <Image
       src={photo}
       alt="Hubert Le Dorven en train de pocher la crème d'un Saint-Honoré dans son laboratoire"
       widths={[400, 600, 800]}
-      sizes="(max-width: 860px) 100vw, 480px"
+      sizes="(max-width: 860px) 100vw, 440px"
       format="webp"
       loading="lazy"
     />
     <div class="copy">
-      <h2>17 ans en pâtisserie.<br>17 ans à détester Excel.</h2>
       <p>Pendant des années, je n'ai jamais su précisément ma marge sur chaque création. Mes food costs, je les faisais le dimanche soir, en pestant.</p>
       <p>Travailler seul, c'est aussi gérer les stocks, les commandes, la production et les factures. Tout, en même temps.</p>
       <p>Alors j'ai construit l'outil que j'aurais voulu avoir&nbsp;: je photographie une facture, mes ingrédients se mettent à jour et mes marges se recalculent.</p>
       <p class="sign"><strong>Hubert Le Dorven</strong><br>Pâtissier depuis 17 ans, fondateur de Knead</p>
+    </div>
     </div>
   </div>
 </section>
 
 <style>
   .guide { padding-block: 96px; background: var(--paper); }
-  .grid { display: grid; grid-template-columns: minmax(0, 480px) minmax(0, 1fr); gap: 72px; align-items: center; }
-  img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 40%; border-radius: var(--radius-lg); }
-  h2 { max-width: 13em; margin-bottom: 28px; }
+  h2 { margin-bottom: 56px; }
+  .grid { display: grid; grid-template-columns: minmax(0, 440px) minmax(0, 620px); justify-content: center; gap: 72px; align-items: center; }
+  img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover; object-position: center 35%; border-radius: var(--radius-lg); }
   .copy p { max-width: 34em; margin-bottom: 18px; color: var(--ink-2); }
   .copy .sign { margin: 28px 0 0; padding-top: 20px; border-top: 1px solid var(--line); font-size: 1rem; }
   .sign strong { color: var(--navy); font-weight: 600; }
 
   @media (max-width: 860px) {
     .guide { padding-block: 64px; }
+    h2 { margin-bottom: 32px; }
     .grid { grid-template-columns: minmax(0, 1fr); gap: 36px; }
     img { aspect-ratio: 1 / 1; object-position: center 25%; }
   }
