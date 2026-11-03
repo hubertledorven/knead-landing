@@ -31,27 +31,16 @@ const signup = 'https://app.kneadmanager.com/#signup';
   <div class="band">
     <div class="panel" aria-hidden="true"></div>
     <div class="wrap">
-      <div class="stage">
-        <div class="shot">
-          <Image
-            src={capture}
-            alt="Tableau de bord Knead : production du jour, commandes à venir et stocks à commander"
-            widths={[640, 960, 1152, 1600, 2304]}
-            sizes="(max-width: 1200px) 100vw, 1152px"
-            format="webp"
-            loading="eager"
-            fetchpriority="high"
-          />
-        </div>
-        <!-- Exemples illustratifs, à aligner sur l'app réelle. -->
-        <div class="float float-a" aria-hidden="true">
-          <span>Facture lue</span>
-          <p><b>Beurre de tourage</b><em>+7&nbsp;%</em></p>
-        </div>
-        <div class="float float-b" aria-hidden="true">
-          <span>Marge recalculée</span>
-          <p><b>Entremets</b><em>−3,45&nbsp;€</em></p>
-        </div>
+      <div class="shot">
+        <Image
+          src={capture}
+          alt="Tableau de bord Knead : production du jour, commandes à venir et stocks à commander"
+          widths={[640, 960, 1152, 1600, 2304]}
+          sizes="(max-width: 1200px) 100vw, 1152px"
+          format="webp"
+          loading="eager"
+          fetchpriority="high"
+        />
       </div>
     </div>
   </div>
@@ -166,20 +155,6 @@ const signup = 'https://app.kneadmanager.com/#signup';
   }
   .shot img { width: 100%; }
 
-  .stage { position: relative; }
-  .float {
-    position: absolute; width: 270px; padding: 16px 18px;
-    background: #fff; border: 1px solid var(--line); border-radius: 10px;
-    box-shadow: 0 16px 40px rgba(15, 31, 61, .28);
-    font-variant-numeric: tabular-nums;
-  }
-  .float span { display: block; font-size: .875rem; color: var(--ink-2); }
-  .float p { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-top: 6px; }
-  .float b { font-weight: 600; color: var(--navy); }
-  .float em { flex: none; font-style: normal; font-weight: 600; color: var(--loss); }
-  .float-a { top: 208px; left: 12px; }
-  .float-b { top: 356px; right: 12px; }
-
   @media (max-width: 760px) {
     .copy { padding-block: 48px 40px; }
     .lead { margin-top: 24px; font-size: 1.125rem; }
@@ -188,10 +163,5 @@ const signup = 'https://app.kneadmanager.com/#signup';
     .band { padding-top: 16px; }
     .shot { height: 260px; }
     .shot img { width: 720px; max-width: none; }
-    .float { width: min(230px, 66%); padding: 10px 12px; }
-    .float span { font-size: .8125rem; }
-    .float p { margin-top: 3px; font-size: .9375rem; }
-    .float-a { top: 72px; left: 8px; }
-    .float-b { top: auto; bottom: 16px; right: 8px; }
   }
 </style>
