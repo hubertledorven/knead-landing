@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import InstagramIcon from './InstagramIcon.astro';
 import { temoignages } from '../data/temoignages';
 
 const signup = 'https://app.kneadmanager.com/#signup';
@@ -9,9 +10,6 @@ interface Props {
   apercu?: boolean;
 }
 const { apercu = false } = Astro.props;
-// La citation mise en avant sous le hero n'est pas répétée ici.
-const vedette = temoignages.find((x) => x.enAvant) ?? temoignages[0];
-const liste = temoignages.filter((x) => x !== vedette);
 const emplacements = [
   'Avant Knead : comment la personne calculait ses coûts.',
   'Le résultat concret : une marge corrigée, un prix revu, du temps gagné. Un chiffre réel si possible.',
@@ -20,20 +18,23 @@ const emplacements = [
   'Une courte citation.',
 ];
 // Le mur s'adapte au nombre de citations : pas de colonnes vides avec une ou deux citations.
-const colonnes = Math.min(liste.length || emplacements.length, 3);
+const colonnes = Math.min(temoignages.length || emplacements.length, 3);
 ---
-{(liste.length > 0 || apercu) && (
+{(temoignages.length > 0 || apercu) && (
   <section class="testimonials">
     <div class="wrap">
-      <h2>Ils ont arrêté de calculer le dimanche soir</h2>
+      <h2>Ce qu'en disent celles et ceux qui l'utilisent</h2>
       <div class:list={['wall', `cols-${colonnes}`]}>
-        {liste.length > 0
-          ? liste.map((t) => (
+        {temoignages.length > 0
+          ? temoignages.map((t) => (
               <figure class="item">
-                <blockquote>« {t.citation} »</blockquote>
+                <blockquote>{t.citation}</blockquote>
                 <figcaption>
                   {t.photo && <Image src={t.photo} alt="" width={44} height={44} widths={[44, 88]} sizes="44px" format="webp" />}
-                  <span><strong>{t.nom}</strong><br />{t.boutique}{t.ville ? `, ${t.ville}` : ''}</span>
+                  <span>
+                    {t.instagram && <InstagramIcon />}<strong>{t.nom}</strong>
+                    {t.boutique && <><br />{t.boutique}{t.ville ? `, ${t.ville}` : ''}</>}
+                  </span>
                 </figcaption>
               </figure>
             ))
@@ -65,7 +66,7 @@ const colonnes = Math.min(liste.length || emplacements.length, 3);
   .cols-2 { columns: 2; max-width: 860px; }
   .item { break-inside: avoid; margin-bottom: 16px; padding: 28px; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); }
   blockquote { font-size: 1.125rem; line-height: 1.5; color: var(--ink); }
-  figcaption { display: flex; align-items: center; gap: 12px; margin-top: 20px; font-size: 1rem; line-height: 1.4; color: var(--ink-2); }
+  figcaption { display: flex; align-items: center; gap: 12px; margin-top: 20px; font-size: .9375rem; line-height: 1.4; color: var(--ink-2); }
   figcaption strong { color: var(--navy); font-weight: 600; }
   figcaption img, .slot-photo { flex: none; width: 44px; height: 44px; border-radius: 50%; object-fit: cover; }
   .slot-photo { border: 1.5px dashed #B9B5A7; }

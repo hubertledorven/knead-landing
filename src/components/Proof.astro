@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import InstagramIcon from './InstagramIcon.astro';
 import { temoignages } from '../data/temoignages';
 
 interface Props {
@@ -12,10 +13,10 @@ const t = temoignages.find((x) => x.enAvant) ?? temoignages[0];
 {t ? (
   <section class="proof">
     <figure class="wrap">
-      <blockquote>« {t.citation} »</blockquote>
+      <blockquote>«&nbsp;{t.extrait ?? t.citation}&nbsp;»</blockquote>
       <figcaption>
         {t.photo && <Image src={t.photo} alt="" width={48} height={48} widths={[48, 96]} sizes="48px" format="webp" />}
-        <span><strong>{t.nom}</strong>, {t.boutique}{t.ville ? `, ${t.ville}` : ''}</span>
+        <span>{t.instagram && <InstagramIcon />}<strong>{t.nom}</strong>{t.boutique ? `, ${t.boutique}` : ''}{t.ville ? `, ${t.ville}` : ''}</span>
       </figcaption>
     </figure>
   </section>
@@ -35,7 +36,8 @@ const t = temoignages.find((x) => x.enAvant) ?? temoignages[0];
   .proof { padding-block: 88px; text-align: center; }
   figure, .slot { max-width: 860px; margin-inline: auto; }
   blockquote, .slot-quote { font-family: var(--title); font-size: clamp(1.5rem, 2.4vw, 1.875rem); font-weight: 500; letter-spacing: var(--title-track); line-height: 1.25; color: var(--navy); }
-  figcaption, .slot-who { display: flex; justify-content: center; align-items: center; gap: 12px; margin-top: 24px; font-size: 1.0625rem; color: var(--ink-2); }
+  blockquote { text-wrap: balance; }
+  figcaption, .slot-who { display: flex; justify-content: center; align-items: center; gap: 12px; margin-top: 24px; font-size: .9375rem; color: var(--ink-2); }
   figcaption strong { color: var(--navy); font-weight: 600; }
   figcaption img, .slot-photo { flex: none; width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
   .slot-photo { border: 1.5px dashed #B9B5A7; }
