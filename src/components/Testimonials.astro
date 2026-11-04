@@ -69,10 +69,10 @@ const colonnes = Math.min(temoignages.length || emplacements.length, 3);
   figcaption { display: flex; align-items: center; gap: 12px; margin-top: 20px; font-size: .9375rem; line-height: 1.4; color: var(--ink-2); }
   figcaption strong { color: var(--navy); font-weight: 600; }
   figcaption img, .slot-photo { flex: none; width: 44px; height: 44px; border-radius: 50%; object-fit: cover; }
-  .slot-photo { border: 1.5px dashed #B9B5A7; }
+  .slot-photo { border: 1.5px dashed var(--line-dashed); }
   .action { margin-top: 48px; text-align: center; }
   .action p { margin-bottom: 20px; font-family: var(--title); font-size: clamp(1.375rem, 2vw, 1.625rem); font-weight: 400; letter-spacing: var(--title-track); line-height: 1.25; color: var(--navy); }
-  .slot { border: 1.5px dashed #B9B5A7; background: transparent; }
+  .slot { border: 1.5px dashed var(--line-dashed); background: transparent; }
   .tag { display: block; margin-bottom: 12px; font-size: .875rem; font-weight: 600; color: var(--gold-ink); }
 
   @media (max-width: 960px) { .cols-3 { columns: 2; } }

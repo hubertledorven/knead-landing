@@ -2,13 +2,22 @@
   /* Charte Knead */
   --navy: #0F1F3D;
   --navy-soft: #1A2E4F;
+  --navy-light: #2F4770;
+  --navy-deep: #0B1729;
   --gold: #C9A84C;      /* sur navy uniquement */
-  --gold-ink: #8C6D2F;  /* accent lisible sur fond clair */
+  --gold-ink: #806326;  /* accent lisible sur fond clair, y compris sur le crème et le halo du hero */
+  --gradient-navy: linear-gradient(160deg, var(--navy) 20%, var(--navy-light));
+  --gradient-gold: linear-gradient(to bottom, var(--gold), #DBBF6E);
+  --gradient-gold-hover: linear-gradient(to bottom, #D6B863, #E4CC85);
   --paper: #F7F6F2;
   --ink: #1E293B;
   --ink-2: #475569;     /* texte secondaire, plus contrasté que l'ancien #64748B */
   --on-navy-2: #CBD5E1;
   --line: #E4E2DA;
+  --line-soft: #F0EEE7;
+  --line-strong: #D9D6CB;
+  --line-dashed: #B9B5A7;
+  --track: #EEECE5;
   --loss: #B42318;
   --ok: #1F7A4D;
 

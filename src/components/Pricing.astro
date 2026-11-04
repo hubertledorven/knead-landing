@@ -95,7 +95,7 @@ const formules = [
     position: relative; margin-block: -16px; padding: 0; border-color: var(--navy);
     box-shadow: 0 18px 44px rgba(15, 31, 61, .18);
   }
-  .featured .head { padding: 48px 32px 24px; background: linear-gradient(160deg, var(--navy) 20%, #2F4770); border-radius: calc(var(--radius-lg) - 1px) calc(var(--radius-lg) - 1px) 0 0; color: #fff; }
+  .featured .head { padding: 48px 32px 24px; background: var(--gradient-navy); border-radius: calc(var(--radius-lg) - 1px) calc(var(--radius-lg) - 1px) 0 0; color: #fff; }
   /* Étiquette à cheval sur le haut de la carte : elle dit pourquoi Solo est mise en avant. */
   .tag {
     display: none; position: absolute; z-index: 1; top: -15px; left: 50%; transform: translateX(-50%); padding: 5px 14px;
@@ -116,9 +116,9 @@ const formules = [
     --btn-shadow: 0 0 0 1px rgba(201, 168, 76, .5), 0 10px 30px rgba(201, 168, 76, .45);
     --btn-shadow-hover: 0 0 0 1px rgba(201, 168, 76, .7), 0 14px 38px rgba(201, 168, 76, .6);
     min-height: 60px; padding-inline: 20px; font-size: 1.1875rem;
-    background: linear-gradient(to bottom, var(--gold), #DBBF6E);
+    background: var(--gradient-gold);
   }
-  .btn-gold:hover { background: linear-gradient(to bottom, #D6B863, #E4CC85); }
+  .btn-gold:hover { background: var(--gradient-gold-hover); }
 
   .after { margin-top: 32px; font-size: 1rem; text-align: center; color: var(--ink-2); }
 
