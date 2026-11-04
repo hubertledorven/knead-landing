@@ -18,11 +18,19 @@ const signup = 'https://app.kneadmanager.com/#signup';
 </header>
 
 <style>
-  .site-header { position: relative; z-index: 5; }
-  .bar { display: flex; align-items: center; justify-content: space-between; gap: 12px 24px; height: 76px; }
+  /* Transparente au-dessus du hero, elle prend un fond dès qu'on défile. */
+  .site-header {
+    position: sticky; top: 0; z-index: 5; border-bottom: 1px solid transparent;
+    transition: background-color .18s ease, border-color .18s ease;
+  }
+  .site-header.scrolled {
+    background: rgba(255, 255, 255, .92); border-bottom-color: var(--line);
+    -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  }
+  .bar { display: flex; align-items: center; justify-content: space-between; gap: 12px 24px; height: calc(var(--header-h) - 1px); }
   .brand { font-family: var(--logo); font-size: 1.875rem; font-weight: 600; color: var(--navy); text-decoration: none; }
   .brand span { color: var(--gold-ink); }
-  .links { display: flex; gap: 32px; margin-left: 24px; margin-right: auto; }
+  .links { display: flex; gap: 44px; margin-left: auto; margin-right: 20px; }
   .links a { font-size: 1rem; font-weight: 500; color: var(--ink-2); text-decoration: none; }
   .links a:hover { color: var(--navy); }
   .toggle { display: none; width: 44px; height: 44px; padding: 10px; background: none; border: 1px solid var(--line); border-radius: var(--radius); color: var(--navy); cursor: pointer; }
@@ -31,13 +39,18 @@ const signup = 'https://app.kneadmanager.com/#signup';
   @media (max-width: 760px) {
     .btn { margin-left: auto; }
     .toggle { display: block; }
-    .links { display: none; position: absolute; top: 76px; left: 0; right: 0; flex-direction: column; gap: 0; margin: 0; padding: 8px var(--gutter) 16px; background: #fff; border-bottom: 1px solid var(--line); box-shadow: 0 16px 28px rgba(15, 31, 61, .1); }
+    .links { display: none; position: absolute; top: var(--header-h); left: 0; right: 0; flex-direction: column; gap: 0; margin: 0; padding: 8px var(--gutter) 16px; background: #fff; border-bottom: 1px solid var(--line); box-shadow: 0 16px 28px rgba(15, 31, 61, .1); }
     .links.open { display: flex; }
     .links a { padding-block: 13px; font-size: 1.125rem; color: var(--navy); }
   }
 </style>
 
 <script>
+  const header = document.querySelector('.site-header');
+  const updateScrolled = () => header?.classList.toggle('scrolled', window.scrollY > 8);
+  window.addEventListener('scroll', updateScrolled, { passive: true });
+  updateScrolled();
+
   const toggle = document.querySelector<HTMLButtonElement>('.toggle');
   const nav = document.getElementById('site-nav');
   if (toggle && nav) {

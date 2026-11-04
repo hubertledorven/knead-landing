@@ -22,6 +22,7 @@ const signup = 'https://app.kneadmanager.com/#signup';
   </div>
 
   <div class="wrap copy">
+    <p class="eyebrow">Conçu par un pâtissier, pour les pâtissier·ères</p>
     <h1>Sachez enfin ce que chaque gâteau <span class="mark">vous rapporte.</span></h1>
     <p class="lead">Photographiez vos factures&nbsp;: Knead met vos prix d'achat à jour et recalcule la marge de chaque recette.</p>
     <a href={signup} class="btn">Essai gratuit 7 jours</a>
@@ -49,9 +50,9 @@ const signup = 'https://app.kneadmanager.com/#signup';
 <style>
   /* La section remonte sous l'en-tête, transparent, pour que le fond démarre tout en haut. */
   .hero {
-    position: relative; margin-top: -76px; padding-top: 76px; overflow-x: clip;
+    position: relative; margin-top: calc(-1 * var(--header-h)); padding-top: var(--header-h); overflow-x: clip;
     background:
-      radial-gradient(ellipse 620px 340px at 50% 210px, rgba(201, 168, 76, .2), transparent 72%),
+      radial-gradient(ellipse 620px 340px at 50% 210px, rgba(201, 168, 76, .1), transparent 72%),
       linear-gradient(to bottom, var(--paper), #fff 620px);
   }
   /* Quadrillage discret, qui s'efface vers les bords. */
@@ -66,6 +67,7 @@ const signup = 'https://app.kneadmanager.com/#signup';
   }
 
   .copy { position: relative; display: flex; flex-direction: column; align-items: center; padding-block: 72px; text-align: center; }
+  .eyebrow { margin-bottom: 20px; font-size: .8125rem; font-weight: 600; letter-spacing: .09em; line-height: 1.4; text-transform: uppercase; text-wrap: balance; color: var(--gold-ink); }
   h1 { max-width: 15em; }
   /* Trait doré dessiné à la main sous les mots clés. */
   .mark {
