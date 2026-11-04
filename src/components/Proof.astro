@@ -33,15 +33,14 @@ const t = temoignages.find((x) => x.enAvant) ?? temoignages[0];
 )}
 
 <style>
-  .proof { padding-block: 88px; text-align: center; }
+  .proof { padding-block: var(--space-section); text-align: center; }
   figure, .slot { max-width: 860px; margin-inline: auto; }
   blockquote, .slot-quote { font-family: var(--title); font-size: clamp(1.5rem, 2.4vw, 1.875rem); font-weight: 500; letter-spacing: var(--title-track); line-height: 1.25; color: var(--navy); }
   blockquote { text-wrap: balance; }
-  figcaption, .slot-who { display: flex; justify-content: center; align-items: center; gap: 12px; margin-top: 24px; font-size: .9375rem; color: var(--ink-2); }
-  figcaption strong { color: var(--navy); font-weight: 600; }
+  figcaption, .slot-who { display: flex; justify-content: center; align-items: center; gap: 12px; margin-top: 24px; font-size: .875rem; color: var(--ink-2); }
+  figcaption strong { color: var(--navy); font-weight: 500; }
   figcaption img, .slot-photo { flex: none; width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
   .slot-photo { border: 1.5px dashed var(--line-dashed); }
   .slot { padding: 32px 24px 40px; border: 1.5px dashed var(--line-dashed); border-radius: var(--radius); }
   .tag { display: block; margin-bottom: 20px; font-size: .875rem; font-weight: 600; color: var(--gold-ink); }
-  @media (max-width: 560px) { .proof { padding-block: 56px; } }
 </style>

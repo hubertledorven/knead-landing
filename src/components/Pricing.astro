@@ -68,9 +68,9 @@ const formules = [
 </section>
 
 <style>
-  .pricing { padding-block: 104px; }
+  .pricing { padding-block: var(--space-section); }
   h2 { max-width: 17em; }
-  .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-items: stretch; margin-top: 64px; }
+  .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-items: stretch; margin-top: var(--space-heading); }
 
   /* Sous-grille : listes et boutons s'alignent d'une carte à l'autre. */
   .plan { display: grid; grid-row: span 4; grid-template-rows: subgrid; row-gap: 0; padding: 32px; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); }
@@ -120,7 +120,7 @@ const formules = [
   }
   .btn-gold:hover { background: var(--gradient-gold-hover); }
 
-  .after { margin-top: 32px; font-size: 1rem; text-align: center; color: var(--ink-2); }
+  .after { margin-top: var(--space-after); font-size: 1rem; text-align: center; color: var(--ink-2); }
 
   /* Trois cartes étroites sur tablette en paysage : boutons resserrés et sans flèche, pour rester sur une ligne. */
   @media (min-width: 961px) and (max-width: 1180px) {
@@ -141,7 +141,6 @@ const formules = [
     .featured .note { margin-bottom: 32px; }
   }
   @media (max-width: 560px) {
-    .pricing { padding-block: 64px; }
     .plan { padding: 24px; }
     .featured .head { padding: 28px 24px 24px; }
     .featured ul { margin-inline: 24px; }

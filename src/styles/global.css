@@ -34,9 +34,19 @@
   --gutter: 24px;
   /* En rem et em : la navbar suit la taille de texte choisie dans le navigateur. */
   --header-h: 4.75rem;
+
+  /* Rythme vertical de la page : haut et bas des sections, écart après un titre, écart avant le bloc de fin. */
+  --space-section: 6rem;
+  --space-heading: 3.5rem;
+  --space-after: 2.5rem;
 }
 @media (max-width: 47.5em) {
-  :root { --header-h: 3.75rem; }
+  :root {
+    --header-h: 3.75rem;
+    --space-section: 4rem;
+    --space-heading: 2rem;
+    --space-after: 2rem;
+  }
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }

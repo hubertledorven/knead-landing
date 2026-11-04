@@ -49,11 +49,12 @@
 </section>
 
 <style>
-  .problem { padding-block: 40px 104px; }
+  /* Haut réduit : la section prolonge la citation juste au-dessus, sur le même fond. */
+  .problem { padding-block: 2rem var(--space-section); }
   h2 { max-width: 24em; }
   .intro { max-width: 36em; margin: 20px auto 0; font-size: 1.25rem; line-height: 1.5; text-align: center; color: var(--ink-2); }
 
-  ul { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-block: 56px; }
+  ul { list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-block: var(--space-heading); }
   /* Douleurs en cartes façon notification. Sous-grille : les textes démarrent à la même hauteur. */
   li {
     position: relative; display: grid; grid-row: span 2; grid-template-rows: subgrid; row-gap: 8px;
@@ -94,20 +95,18 @@
   .big { margin-top: 16px; font-family: var(--title); font-size: clamp(2.25rem, 4.2vw, 3.5rem); font-weight: var(--title-weight); letter-spacing: var(--title-track); line-height: 1.05; color: var(--navy); }
   .real .big { color: var(--loss); }
   .sub { margin-top: 10px; font-size: 1rem; color: var(--ink-2); }
-  .next { margin-top: 48px; text-align: center; font-family: var(--title); font-size: clamp(1.375rem, 2vw, 1.625rem); font-weight: 400; letter-spacing: var(--title-track); line-height: 1.25; color: var(--navy); text-wrap: balance; }
+  .next { margin-top: var(--space-after); text-align: center; font-family: var(--title); font-size: clamp(1.375rem, 2vw, 1.625rem); font-weight: 400; letter-spacing: var(--title-track); line-height: 1.25; color: var(--navy); text-wrap: balance; }
 
   @media (max-width: 960px) {
-    ul { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-block: 40px; }
+    ul { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .example { grid-template-columns: minmax(0, 1fr); gap: 24px; }
   }
   @media (max-width: 560px) {
-    .problem { padding-bottom: 72px; }
     .intro { font-size: 1.125rem; }
     ul { grid-template-columns: minmax(0, 1fr); }
     .example { padding: 24px 18px; }
     .compare { grid-template-columns: minmax(0, 1fr); gap: 28px; }
     .arrow { width: 36px; height: 36px; margin: -18px 0 0 -18px; rotate: 90deg; }
     .compare > div { padding: 22px 20px; }
-    .next { margin-top: 32px; }
   }
 </style>

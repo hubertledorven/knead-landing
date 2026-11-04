@@ -18,7 +18,7 @@ const signup = 'https://app.kneadmanager.com/#signup';
     <div class="ring">
       <Image src={gateau} alt="" widths={[144, 288]} sizes="144px" format="webp" />
     </div>
-    <p class="badge"><span>Saint-Honoré</span><b>+39,50&nbsp;€</b></p>
+    <p class="badge"><span>Création</span><b>+39,50&nbsp;€</b></p>
   </div>
 
   <div class="wrap copy">
@@ -95,8 +95,9 @@ const signup = 'https://app.kneadmanager.com/#signup';
   }
 
   .ticket {
-    top: 336px; left: calc(50% - min(680px, 48vw)); width: 196px; padding: 14px 14px 10px;
-    rotate: -5deg; background: #fff; border-radius: 10px 10px 0 0;
+    /* Centré sur la hauteur du bouton principal. */
+    top: 425px; left: calc(50% - 600px); width: 196px; padding: 14px 14px 10px;
+    rotate: -5deg; scale: .85; background: #fff; border-radius: 10px 10px 0 0;
     filter: drop-shadow(0 14px 22px rgba(15, 31, 61, .16));
   }
   /* Bord dentelé du ticket. */
@@ -110,7 +111,7 @@ const signup = 'https://app.kneadmanager.com/#signup';
   .tick { position: absolute; top: -10px; right: -10px; display: grid; place-items: center; width: 26px; height: 26px; background: var(--navy); border-radius: 50%; }
   .tick svg { width: 14px; height: 14px; fill: none; stroke: var(--gold); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
 
-  .cake { top: 316px; right: calc(50% - min(680px, 48vw)); width: 172px; animation-delay: -4s; }
+  .cake { top: 412px; right: calc(50% - 600px); width: 172px; rotate: 5deg; scale: .85; animation-delay: -4s; }
   .ring { position: relative; width: 144px; height: 144px; margin-inline: auto; padding: 5px; background: #fff; border-radius: 50%; box-shadow: 0 14px 30px rgba(15, 31, 61, .2); }
   .ring::before { content: ''; position: absolute; inset: -10px; border: 1.5px dashed var(--gold); border-radius: 50%; }
   /* Photo en portrait : gâteau recadré dans le rond, un peu au-dessus du centre car le badge couvre le bas. */

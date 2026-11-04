@@ -23,7 +23,7 @@ import photo from '../assets/hubert.jpg';
 </section>
 
 <style>
-  .guide { padding-block: 96px; }
+  .guide { padding-block: var(--space-section); }
   .grid { display: grid; grid-template-columns: minmax(0, 440px) minmax(0, 620px); justify-content: center; gap: 72px; align-items: center; }
   /* Le titre fait corps avec le texte : aligné à gauche, contrairement aux autres sections. */
   h2 { margin: 0 0 28px; text-align: left; }
@@ -33,7 +33,6 @@ import photo from '../assets/hubert.jpg';
   .sign strong { color: var(--navy); font-weight: 600; }
 
   @media (max-width: 860px) {
-    .guide { padding-block: 64px; }
     .grid { grid-template-columns: minmax(0, 1fr); gap: 36px; }
   }
 </style>

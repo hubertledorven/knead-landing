@@ -30,9 +30,9 @@ const schema = {
 </section>
 
 <style>
-  .faq { padding-block: 96px; background: var(--paper); }
-  .head { margin-bottom: 48px; text-align: center; }
-  .contact { margin-top: 32px; text-align: center; color: var(--ink-2); }
+  .faq { padding-block: var(--space-section); background: var(--paper); }
+  .head { margin-bottom: var(--space-heading); text-align: center; }
+  .contact { margin-top: var(--space-after); text-align: center; color: var(--ink-2); }
   .contact a { font-weight: 600; color: var(--navy); text-underline-offset: 4px; text-decoration-color: var(--gold-ink); }
   .list { max-width: 800px; margin-inline: auto; border-top: 1px solid var(--line-strong); }
   details { border-bottom: 1px solid var(--line-strong); }
@@ -44,9 +44,4 @@ const schema = {
   summary::after { content: '+'; flex: none; font-size: 1.5rem; font-weight: 400; line-height: 1; color: var(--gold-ink); }
   details[open] summary::after { content: '−'; }
   details p { max-width: 38em; padding-bottom: 24px; color: var(--ink-2); }
-
-  @media (max-width: 860px) {
-    .faq { padding-block: 64px; }
-    .head { margin-bottom: 32px; }
-  }
 </style>

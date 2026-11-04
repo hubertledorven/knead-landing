@@ -58,30 +58,29 @@ const colonnes = Math.min(temoignages.length || emplacements.length, 3);
 )}
 
 <style>
-  .testimonials { padding-block: 96px; background: var(--paper); }
-  h2 { max-width: 16em; margin-bottom: 48px; }
-  /* Colonnes de hauteurs variables, pour des citations de longueurs différentes. */
-  .wall { columns: 3; column-gap: 16px; margin-inline: auto; }
-  .cols-1 { columns: 1; max-width: 640px; }
-  .cols-2 { columns: 2; max-width: 860px; }
-  .item { break-inside: avoid; margin-bottom: 16px; padding: 28px; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); }
+  .testimonials { padding-block: var(--space-section); background: var(--paper); }
+  h2 { max-width: 16em; margin-bottom: var(--space-heading); }
+  /* Cartes de même taille, quelle que soit la longueur des citations. Le nom reste aligné en bas. */
+  .wall { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-rows: 1fr; gap: 16px; margin-inline: auto; }
+  .cols-1 { grid-template-columns: minmax(0, 1fr); max-width: 640px; }
+  .cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 860px; }
+  .item { display: flex; flex-direction: column; padding: 28px; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); }
   blockquote { font-size: 1.125rem; line-height: 1.5; color: var(--ink); }
-  figcaption { display: flex; align-items: center; gap: 12px; margin-top: 20px; font-size: .9375rem; line-height: 1.4; color: var(--ink-2); }
+  blockquote { margin-bottom: 20px; }
+  figcaption { display: flex; align-items: center; gap: 12px; margin-top: auto; font-size: .9375rem; line-height: 1.4; color: var(--ink-2); }
   figcaption strong { color: var(--navy); font-weight: 600; }
   figcaption img, .slot-photo { flex: none; width: 44px; height: 44px; border-radius: 50%; object-fit: cover; }
   .slot-photo { border: 1.5px dashed var(--line-dashed); }
-  .action { margin-top: 48px; text-align: center; }
+  .action { margin-top: var(--space-after); text-align: center; }
   .action p { margin-bottom: 20px; font-family: var(--title); font-size: clamp(1.375rem, 2vw, 1.625rem); font-weight: 400; letter-spacing: var(--title-track); line-height: 1.25; color: var(--navy); }
   .slot { border: 1.5px dashed var(--line-dashed); background: transparent; }
   .tag { display: block; margin-bottom: 12px; font-size: .875rem; font-weight: 600; color: var(--gold-ink); }
 
-  @media (max-width: 960px) { .cols-3 { columns: 2; } }
+  @media (max-width: 960px) { .cols-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
   @media (max-width: 640px) {
-    .testimonials { padding-block: 64px; }
-    h2 { margin-bottom: 32px; }
-    .wall { columns: 1; }
+    /* Sur une seule colonne, chaque carte garde la hauteur de son texte. */
+    .wall { grid-template-columns: minmax(0, 1fr); grid-auto-rows: auto; }
     .item { padding: 22px; }
-    .action { margin-top: 32px; }
     .action .btn { width: 100%; }
   }
 </style>
