@@ -36,12 +36,22 @@ const signup = 'https://app.kneadmanager.com/#signup';
   .toggle { display: none; width: 44px; height: 44px; padding: 10px; background: none; border: 1px solid var(--line); border-radius: var(--radius); color: var(--navy); cursor: pointer; }
   .toggle svg { display: block; width: 100%; height: 100%; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; }
 
-  @media (max-width: 760px) {
-    .btn { margin-left: auto; }
+  /* En em : le menu mobile prend aussi le relais quand le texte est agrandi. */
+  @media (max-width: 47.5em) {
+    .bar { column-gap: 12px; }
+    .btn { margin-left: auto; white-space: nowrap; }
     .toggle { display: block; }
     .links { display: none; position: absolute; top: var(--header-h); left: 0; right: 0; flex-direction: column; gap: 0; margin: 0; padding: 8px var(--gutter) 16px; background: #fff; border-bottom: 1px solid var(--line); box-shadow: 0 16px 28px rgba(15, 31, 61, .1); }
     .links.open { display: flex; }
     .links a { padding-block: 13px; font-size: 1.125rem; color: var(--navy); }
+  }
+  @media (max-width: 22em) {
+    .bar > .btn { padding-inline: 12px; }
+  }
+  /* Texte très agrandi : le bouton ne tient plus, celui du hero reste juste en dessous. */
+  @media (max-width: 19em) {
+    .bar > .btn { display: none; }
+    .toggle { margin-left: auto; }
   }
 </style>
 
@@ -61,5 +71,11 @@ const signup = 'https://app.kneadmanager.com/#signup';
     };
     toggle.addEventListener('click', () => setOpen(!nav.classList.contains('open')));
     nav.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && nav.classList.contains('open')) {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
   }
 </script>

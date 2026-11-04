@@ -98,13 +98,13 @@ const formules = [
   .featured .head { padding: 48px 32px 24px; background: linear-gradient(160deg, var(--navy) 20%, #2F4770); border-radius: calc(var(--radius-lg) - 1px) calc(var(--radius-lg) - 1px) 0 0; color: #fff; }
   /* Étiquette à cheval sur le haut de la carte : elle dit pourquoi Solo est mise en avant. */
   .tag {
-    position: absolute; z-index: 1; top: -15px; left: 50%; transform: translateX(-50%); padding: 5px 14px;
+    display: none; position: absolute; z-index: 1; top: -15px; left: 50%; transform: translateX(-50%); padding: 5px 14px;
     background: linear-gradient(to bottom, #EAD48F, #D6B75F); border-radius: 999px;
     box-shadow: 0 0 0 1px rgba(255, 255, 255, .4) inset, 0 6px 16px rgba(160, 128, 40, .3);
     font-size: .875rem; font-weight: 600; color: var(--navy); white-space: nowrap;
   }
-  /* Comparaison avec ou sans étiquette, à trancher avec le client. */
-  :global(html[data-tag="sans"]) .tag { display: none; }
+  /* Masquée par défaut tant que le client n'a pas confirmé que Solo est la plus souscrite. */
+  :global(html[data-tag="populaire"]) .tag { display: block; }
   .featured h3, .featured .price { color: #fff; }
   .featured .price small, .featured .year { color: var(--on-navy-2); }
   .featured ul { margin-inline: 32px; border-top: 0; }

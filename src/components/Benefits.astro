@@ -144,13 +144,13 @@ const semaine = [
   .ui-head { display: flex; justify-content: space-between; gap: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--line); color: var(--ink-2); }
   .ui-head b { color: var(--navy); font-weight: 600; }
   .rows { list-style: none; }
-  .rows li { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; padding: 10px 0; border-bottom: 1px solid #F0EEE7; }
+  .rows li { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 4px 16px; padding: 10px 0; border-bottom: 1px solid #F0EEE7; }
   .rows li:last-child { border-bottom: 0; }
   .rows b { font-weight: 600; color: var(--navy); white-space: nowrap; }
-  .end { display: flex; align-items: baseline; gap: 12px; }
+  .end { display: flex; align-items: baseline; gap: 12px; margin-left: auto; }
   .end em { font-style: normal; font-size: .875rem; color: var(--ink-2); min-width: 4.2em; text-align: right; }
   .end em.up { color: var(--loss); font-weight: 600; }
-  .m-row { display: grid; grid-template-columns: minmax(0, 1fr) 60px 60px 68px; gap: 6px; align-items: baseline; padding: 12px 0; border-bottom: 1px solid #F0EEE7; font-size: .875rem; }
+  .m-row { display: grid; grid-template-columns: minmax(0, 1fr) 3.75rem 3.75rem 4.25rem; gap: 6px; align-items: baseline; padding: 12px 0; border-bottom: 1px solid #F0EEE7; font-size: .875rem; }
   .m-row:last-child { border-bottom: 0; padding-bottom: 20px; }
   .m-row > :not(:first-child) { text-align: right; white-space: nowrap; }
   .m-row b { font-weight: 600; color: var(--navy); }
@@ -183,11 +183,16 @@ const semaine = [
   @media (max-width: 640px) {
     .benefits { padding-block: 64px 72px; }
     .card { padding: 28px 20px 0; }
-    .m-row { grid-template-columns: minmax(0, 1fr) 60px 68px; }
+    .m-row { grid-template-columns: minmax(0, 1fr) 3.75rem 4.25rem; }
     .m-row > :nth-child(2) { display: none; }
     .ui { padding: 16px; }
     .week { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     .day:nth-child(n + 4) { display: none; }
     .after .btn { width: 100%; }
+  }
+  /* Deux jours seulement sur les petits téléphones : les noms de préparation tiennent dans leur étiquette. */
+  @media (max-width: 25em) {
+    .week { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .day:nth-child(n + 3) { display: none; }
   }
 </style>

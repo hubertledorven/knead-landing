@@ -71,7 +71,8 @@ const signup = 'https://app.kneadmanager.com/#signup';
   h1 { max-width: 15em; }
   /* Trait doré dessiné à la main sous les mots clés. */
   .mark {
-    white-space: nowrap; padding-bottom: .1em;
+    /* Reste groupé sur une ligne, sauf si le texte agrandi ne tient plus dans l'écran. */
+    display: inline-block; max-width: 100%; padding-bottom: .1em;
     background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 14' preserveAspectRatio='none'%3E%3Cpath d='M3 9C60 3 118 3 170 6s92 3 127-1' fill='none' stroke='%23C9A84C' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E") center bottom / 100% .2em no-repeat;
   }
   .lead { margin-top: 32px; font-size: 1.25rem; line-height: 1.5; color: var(--ink-2); max-width: 36em; }
@@ -120,7 +121,7 @@ const signup = 'https://app.kneadmanager.com/#signup';
   }
   .badge b { font-weight: 600; color: var(--ok); }
 
-  @media (min-width: 1240px) {
+  @media (min-width: 77.5em) {
     .deco { display: block; }
   }
   @media (prefers-reduced-motion: reduce) {
@@ -151,7 +152,7 @@ const signup = 'https://app.kneadmanager.com/#signup';
   }
   .band .wrap { position: relative; }
   .shot {
-    height: 560px; overflow: hidden;
+    height: 560px; overflow: hidden; background: var(--paper);
     border-radius: 12px 12px 0 0;
     box-shadow: 0 0 0 1px rgba(15, 31, 61, .08), 0 24px 60px rgba(15, 31, 61, .22);
   }
