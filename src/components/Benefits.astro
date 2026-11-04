@@ -177,7 +177,11 @@ const semaine = [
   .after p { color: var(--ink-2); }
   .after strong { color: var(--navy); font-weight: 600; }
 
-  @media (max-width: 960px) {
+  /* Cinq jours dans une carte étroite : étiquettes resserrées pour ne pas couper les mots. */
+  @media (min-width: 1001px) and (max-width: 1100px) {
+    .day span { padding-inline: 5px; font-size: .75rem; }
+  }
+  @media (max-width: 1000px) {
     .span-5, .span-7 { grid-column: span 12; }
   }
   @media (max-width: 640px) {
@@ -191,7 +195,7 @@ const semaine = [
     .after .btn { width: 100%; }
   }
   /* Deux jours seulement sur les petits téléphones : les noms de préparation tiennent dans leur étiquette. */
-  @media (max-width: 25em) {
+  @media (max-width: 28em) {
     .week { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .day:nth-child(n + 3) { display: none; }
   }

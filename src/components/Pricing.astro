@@ -122,6 +122,17 @@ const formules = [
 
   .after { margin-top: 32px; font-size: 1rem; text-align: center; color: var(--ink-2); }
 
+  /* Trois cartes étroites sur tablette en paysage : boutons resserrés et sans flèche, pour rester sur une ligne. */
+  @media (min-width: 961px) and (max-width: 1180px) {
+    .plan { padding: 24px; }
+    .plan.featured { padding: 0; }
+    .featured .head { padding-inline: 24px; }
+    .featured ul, .featured .btn { margin-inline: 24px; }
+    .featured .note { margin-inline: 24px; }
+    .btn { padding-inline: 12px; }
+    .btn::after { display: none; }
+  }
+
   @media (max-width: 960px) {
     .grid { grid-template-columns: minmax(0, 1fr); max-width: 520px; margin-inline: auto; }
     .plan { display: flex; flex-direction: column; }
@@ -136,5 +147,11 @@ const formules = [
     .featured ul { margin-inline: 24px; }
     .featured .btn { margin-inline: 24px; }
     .featured .note { margin: 12px 24px 28px; }
+  }
+  /* Petits téléphones : même resserrement, pour garder les boutons sur une ligne. */
+  @media (max-width: 25em) {
+    .btn { padding-inline: 8px; font-size: 1rem; }
+    .btn::after { display: none; }
+    .btn-gold { font-size: 1.0625rem; }
   }
 </style>

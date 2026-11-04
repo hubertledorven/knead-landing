@@ -28,4 +28,10 @@
   nav a:hover, .legal a:hover { color: #fff; text-decoration: underline; text-underline-offset: 4px; }
   .legal { margin-top: 36px; padding-top: 22px; border-top: 1px solid rgba(255, 255, 255, .1); font-size: .9375rem; }
   :focus-visible { outline-color: var(--gold); }
+
+  /* Zones tactiles confortables sur mobile. La hauteur remplace l'espace vertical entre les liens. */
+  @media (max-width: 47.5em) {
+    .brand, nav a { display: inline-flex; align-items: center; min-height: 44px; }
+    nav { row-gap: 0; }
+  }
 </style>
