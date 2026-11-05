@@ -7,6 +7,7 @@ import Proof from '../components/Proof.astro';
 import Problem from '../components/Problem.astro';
 import Guide from '../components/Guide.astro';
 import Plan from '../components/Plan.astro';
+import PlanFiche from '../components/PlanFiche.astro';
 import Benefits from '../components/Benefits.astro';
 import Testimonials from '../components/Testimonials.astro';
 import Pricing from '../components/Pricing.astro';
@@ -22,9 +23,8 @@ import Footer from '../components/Footer.astro';
   <script is:inline>
     (function () {
       var q = new URLSearchParams(location.search), d = document.documentElement;
-      d.dataset.titres = q.get('titres') === 'a' ? 'a' : 'b';
-      d.dataset.fond = q.get('fond') === 'bleu' ? 'bleu' : 'dore';
-      d.dataset.tag = q.get('tag') === 'populaire' ? 'populaire' : 'sans';
+      if (q.get('benefices') === 'grille') d.dataset.benefices = 'grille';
+      if (q.get('etapes') === 'captures') d.dataset.etapes = 'captures';
     })();
   </script>
 
@@ -34,6 +34,7 @@ import Footer from '../components/Footer.astro';
     <Proof apercu />
     <Problem />
     <Benefits />
+    <PlanFiche />
     <Plan />
     <Guide />
     <Testimonials apercu />
@@ -43,58 +44,52 @@ import Footer from '../components/Footer.astro';
   </main>
   <Footer />
 
+  <!-- Chaque choix est une adresse : on peut envoyer directement une proposition au client. -->
   <details class="switcher">
     <summary>Options</summary>
     <div class="options" role="group" aria-label="Comparer les propositions">
       <div class="row">
-        <span>Titres</span>
-        <a href="#" data-set="titres" data-value="a">A</a>
-        <a href="#" data-set="titres" data-value="b">B</a>
+        <span>Bénéfices</span>
+        <a href="#" data-option="benefices" data-valeur="pile">Empilées</a>
+        <a href="#" data-option="benefices" data-valeur="grille">Grille</a>
       </div>
       <div class="row">
-        <span>Fond hero</span>
-        <a href="#" data-set="fond" data-value="dore">Doré</a>
-        <a href="#" data-set="fond" data-value="bleu">Bleu</a>
-      </div>
-      <div class="row">
-        <span>Étiquette</span>
-        <a href="#" data-set="tag" data-value="sans">Sans</a>
-        <a href="#" data-set="tag" data-value="populaire">Populaire</a>
+        <span>Étapes</span>
+        <a href="#" data-option="etapes" data-valeur="fiche">Fiche</a>
+        <a href="#" data-option="etapes" data-valeur="captures">Captures</a>
       </div>
     </div>
   </details>
-
   <script is:inline>
     (function () {
-      var d = document.documentElement;
-      var links = document.querySelectorAll('.switcher a');
-      function sync() {
-        links.forEach(function (a) {
-          var on = d.dataset[a.dataset.set] === a.dataset.value;
-          a.setAttribute('aria-current', on ? 'true' : 'false');
+      var d = document.documentElement, defaut = { benefices: 'pile', etapes: 'fiche' };
+      var liens = document.querySelectorAll('.switcher a');
+      function marquer() {
+        liens.forEach(function (a) {
+          a.setAttribute('aria-current', (d.dataset[a.dataset.option] || defaut[a.dataset.option]) === a.dataset.valeur ? 'true' : 'false');
         });
       }
-      links.forEach(function (a) {
+      liens.forEach(function (a) {
         a.addEventListener('click', function (e) {
           e.preventDefault();
-          d.dataset[a.dataset.set] = a.dataset.value;
-          // L'URL garde le choix, pour pouvoir envoyer une combinaison précise au client.
+          // L'adresse garde chaque choix, pour pouvoir envoyer une combinaison précise au client.
           var q = new URLSearchParams(location.search);
-          q.set(a.dataset.set, a.dataset.value);
-          history.replaceState(null, '', location.pathname + '?' + q.toString());
-          sync();
+          q.set(a.dataset.option, a.dataset.valeur);
+          var adresse = location.pathname + '?' + q.toString();
+          // Changer de disposition recharge la page ; le reste s'applique sur place.
+          if (a.dataset.option === 'benefices') { location.href = adresse + '#benefices'; return; }
+          d.dataset[a.dataset.option] = a.dataset.valeur;
+          history.replaceState(null, '', adresse);
+          marquer();
         });
       });
-      sync();
+      marquer();
     })();
   </script>
 </Base>
 
 <style is:global>
-  .switcher {
-    position: fixed; right: 16px; bottom: 16px; z-index: 10;
-    font-size: .875rem; font-weight: 600; color: var(--ink-2); white-space: nowrap;
-  }
+  .switcher { position: fixed; right: 16px; bottom: 16px; z-index: 10; font-size: .875rem; font-weight: 600; color: var(--ink-2); white-space: nowrap; }
   .switcher summary {
     display: flex; align-items: center; min-height: 44px; padding-inline: 16px;
     background: var(--navy); border-radius: 10px; color: #fff; cursor: pointer; list-style: none;
@@ -102,15 +97,13 @@ import Footer from '../components/Footer.astro';
   }
   .switcher summary::-webkit-details-marker { display: none; }
   .switcher .options {
-    position: absolute; right: 0; bottom: calc(100% + 8px); display: flex; flex-direction: column; gap: 6px; padding: 10px 12px;
+    position: absolute; right: 0; bottom: calc(100% + 8px); padding: 10px 12px;
     background: #fff; border: 1px solid var(--line); border-radius: 10px;
     box-shadow: 0 8px 28px rgba(15, 31, 61, .18);
   }
+  .switcher .options { display: flex; flex-direction: column; gap: 6px; }
   .switcher .row { display: flex; align-items: center; gap: 4px; }
   .switcher .row span { width: 76px; }
-  .switcher a {
-    display: grid; place-items: center; min-width: 36px; height: 36px; padding-inline: 8px;
-    border-radius: 6px; color: var(--navy); text-decoration: none;
-  }
+  .switcher a { display: grid; place-items: center; height: 36px; padding-inline: 10px; border-radius: 6px; color: var(--navy); text-decoration: none; }
   .switcher a[aria-current="true"] { background: var(--navy); color: #fff; }
 </style>

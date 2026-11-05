@@ -1,201 +1,269 @@
 ---
-const signup = 'https://app.kneadmanager.com/#signup';
+import { Image } from 'astro:assets';
+import scan from '../assets/benefice-scan.png';
+import marge from '../assets/benefice-marge.png';
+import semaine from '../assets/benefice-semaine.png';
+import semaineMobile from '../assets/benefice-semaine-mobile.png';
+import alerte from '../assets/benefice-alerte.png';
+import aCommander from '../assets/benefice-a-commander.png';
+import BenefitsGrille from './BenefitsGrille.astro';
 
-const factures = [
-  { nom: 'Beurre de tourage', prix: '9,85 €/kg', statut: '+7 %', hausse: true },
-  { nom: 'Crème 35 %', prix: '4,35 €/L', statut: '+6 %', hausse: true },
-  { nom: 'Chocolat noir 70 %', prix: '13,50 €/kg', statut: 'Inchangé', hausse: false },
-  { nom: 'Praliné noisette', prix: '18,40 €/kg', statut: 'Créé', hausse: false },
-];
-const recettes = [
-  { nom: 'Entremets', cout: '33,45 €', prix: '30,00 €', marge: '−3,45 €', perte: true },
-  { nom: 'Flan 8 parts', cout: '12,40 €', prix: '32,00 €', marge: '+19,60 €' },
-  { nom: 'Tarte citron', cout: '14,80 €', prix: '34,00 €', marge: '+19,20 €' },
-  { nom: 'Saint-Honoré', cout: '38,50 €', prix: '78,00 €', marge: '+39,50 €' },
-];
-const semaine = [
-  { jour: 'Mar', items: ['Pâte sucrée', 'Flan ×6', 'Choux'] },
-  { jour: 'Mer', items: ['Biscuits', 'Crémeux', 'Glaçage'] },
-  { jour: 'Jeu', items: ['Entremets ×2', 'Madeleines', 'Tartes ×4'] },
-  { jour: 'Ven', items: ['Saint-Honoré', 'Flan ×8', 'Montage'] },
-  { jour: 'Sam', items: ['Vitrine', 'Retraits', 'Livraison'] },
-];
+const signup = 'https://app.kneadmanager.com/#signup';
+const aussi = ['Seuil de rentabilité', 'Devis et factures', 'Suivi des pertes', 'Hygiène et PMS', 'Assistant intégré'];
+const tailles = '(max-width: 1000px) 720px, 680px';
 ---
 <section class="benefits" id="benefices">
   <div class="wrap">
-    <h2>Ce que Knead change dans votre semaine</h2>
+    <h2 data-reveal>Ce que Knead change dans votre semaine</h2>
 
-    <div class="bento">
-      <article class="card span-5">
-        <i class="dot" aria-hidden="true"></i>
+    <div class="stack">
+      <article class="card" style="--i:0" data-reveal>
         <div class="text">
           <h3>Photographiez la facture, vos prix se mettent à jour</h3>
-          <p>L'IA lit les ingrédients et les prix, puis crée ou met à jour vos fiches. Vous n'avez plus rien à ressaisir.</p>
+          <p>Knead lit la facture et met vos fiches à jour.</p>
         </div>
-        <div class="ui" aria-hidden="true">
-          <div class="ui-head"><b>Facture fournisseur</b><span>4 lignes lues</span></div>
-          <ul class="rows">
-            {factures.map((f) => (
-              <li><span>{f.nom}</span><span class="end"><b>{f.prix}</b><em class:list={{ up: f.hausse }}>{f.statut}</em></span></li>
-            ))}
-          </ul>
+        <div class="stage" data-demo="facture">
+          <div class="capture">
+            <Image src={scan} alt="Résultat du scan d'une facture dans Knead : quatre ingrédients détectés, dont le beurre de tourage en hausse de 0,85 € et la crème de 0,15 €." widths={[750, 1500]} sizes={tailles} format="webp" quality={90} />
+            <span class="cache" aria-hidden="true"></span>
+            <span class="balayage" aria-hidden="true"></span>
+          </div>
+          <p class="pastille" aria-hidden="true"><span>Beurre de tourage</span><b class="hausse">+0,85&nbsp;€/kg</b></p>
         </div>
       </article>
 
-      <article class="card span-7">
-        <i class="dot" aria-hidden="true"></i>
+      <article class="card" style="--i:1" data-reveal>
         <div class="text">
           <h3>Repérez ce qui vous fait perdre de l'argent</h3>
-          <p>Le coût de chaque recette, temps de travail et pertes compris, avec la marge en face. Quand le beurre augmente, vos marges se recalculent.</p>
+          <p>Temps de travail et pertes compris.</p>
         </div>
-        <div class="ui" aria-hidden="true">
-          <div class="ui-head"><b>Marge par recette</b><span>Exemple</span></div>
-          <div class="margins">
-            <div class="m-row m-head"><span>Recette</span><span>Coût</span><span>Prix</span><span>Marge</span></div>
-            {recettes.map((r) => (
-              <div class:list={['m-row', { loss: r.perte }]}>
-                <span>{r.nom}</span><span>{r.cout}</span><span>{r.prix}</span><b>{r.marge}</b>
-              </div>
-            ))}
+        <div class="stage" data-demo="marges">
+          <div class="capture">
+            <Image src={marge} alt="Fiche d'un entremets dans Knead : coût total 33,48 €, prix de vente 30 €, marge de −3,48 € par pièce." widths={[600, 860, 1720]} sizes="(max-width: 640px) 600px, 860px" format="webp" quality={90} />
+            <span class="cercle cercle-marge" aria-hidden="true"></span>
           </div>
+          <p class="pastille grande perte" aria-hidden="true"><span>Marge par entremets</span><b class="marge">−3,48&nbsp;€</b></p>
         </div>
       </article>
 
-      <article class="card span-7">
-        <i class="dot" aria-hidden="true"></i>
+      <article class="card" style="--i:2" data-reveal>
         <div class="text">
           <h3>Votre semaine de production, jour par jour</h3>
-          <p>Chaque commande se place au bon jour&nbsp;: vous savez quoi préparer, et quand.</p>
+          <p>Chaque commande au bon jour.</p>
         </div>
-        <div class="ui" aria-hidden="true">
-          <div class="week">
-            {semaine.map((d) => (
-              <div class="day">
-                <b>{d.jour}</b>
-                {d.items.map((i) => <span>{i}</span>)}
-              </div>
-            ))}
+        <div class="stage" data-demo="semaine">
+          <div class="capture ecran">
+            <Image src={semaine} alt="Production de la semaine dans Knead : chaque jour, les recettes à produire et leurs quantités." widths={[720, 1440]} sizes={tailles} format="webp" quality={90} />
+          </div>
+          <div class="telephone">
+            <Image src={semaineMobile} alt="Le planning de production de Knead affiché sur téléphone." widths={[240, 480]} sizes="(max-width: 640px) 240px, 210px" format="webp" quality={90} />
           </div>
         </div>
       </article>
 
-      <article class="card span-5">
-        <i class="dot" aria-hidden="true"></i>
+      <article class="card" style="--i:3" data-reveal>
         <div class="text">
           <h3>Prévenu avant la rupture</h3>
-          <p>Plus jamais à court de praliné un samedi matin&nbsp;: Knead vous prévient à temps.</p>
+          <p>Une commande dépasse votre stock&nbsp;? Knead vous dit quoi racheter.</p>
         </div>
-        <div class="ui" aria-hidden="true">
-          <div class="ui-head"><b>Stocks</b><span>Exemple</span></div>
-          <div class="stock">
-            <div class="stock-line"><span>Praliné noisette</span><b class="low">1,2 kg</b></div>
-            <div class="gauge"><i class="g-low"></i></div>
-            <p class="stock-note">Sous votre seuil de 2 kg</p>
-            <div class="stock-line"><span>Beurre de tourage</span><b>8 kg</b></div>
-            <div class="gauge"><i class="g-ok"></i></div>
+        <div class="stage" data-demo="stocks">
+          <div class="capture">
+            <Image src={alerte} alt="Alerte de Knead à l'enregistrement d'une commande : stock insuffisant, 100 g de poudre d'amande manquants." widths={[600, 820, 1640]} sizes="(max-width: 640px) 600px, 820px" format="webp" quality={90} />
+            <span class="cercle cercle-alerte" aria-hidden="true"></span>
+          </div>
+          <div class="liste">
+            <Image src={aCommander} alt="Liste « À commander » : 100 g de poudre d'amande et 250 g de sucre semoule." widths={[420, 840]} sizes="420px" format="webp" quality={90} />
           </div>
         </div>
       </article>
     </div>
 
+    <BenefitsGrille />
+
     <div class="after">
-      <p><strong>Et aussi&nbsp;:</strong> seuil de rentabilité, devis et factures, suivi des pertes, hygiène et PMS, assistant intégré.</p>
-      <a href={signup} class="btn">Essai gratuit 7 jours</a>
+      <p class="aussi" data-reveal>Et aussi</p>
+      <ul class="pills">
+        {aussi.map((a) => <li data-reveal>{a}</li>)}
+      </ul>
+      <div data-reveal><a href={signup} class="btn">Essai gratuit 7 jours</a></div>
     </div>
   </div>
 </section>
 
+<script is:inline>
+  (function () {
+    var pile = document.querySelector('.benefits .stack');
+    // Rien à régler ni à jouer quand la grille est affichée à la place de la pile.
+    if (!pile || getComputedStyle(pile).display === 'none') return;
+    var cartes = pile.querySelectorAll('.card');
+
+    // Empilement seulement si chaque carte tient à l'écran : sinon le bas d'une carte serait caché par la suivante.
+    // Recalculé quand la largeur change, pas quand la barre d'adresse mobile apparaît ou disparaît.
+    var largeur = 0;
+    function reglerPile() {
+      if (innerWidth === largeur) return;
+      largeur = innerWidth;
+      pile.classList.remove('empile');
+      var entete = document.querySelector('.site-header').offsetHeight;
+      var tient = [].every.call(cartes, function (c, i) { return c.offsetHeight + entete + 16 + i * 12 <= innerHeight; });
+      if (tient) pile.classList.add('empile');
+    }
+    reglerPile();
+    addEventListener('resize', reglerPile);
+
+    // Démos : sans .anime, l'état final reste affiché tel quel.
+    if (!document.documentElement.classList.contains('anime')) return;
+
+    var pastille = pile.querySelector('.pastille.perte');
+    var valeur = pastille.querySelector('.marge');
+    var texte = valeur.textContent;
+    var signe = function (v) { return (v < 0 ? '−' : '+') + Math.abs(v).toFixed(2).replace('.', ',') + '\u00a0€'; };
+    // Avant le calcul complet : prix de 30 € moins 9 € d'ingrédients et d'emballage.
+    valeur.textContent = signe(21);
+    pastille.classList.remove('perte');
+
+    function compteMarge() {
+      var debut = performance.now() + 600;
+      (function pas(t) {
+        var p = Math.max(0, Math.min((t - debut) / 1000, 1));
+        valeur.textContent = signe(21 + (-3.48 - 21) * (1 - Math.pow(1 - p, 3)));
+        if (p < 1) return requestAnimationFrame(pas);
+        valeur.textContent = texte;
+        pastille.classList.add('perte');
+      })(performance.now());
+    }
+
+    var observateur = new IntersectionObserver(function (entrees) {
+      entrees.forEach(function (e) {
+        if (!e.isIntersecting && e.boundingClientRect.top > 0) return;
+        e.target.classList.add('joue');
+        if (e.target.querySelector('[data-demo="marges"]')) compteMarge();
+        observateur.unobserve(e.target);
+      });
+    }, { threshold: .6 });
+    cartes.forEach(function (c) { observateur.observe(c); });
+  })();
+</script>
+
 <style>
   .benefits { padding-block: var(--space-section); background: var(--paper); }
   h2 { max-width: 16em; margin-bottom: var(--space-heading); }
-  .bento { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 16px; }
-  .span-5 { grid-column: span 5; }
-  .span-7 { grid-column: span 7; }
-
+  /* Cartes empilées : chacune se pose sur la précédente et laisse dépasser son bord. Activé par le script si elles tiennent à l'écran. */
+  .stack { display: grid; gap: 24px; }
+  :global(html[data-benefices="grille"]) .stack { display: none; }
   .card {
-    position: relative; display: flex; flex-direction: column; justify-content: space-between; gap: 28px;
-    padding: 36px 36px 0; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg);
-    box-shadow: 0 10px 28px rgba(15, 31, 61, .06);
+    display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: 40px; align-items: stretch;
+    padding: 24px 24px 24px 48px; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg);
+    box-shadow: 0 -8px 28px rgba(15, 31, 61, .07);
   }
-  /* Point vert posé sur l'angle de la carte, en réponse au point rouge des douleurs. */
-  .dot {
-    position: absolute; top: -2px; left: -2px; width: 10px; height: 10px; background: var(--ok); border-radius: 50%;
-    box-shadow: 0 0 0 3px rgba(31, 122, 77, .22);
-    animation: resolu 2.6s ease-in-out infinite;
+  /* Même hauteur pour toutes : une seule carte à l'écran, et aucun bas de carte ne dépasse sous la suivante. */
+  .empile .card {
+    --haut: calc(var(--header-h) + 16px + var(--i) * 12px);
+    position: sticky; top: var(--haut); min-height: min(calc(100svh - var(--header-h) - 76px), 640px);
   }
-  .card:nth-child(2) .dot { animation-delay: -.65s; }
-  .card:nth-child(3) .dot { animation-delay: -1.3s; }
-  .card:nth-child(4) .dot { animation-delay: -1.95s; }
-  @keyframes resolu {
-    0%, 100% { opacity: 1; box-shadow: 0 0 0 3px rgba(31, 122, 77, .22); }
-    50% { opacity: .55; box-shadow: 0 0 0 6px rgba(31, 122, 77, .06); }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .dot { animation: none; }
-  }
+  .text { align-self: center; }
+  .text h3 { font-size: clamp(1.5rem, 2.4vw, 2rem); }
   .text p { margin-top: 12px; color: var(--ink-2); }
+  .stage { position: relative; display: flex; flex-direction: column; justify-content: center; min-width: 0; padding-block: 32px; background: var(--fond-bleu); border-radius: 12px; overflow: hidden; }
+  /* Une carte sur deux en doré clair. */
+  .card:nth-child(even) .stage { background: var(--fond-dore); }
 
-  /* Fragments d'interface : données d'exemple, à aligner sur l'app réelle. */
-  .ui {
-    padding: 20px 22px; background: #fff; border: 1px solid var(--line); border-bottom: 0;
-    border-radius: 10px 10px 0 0; font-size: .9375rem; line-height: 1.35;
-    font-variant-numeric: tabular-nums;
+  /* Capture : part de la gauche et sort du panneau à droite, seule la partie utile reste à l'écran. */
+  .capture {
+    position: relative; flex: none; width: calc(100% - 32px); min-width: 520px; margin-left: 32px;
+    border-radius: 14px 0 0 14px; box-shadow: 0 18px 44px rgba(11, 23, 41, .32);
   }
-  .ui-head { display: flex; justify-content: space-between; gap: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--line); color: var(--ink-2); }
-  .ui-head b { color: var(--navy); font-weight: 600; }
-  .rows { list-style: none; }
-  .rows li { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 4px 16px; padding: 10px 0; border-bottom: 1px solid var(--line-soft); }
-  .rows li:last-child { border-bottom: 0; }
-  .rows b { font-weight: 600; color: var(--navy); white-space: nowrap; }
-  .end { display: flex; align-items: baseline; gap: 12px; margin-left: auto; }
-  .end em { font-style: normal; font-size: .875rem; color: var(--ink-2); min-width: 4.2em; text-align: right; }
-  .end em.up { color: var(--loss); font-weight: 600; }
-  .m-row { display: grid; grid-template-columns: minmax(0, 1fr) 3.75rem 3.75rem 4.25rem; gap: 6px; align-items: baseline; padding: 12px 0; border-bottom: 1px solid var(--line-soft); font-size: .875rem; }
-  .m-row:last-child { border-bottom: 0; padding-bottom: 20px; }
-  .m-row > :not(:first-child) { text-align: right; white-space: nowrap; }
-  .m-row b { font-weight: 600; color: var(--navy); }
-  .m-head { padding-bottom: 8px; font-size: .8125rem; color: var(--ink-2); }
-  .loss, .loss b { color: var(--loss); font-weight: 600; }
+  /* Sur un écran bas, la capture perd son bas plutôt que de sortir de la carte empilée. */
+  .capture img { width: 100%; max-height: calc(100svh - 290px); object-fit: cover; object-position: 0 0; border-radius: inherit; }
+  /* Captures larges : agrandies et coupées à droite, pour que leur texte reste lisible. */
+  [data-demo="marges"] .capture { width: 860px; }
+  [data-demo="stocks"] .capture { width: 820px; }
 
-  .week { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; }
-  .day { display: flex; flex-direction: column; gap: 6px; padding-bottom: 12px; }
-  .day b { padding-bottom: 8px; font-weight: 600; color: var(--navy); }
-  .day span { padding: 7px 8px; background: var(--paper); border-left: 2px solid var(--navy); border-radius: 3px; font-size: .8125rem; }
-
-  .stock { padding-top: 14px; }
-  .stock-line { display: flex; justify-content: space-between; gap: 12px; }
-  .stock-line b { font-weight: 600; color: var(--navy); }
-  .stock-line b.low, .stock-note { color: var(--loss); }
-  .stock-note { margin: 6px 0 18px; font-size: .875rem; font-weight: 600; }
-  .gauge { height: 6px; margin-top: 8px; background: var(--track); border-radius: 3px; overflow: hidden; }
-  .gauge i { display: block; height: 100%; }
-  .g-low { width: 24%; background: var(--loss); }
-  .g-ok { width: 80%; background: var(--ok); margin-bottom: 0; }
-  .stock > .gauge:last-child { margin-bottom: 16px; }
-
-  .after { display: flex; flex-direction: column; align-items: center; gap: 24px; margin-top: var(--space-after); text-align: center; }
-  .after p { color: var(--ink-2); }
-  .after strong { color: var(--navy); font-weight: 600; }
-
-  /* Cinq jours dans une carte étroite : étiquettes resserrées pour ne pas couper les mots. */
-  @media (min-width: 1001px) and (max-width: 1100px) {
-    .day span { padding-inline: 5px; font-size: .75rem; }
+  /* Éléments lisibles posés sur la capture. */
+  .pastille {
+    position: relative; align-self: flex-end; display: flex; align-items: baseline; gap: 12px; margin: -24px 24px 0 0; padding: 12px 18px;
+    background: #fff; border-radius: 12px; box-shadow: 0 14px 32px rgba(11, 23, 41, .3);
+    font-size: 1rem; line-height: 1.3; color: var(--ink-2); font-variant-numeric: tabular-nums;
   }
+  .pastille b { font-weight: 600; color: var(--navy); white-space: nowrap; }
+  .pastille .hausse { color: var(--loss); }
+  .grande { flex-direction: column; gap: 2px; padding: 16px 24px; }
+  .grande b { font-family: var(--title); font-size: clamp(2rem, 3.4vw, 2.75rem); letter-spacing: var(--title-track); line-height: 1.1; color: var(--ok); transition: color .3s ease; }
+  .perte b { color: var(--loss); }
+
+  /* Cercle autour de la donnée à regarder, placé en pourcentage de la capture. */
+  .cercle { position: absolute; border-radius: 10px; pointer-events: none; }
+  .cercle-marge { left: 20.6%; top: 81%; width: 9.6%; height: 17.5%; border: 2px solid var(--loss); }
+  .cercle-alerte { left: 2.3%; top: 19.5%; width: 95%; height: 24.5%; border: 2px solid #E8912D; border-radius: 12px; }
+
+  /* Lecture de la facture : un trait descend et découvre les lignes. La zone suit l'en-tête du panneau. */
+  .cache { position: absolute; inset: 15.5% 0 2% 0; background: #14244A; transform-origin: 50% 100%; transform: scaleY(0); }
+  .balayage { position: absolute; left: 0; right: 0; top: 15.5%; height: 3px; background: var(--gold); box-shadow: 0 0 16px 3px rgba(201, 168, 76, .7); opacity: 0; }
+
+  .telephone {
+    position: absolute; top: 50%; right: 28px; width: clamp(160px, 28%, 210px); transform: translateY(-50%);
+    padding: 6px; background: var(--navy-deep); border-radius: 26px; box-shadow: 0 22px 48px rgba(11, 23, 41, .42);
+  }
+  .telephone img { width: 100%; border-radius: 20px; }
+
+  .liste { position: relative; align-self: flex-end; width: min(420px, 88%); margin: -28px 24px 0 0; border-radius: 12px; box-shadow: 0 14px 32px rgba(11, 23, 41, .4); }
+  .liste img { width: 100%; border-radius: inherit; }
+
+  .after { display: flex; flex-direction: column; align-items: center; gap: 32px; margin-top: var(--space-after); text-align: center; }
+  .aussi { font-weight: 600; color: var(--navy); }
+  .pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; list-style: none; }
+  .pills li { padding: 6px 14px; background: #fff; border: 1px solid var(--line); border-radius: 999px; font-size: .9375rem; color: var(--ink-2); }
+
+  /* Démos : l'état final est celui du HTML, chaque élément n'est masqué qu'avec .anime et jusqu'à .joue. */
+  @keyframes pose { from { opacity: 0; translate: 0 14px; scale: .94; } }
+  @keyframes entre-droite { from { opacity: 0; translate: 40px 0; } }
+  @keyframes entre-bas { from { translate: 0 110%; } }
+  @keyframes decouvre { from { transform: scaleY(1); } to { transform: scaleY(0); } }
+  @keyframes descend {
+    0% { opacity: 1; top: 15.5%; }
+    96% { opacity: 1; }
+    100% { opacity: 0; top: 98%; }
+  }
+  @keyframes signale { 0% { opacity: 0; scale: 1.25; } 60% { opacity: 1; scale: 1; } 75% { scale: 1.04; } 100% { scale: 1; } }
+
+  :global(html.anime) .card:not(.joue) :is(.pastille, .liste, .cercle, .telephone) { opacity: 0; }
+  :global(html.anime) .card:not(.joue) .capture { opacity: 0; }
+  :global(html.anime) .card:not(.joue) .cache { transform: scaleY(1); }
+  :global(html.anime) .joue .capture { animation: entre-droite .6s cubic-bezier(.16, 1, .3, 1) backwards; }
+
+  :global(html.anime) .joue .cache { animation: decouvre 1.3s cubic-bezier(.45, 0, .55, 1) .35s backwards; }
+  :global(html.anime) .joue .balayage { animation: descend 1.3s cubic-bezier(.45, 0, .55, 1) .35s; }
+  :global(html.anime) .joue [data-demo="facture"] .pastille { animation: pose .45s cubic-bezier(.16, 1, .3, 1) 1.65s backwards; }
+
+  :global(html.anime) .joue .pastille.grande { animation: pose .45s cubic-bezier(.16, 1, .3, 1) .3s backwards; }
+  :global(html.anime) .joue .cercle-marge { animation: signale .7s ease-out 1.6s backwards; }
+
+  :global(html.anime) .joue .telephone { animation: entre-bas .8s cubic-bezier(.16, 1, .3, 1) .4s backwards; }
+
+  :global(html.anime) .joue .cercle-alerte { animation: signale .7s ease-out .6s backwards; }
+  :global(html.anime) .joue .liste { animation: pose .5s cubic-bezier(.16, 1, .3, 1) 1.2s backwards; }
+
   @media (max-width: 1000px) {
-    .span-5, .span-7 { grid-column: span 12; }
+    .card { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 1fr; gap: 20px; padding: 28px; }
+    .text { align-self: start; }
+  }
+  @media (min-width: 641px) and (max-width: 1000px) {
+    .capture img { max-height: 400px; }
   }
   @media (max-width: 640px) {
-    .card { padding: 28px 20px 0; }
-    .m-row { grid-template-columns: minmax(0, 1fr) 3.75rem 4.25rem; }
-    .m-row > :nth-child(2) { display: none; }
-    .ui { padding: 16px; }
-    .week { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .day:nth-child(n + 4) { display: none; }
+    .card { padding: 22px 16px 16px; gap: 16px; }
+    .stage { padding-block: 20px; }
+    .empile .card { --haut: calc(var(--header-h) + 8px + var(--i) * 8px); }
+    .capture { margin-left: 16px; }
+    .capture img { max-height: calc(100svh - 345px); }
+    [data-demo="marges"] .capture, [data-demo="stocks"] .capture { width: 600px; }
+    .pastille, .liste { margin-right: 12px; }
+    /* La pastille passe sous la capture pour laisser voir le cercle de la marge. */
+    .grande { margin-top: 12px; }
+    /* Sur téléphone, l'écran mobile seul, assez grand pour être lu ; il sort du panneau par le bas. */
+    [data-demo="semaine"] { justify-content: flex-start; align-items: center; padding-bottom: 0; }
+    .ecran { display: none; }
+    .telephone { position: relative; top: auto; right: auto; flex: 1 1 340px; width: 240px; max-height: 477px; margin-bottom: -6px; transform: none; border-radius: 26px 26px 0 0; overflow: hidden; }
     .after .btn { width: 100%; }
-  }
-  /* Deux jours seulement sur les petits téléphones : les noms de préparation tiennent dans leur étiquette. */
-  @media (max-width: 28em) {
-    .week { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .day:nth-child(n + 3) { display: none; }
   }
 </style>

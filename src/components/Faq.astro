@@ -14,9 +14,9 @@ const schema = {
 <section class="faq" id="faq">
   <div class="wrap">
     <div class="head">
-      <h2>Vos questions, avant de vous lancer</h2>
+      <h2 data-reveal>Vos questions, avant de vous lancer</h2>
     </div>
-    <div class="list">
+    <div class="list" data-reveal>
       {faq.map((f, i) => (
         <details open={i === 0}>
           <summary>{f.question}</summary>
@@ -24,7 +24,7 @@ const schema = {
         </details>
       ))}
     </div>
-    <p class="contact">Une autre question&nbsp;? <a href="mailto:contact@kneadmanager.com">Écrivez-nous</a></p>
+    <p class="contact" data-reveal>Une autre question&nbsp;? <a href="mailto:contact@kneadmanager.com">Écrivez-nous</a></p>
   </div>
   <script type="application/ld+json" set:html={JSON.stringify(schema)} />
 </section>

@@ -1,0 +1,164 @@
+---
+// Deuxième proposition de la section bénéfices : grille 5/7, captures côte à côte, rien ne se superpose.
+import { Image } from 'astro:assets';
+import scan from '../assets/benefice-scan.png';
+import marge from '../assets/benefice-marge.png';
+import semaine from '../assets/benefice-semaine.png';
+import semaineMobile from '../assets/benefice-semaine-mobile.png';
+import alerte from '../assets/benefice-alerte.png';
+import aCommander from '../assets/benefice-a-commander.png';
+---
+<div class="grille">
+  <article class="carte s5">
+    <div class="texte">
+      <h3>Photographiez la facture, vos prix se mettent à jour</h3>
+      <p>Knead lit la facture et met vos fiches à jour.</p>
+    </div>
+    <div class="visuel haut">
+      <div class="capture c-scan">
+        <Image src={scan} alt="Résultat du scan d'une facture dans Knead : quatre ingrédients détectés, dont le beurre de tourage en hausse de 0,85 € et la crème de 0,15 €." widths={[640, 1280]} sizes="640px" format="webp" quality={90} />
+      </div>
+    </div>
+  </article>
+
+  <article class="carte s7">
+    <div class="texte">
+      <h3>Repérez ce qui vous fait perdre de l'argent</h3>
+      <p>Temps de travail et pertes compris.</p>
+    </div>
+    <div class="visuel centre">
+      <div class="capture c-marge">
+        <Image src={marge} alt="Fiche d'un entremets dans Knead : coût total 33,48 €, prix de vente 30 €, marge de −3,48 € par pièce." widths={[640, 980, 1960]} sizes="(max-width: 640px) 640px, 980px" format="webp" quality={90} />
+        <span class="cercle" aria-hidden="true"></span>
+      </div>
+    </div>
+  </article>
+
+  <article class="carte s7">
+    <div class="texte">
+      <h3>Votre semaine de production, jour par jour</h3>
+      <p>Chaque commande au bon jour.</p>
+    </div>
+    <div class="visuel duo">
+      <div class="capture c-semaine">
+        <Image src={semaine} alt="Production de la semaine dans Knead : chaque jour, les recettes à produire et leurs quantités." widths={[580, 1160]} sizes="580px" format="webp" quality={90} />
+      </div>
+      <div class="telephone">
+        <Image src={semaineMobile} alt="Le planning de production de Knead affiché sur téléphone." widths={[220, 440]} sizes="(max-width: 640px) 220px, 190px" format="webp" quality={90} />
+      </div>
+    </div>
+  </article>
+
+  <article class="carte s5">
+    <div class="texte">
+      <h3>Prévenu avant la rupture</h3>
+      <p>Une commande dépasse votre stock&nbsp;? Knead vous dit quoi racheter.</p>
+    </div>
+    <div class="visuel pile">
+      <div class="capture c-alerte">
+        <Image src={alerte} alt="Alerte de Knead à l'enregistrement d'une commande : stock insuffisant, 100 g de poudre d'amande manquants." widths={[640, 1280]} sizes="640px" format="webp" quality={90} />
+      </div>
+      <div class="liste">
+        <Image src={aCommander} alt="Liste « À commander » : 100 g de poudre d'amande et 250 g de sucre semoule." widths={[420, 840]} sizes="420px" format="webp" quality={90} />
+      </div>
+    </div>
+  </article>
+</div>
+
+<script is:inline>
+  (function () {
+    var grille = document.querySelector('.grille');
+    if (!grille || getComputedStyle(grille).display === 'none' || !document.documentElement.classList.contains('anime')) return;
+    var cartes = grille.querySelectorAll('.carte');
+    var observateur = new IntersectionObserver(function (entrees) {
+      entrees.forEach(function (e) {
+        if (!e.isIntersecting && e.boundingClientRect.top > 0) return;
+        e.target.classList.add('vue');
+        observateur.unobserve(e.target);
+      });
+    }, { threshold: .25, rootMargin: '0px 0px -6% 0px' });
+    cartes.forEach(function (c) { observateur.observe(c); });
+  })();
+</script>
+
+<style>
+  /* Masquée tant que le sélecteur de la maquette ne la demande pas. */
+  .grille { display: none; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 16px; }
+  :global(html[data-benefices="grille"]) .grille { display: grid; }
+  .s5 { grid-column: span 5; }
+  .s7 { grid-column: span 7; }
+
+  .carte { display: flex; flex-direction: column; min-width: 0; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 10px 28px rgba(15, 31, 61, .06); }
+  .texte { padding: 32px 32px 28px; }
+  .texte p { margin-top: 10px; color: var(--ink-2); }
+
+  /* Le visuel occupe tout le bas de la carte ; les captures en sortent à droite ou en bas. */
+  .visuel { position: relative; flex: 1; display: flex; min-height: 340px; padding-top: 28px; background: var(--fond-bleu); overflow: hidden; }
+  /* Une carte sur deux en doré clair : en damier sur deux colonnes, à la suite sur une seule. */
+  .carte:nth-child(even) .visuel { background: var(--fond-dore); }
+  @media (min-width: 1001px) {
+    .carte:nth-child(3) .visuel { background: var(--fond-dore); }
+    .carte:nth-child(4) .visuel { background: var(--fond-bleu); }
+  }
+  .centre { align-items: center; padding-block: 28px; }
+  .pile { flex-direction: column; gap: 16px; padding-block: 28px; }
+
+  .capture { position: relative; flex: none; margin-left: 28px; box-shadow: 0 16px 36px rgba(11, 23, 41, .3); }
+  .capture img { width: 100%; }
+
+  /* Sort par le bas et par la droite, quelle que soit la hauteur de la rangée : le haut de la facture reste lisible. */
+  .c-scan { position: absolute; top: 28px; bottom: 0; width: max(640px, calc(100% - 28px)); overflow: hidden; border-radius: 14px 0 0 0; }
+  .c-marge { width: max(980px, calc(100% - 28px)); border-radius: 14px 0 0 14px; }
+  .c-marge img, .c-alerte img { border-radius: inherit; }
+  .c-alerte { width: max(640px, calc(100% - 28px)); border-radius: 14px 0 0 14px; }
+
+  /* Cercle autour de la marge, placé en pourcentage de la capture. */
+  .cercle { position: absolute; left: 20.6%; top: 81%; width: 9.6%; height: 17.5%; border: 2px solid var(--loss); border-radius: 10px; pointer-events: none; }
+
+  /* Ordinateur et téléphone côte à côte : chacun garde sa place et sort par le bas. */
+  .c-semaine { position: absolute; top: 28px; bottom: 0; left: 0; right: 234px; overflow: hidden; border-radius: 14px 14px 0 0; }
+  .c-semaine img { width: 580px; max-width: none; }
+  .telephone { position: absolute; top: 28px; bottom: 0; right: 24px; width: 190px; padding: 5px 5px 0; overflow: hidden; background: var(--navy-deep); border-radius: 22px 22px 0 0; box-shadow: 0 16px 36px rgba(11, 23, 41, .34); }
+  .telephone img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 0; border-radius: 17px 17px 0 0; }
+
+  .liste { flex: none; width: min(420px, calc(100% - 56px)); margin-left: 28px; border-radius: 12px; box-shadow: 0 12px 28px rgba(11, 23, 41, .34); }
+  .liste img { width: 100%; border-radius: inherit; }
+
+  /* Apparition des cartes, activée seulement avec .anime : la carte monte, puis sa capture la rejoint.
+     Sur deux colonnes, la carte de droite arrive après celle de gauche. */
+  .carte { --rang: 0; }
+  @media (min-width: 1001px) {
+    .carte:nth-child(even) { --rang: 1; }
+  }
+
+  @keyframes carte-monte { from { opacity: 0; translate: 0 56px; scale: .97; } }
+  @keyframes interieur-monte { from { opacity: 0; translate: 0 44px; } }
+
+  :global(html.anime) .carte:not(.vue) { opacity: 0; }
+
+  :global(html.anime) .vue { animation: carte-monte .8s cubic-bezier(.16, 1, .3, 1) calc(var(--rang) * 180ms) backwards; }
+  :global(html.anime) .vue :is(.capture, .telephone, .liste) { animation: interieur-monte .8s cubic-bezier(.16, 1, .3, 1) calc(var(--rang) * 180ms + 220ms) backwards; }
+  :global(html.anime) .vue .liste { animation-delay: calc(var(--rang) * 180ms + 340ms); }
+
+  @media print {
+    :global(html.anime) .carte:not(.vue) { opacity: 1; }
+  }
+
+  @media (max-width: 1000px) {
+    .s5, .s7 { grid-column: span 12; }
+  }
+  @media (max-width: 640px) {
+    .texte { padding: 24px 20px 20px; }
+    .visuel { min-height: 0; padding-top: 20px; }
+    .capture { margin-left: 16px; }
+    .haut { min-height: 320px; }
+    .c-scan { top: 20px; }
+    .c-marge { width: 640px; }
+    .centre, .pile { padding-block: 20px; }
+    /* Sur téléphone, l'écran mobile seul, assez grand pour être lu. */
+    .duo { min-height: 380px; }
+    .c-semaine { display: none; }
+    .telephone { top: 20px; right: calc(50% - 110px); width: 220px; }
+    .liste { width: calc(100% - 32px); margin-left: 16px; }
+  }
+</style>

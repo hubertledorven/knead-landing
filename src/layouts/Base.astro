@@ -2,7 +2,6 @@
 import '@fontsource-variable/inter';
 import '@fontsource/cormorant-garamond/600.css';
 import '@fontsource-variable/source-serif-4/opsz.css';
-import '@fontsource-variable/schibsted-grotesk';
 import '../styles/global.css';
 
 interface Props {
@@ -34,6 +33,11 @@ const imageUrl = image && new URL(image, Astro.site).href;
   <meta name="twitter:card" content={imageUrl ? 'summary_large_image' : 'summary'}>
   <meta name="theme-color" content="#0F1F3D">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230F1F3D'/%3E%3Ctext x='32' y='45' font-family='Georgia,serif' font-size='38' font-weight='600' text-anchor='middle' fill='%23C9A84C'%3EK%3C/text%3E%3C/svg%3E">
+  <script is:inline>
+    if ('IntersectionObserver' in window && matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+      document.documentElement.classList.add('anime');
+    }
+  </script>
   <!-- Sans JavaScript : navbar opaque pour rester lisible, et menu mobile retiré car les liens restent dans le pied de page. -->
   <noscript><style is:inline>.site-header { background: #fff !important; border-bottom-color: var(--line) !important; } .toggle { display: none !important; }</style></noscript>
 </head>
@@ -41,5 +45,34 @@ const imageUrl = image && new URL(image, Astro.site).href;
   <!-- Chaque page utilisant ce gabarit donne id="contenu" à son <main>. -->
   <a class="skip" href="#contenu">Aller au contenu</a>
   <slot />
+  <script is:inline>
+    // Une fois affiché, un bloc le reste. Ceux qui entrent ensemble arrivent l'un après l'autre. data-reveal="lent" espace davantage cette arrivée.
+    if (document.documentElement.classList.contains('anime')) {
+      var finLent = 0;
+      var observateur = new IntersectionObserver(function (entrees) {
+        var rang = 0, rangLent = 0;
+        entrees.forEach(function (e) {
+          // Un bloc déjà dépassé (ancre, retour en arrière) s'affiche sans attendre.
+          if (!e.isIntersecting && e.boundingClientRect.top > 0) return;
+          if (e.isIntersecting) {
+            var type = e.target.dataset.reveal, delai;
+            if (type === 'lent') {
+              delai = rangLent++ * 320;
+              finLent = Math.max(finLent, performance.now() + delai + 350);
+            } else if (type === 'gauche') {
+              // Attend que les cartes en cadence aient fini d'arriver.
+              delai = Math.max(0, finLent - performance.now());
+            } else {
+              delai = Math.min(rang++, 3) * 80;
+            }
+            e.target.style.setProperty('--delai', Math.round(delai) + 'ms');
+          }
+          e.target.classList.add('vu');
+          observateur.unobserve(e.target);
+        });
+      }, { rootMargin: '0px 0px -8% 0px' });
+      document.querySelectorAll('[data-reveal]').forEach(function (el) { observateur.observe(el); });
+    }
+  </script>
 </body>
 </html>

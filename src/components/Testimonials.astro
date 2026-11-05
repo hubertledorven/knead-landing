@@ -23,11 +23,11 @@ const colonnes = Math.min(temoignages.length || emplacements.length, 3);
 {(temoignages.length > 0 || apercu) && (
   <section class="testimonials">
     <div class="wrap">
-      <h2>Ce qu'en disent celles et ceux qui l'utilisent</h2>
+      <h2 data-reveal>Ce qu'en disent celles et ceux qui l'utilisent</h2>
       <div class:list={['wall', `cols-${colonnes}`]}>
         {temoignages.length > 0
           ? temoignages.map((t) => (
-              <figure class="item">
+              <figure class="item" data-reveal>
                 <blockquote>{t.citation}</blockquote>
                 <figcaption>
                   {t.photo && <Image src={t.photo} alt="" width={44} height={44} widths={[44, 88]} sizes="44px" format="webp" />}
@@ -39,7 +39,7 @@ const colonnes = Math.min(temoignages.length || emplacements.length, 3);
               </figure>
             ))
           : emplacements.map((texte) => (
-              <figure class="item slot">
+              <figure class="item slot" data-reveal>
                 <span class="tag">Témoignage à venir</span>
                 <blockquote>{texte}</blockquote>
                 <figcaption>
@@ -49,7 +49,7 @@ const colonnes = Math.min(temoignages.length || emplacements.length, 3);
               </figure>
             ))}
       </div>
-      <div class="action">
+      <div class="action" data-reveal>
         <p>À vous d'essayer.</p>
         <a href={signup} class="btn">Essai gratuit 7 jours</a>
       </div>

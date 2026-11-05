@@ -9,6 +9,9 @@
   --gradient-navy: linear-gradient(160deg, var(--navy) 20%, var(--navy-light));
   --gradient-gold: linear-gradient(to bottom, var(--gold), #DBBF6E);
   --gradient-gold-hover: linear-gradient(to bottom, #D6B863, #E4CC85);
+  /* Fonds des panneaux de captures, section bénéfices. */
+  --fond-bleu: linear-gradient(160deg, #DCE5F2, #B3C4DF);
+  --fond-dore: linear-gradient(160deg, #F8F1DC, #EAD8A4);
   --paper: #F7F6F2;
   --ink: #1E293B;
   --ink-2: #475569;     /* texte secondaire, plus contrasté que l'ancien #64748B */
@@ -22,10 +25,9 @@
   --ok: #1F7A4D;
 
   --logo: 'Cormorant Garamond', Georgia, serif;
-  /* Proposition B par défaut, celle que montre la maquette. La A est définie plus bas : à retirer une fois le choix fait. */
-  --title: 'Schibsted Grotesk Variable', -apple-system, 'Segoe UI', sans-serif;
+  --title: 'Source Serif 4 Variable', Georgia, serif;
   --title-weight: 600;
-  --title-track: -.025em;
+  --title-track: -.015em;
   --sans: 'Inter Variable', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
 
   --radius: 8px;
@@ -64,10 +66,20 @@ body {
 img { display: block; max-width: 100%; height: auto; }
 a { color: inherit; }
 
-html[data-titres="a"] {
-  --title: 'Source Serif 4 Variable', Georgia, serif;
-  --title-weight: 600;
-  --title-track: -.015em;
+/* Apparition au défilement. Le masquage n'existe que si Base.astro a posé .anime :
+   sans JavaScript, ou si les animations sont réduites, tout reste visible. */
+html.anime [data-reveal] { opacity: 0; translate: 0 20px; }
+html.anime [data-reveal].vu {
+  opacity: 1; translate: none;
+  transition: opacity .7s cubic-bezier(.16, 1, .3, 1), translate .7s cubic-bezier(.16, 1, .3, 1);
+  transition-delay: var(--delai, 0ms);
+}
+/* Cartes de la section douleur : fondu court et grand écart, pour qu'elles tombent une par une. */
+html.anime [data-reveal="lent"].vu { transition-duration: .35s; }
+/* Glissement par la gauche, après les cartes en cadence. */
+html.anime [data-reveal="gauche"] { translate: calc(-1 * min(8vw, 96px)) 0; }
+@media print {
+  html.anime [data-reveal] { opacity: 1; translate: none; }
 }
 
 /* Lien d'évitement : invisible jusqu'à ce qu'il reçoive le focus au clavier. */

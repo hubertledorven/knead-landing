@@ -9,16 +9,39 @@ interface Props {
 }
 const { apercu = false } = Astro.props;
 const t = temoignages.find((x) => x.enAvant) ?? temoignages[0];
+// Reprend les trois bénéfices de la citation : chacun se surligne dans le texte quand son élément du bandeau apparaît.
+const avantages = [
+  { titre: 'Gain de temps', texte: 'Photographiez la facture, rien à ressaisir.', passage: 'gagner du temps', icone: 'M12 6a7.500 7.500 0 1 0 0 15 7.500 7.500 0 0 0 0-15zM12 9.500v4l2.500 1.500M9.500 2.500h5M12 2.500V6M18.500 6.500 17.200 7.800' },
+  { titre: 'Clarté', texte: 'Le coût de chaque recette, au centime.', passage: 'voir plus clair', icone: 'M10.500 4a6.500 6.500 0 1 0 0 13 6.500 6.500 0 0 0 0-13zM15.300 15.300 21 21' },
+  { titre: 'Marges contrôlées', texte: 'Un prix change, vos marges se recalculent.', passage: 'ne pas travailler à perte', icone: 'M3 17l6-6 4 4 8-8M15.500 7H21v5.500' },
+];
+// Découpe la citation : les indices impairs sont les passages à surligner.
+const morceaux = (t?.extrait ?? t?.citation ?? '').split(new RegExp(`(${avantages.map((a) => a.passage).join('|')})`));
 ---
 {t ? (
   <section class="proof">
-    <figure class="wrap">
-      <blockquote>«&nbsp;{t.extrait ?? t.citation}&nbsp;»</blockquote>
+    <figure class="wrap" data-reveal>
+      <blockquote>«&nbsp;{morceaux.map((m, i) => i % 2
+        ? <span class="surligne" data-avantage={avantages.findIndex((a) => a.passage === m)}>{m}</span>
+        : m)}&nbsp;»</blockquote>
       <figcaption>
         {t.photo && <Image src={t.photo} alt="" width={48} height={48} widths={[48, 96]} sizes="48px" format="webp" />}
         <span>{t.instagram && <InstagramIcon />}<strong>{t.nom}</strong>{t.boutique ? `, ${t.boutique}` : ''}{t.ville ? `, ${t.ville}` : ''}</span>
       </figcaption>
     </figure>
+    <div class="wrap">
+      <ul class="band" data-reveal>
+        {avantages.map((a) => (
+          <li>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d={a.icone} /></svg>
+            <div>
+              <strong><span class="surligne">{a.titre}</span></strong>
+              <p>{a.texte}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
   </section>
 ) : apercu && (
   <section class="proof">
@@ -32,8 +55,38 @@ const t = temoignages.find((x) => x.enAvant) ?? temoignages[0];
   </section>
 )}
 
+<script is:inline>
+  // Un seul fil pour le bandeau et la citation : chaque élément s'affiche avec son passage, l'un après l'autre.
+  // Sur mobile, un élément attend aussi d'être entré à l'écran. Sans .anime, tout est visible d'emblée.
+  (function () {
+    var bandeau = document.querySelector('.proof .band');
+    if (!bandeau || !document.documentElement.classList.contains('anime')) return;
+    var elements = bandeau.querySelectorAll('li');
+    var entres = [], suivant = 0, minuteur = null;
+    function avancer() {
+      minuteur = null;
+      if (!entres[suivant]) return;
+      elements[suivant].classList.add('vu');
+      var passage = document.querySelector('.proof [data-avantage="' + suivant + '"]');
+      if (passage) passage.classList.add('vu');
+      suivant++;
+      minuteur = setTimeout(avancer, 400);
+    }
+    var observateur = new IntersectionObserver(function (entrees) {
+      entrees.forEach(function (e) {
+        if (!e.isIntersecting && e.boundingClientRect.top > 0) return;
+        entres[[].indexOf.call(elements, e.target)] = true;
+        observateur.unobserve(e.target);
+      });
+      if (minuteur === null) minuteur = setTimeout(avancer, 150);
+    }, { rootMargin: '0px 0px -8% 0px' });
+    elements.forEach(function (el) { observateur.observe(el); });
+  })();
+</script>
+
 <style>
-  .proof { padding-block: var(--space-section); text-align: center; }
+  /* Un peu plus d'air qu'ailleurs : la section suivante est aussi sur fond blanc, rien d'autre ne les sépare. */
+  .proof { padding-block: calc(var(--space-section) * 1.25); text-align: center; }
   figure, .slot { max-width: 860px; margin-inline: auto; }
   blockquote, .slot-quote { font-family: var(--title); font-size: clamp(1.5rem, 2.4vw, 1.875rem); font-weight: 500; letter-spacing: var(--title-track); line-height: 1.25; color: var(--navy); }
   blockquote { text-wrap: balance; }
@@ -41,6 +94,29 @@ const t = temoignages.find((x) => x.enAvant) ?? temoignages[0];
   figcaption strong { color: var(--navy); font-weight: 500; }
   figcaption img, .slot-photo { flex: none; width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
   .slot-photo { border: 1.5px dashed var(--line-dashed); }
+  /* Surligné doré, balayé de gauche à droite, y compris quand le passage court sur deux lignes. */
+  .surligne { background: linear-gradient(#F3E9CB, #F3E9CB) no-repeat 0 90% / 100% 26%; }
+  :global(html.anime) .surligne { background-size: 0 26%; }
+  :global(html.anime) .surligne.vu,
+  :global(html.anime) .band li.vu .surligne { background-size: 100% 26%; transition: background-size .45s cubic-bezier(.65, 0, .35, 1); }
+
+  /* Pas de fond ni de séparateur : deux traits suffisent, le surlignage apporte la couleur. */
+  .band { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: var(--space-heading); padding: 32px 0; list-style: none; border-block: 1px solid var(--line-strong); text-align: left; }
+  .band li { display: flex; align-items: flex-start; gap: 16px; padding-inline: 32px; }
+  .band svg { flex: none; width: 32px; height: 32px; fill: none; stroke: var(--gold-ink); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+  .band strong { display: block; font-family: var(--title); font-size: 1.25rem; font-weight: var(--title-weight); letter-spacing: var(--title-track); line-height: 1.25; color: var(--navy); }
+  .band p { margin-top: 6px; font-size: 1rem; line-height: 1.45; color: var(--ink-2); }
+  :global(html.anime) .band li { opacity: 0; translate: 0 16px; }
+  :global(html.anime) .band li.vu { opacity: 1; translate: none; transition: opacity .45s cubic-bezier(.16, 1, .3, 1), translate .45s cubic-bezier(.16, 1, .3, 1); }
+  @media print {
+    :global(html.anime) .band li { opacity: 1; translate: none; }
+    :global(html.anime) .surligne { background-size: 100% 26%; }
+  }
+  @media (max-width: 60em) {
+    .band { grid-template-columns: minmax(0, 1fr); padding: 8px 24px; }
+    .band li { padding: 20px 0; }
+  }
+
   .slot { padding: 32px 24px 40px; border: 1.5px dashed var(--line-dashed); border-radius: var(--radius); }
   .tag { display: block; margin-bottom: 20px; font-size: .875rem; font-weight: 600; color: var(--gold-ink); }
 </style>
