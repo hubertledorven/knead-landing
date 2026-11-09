@@ -2,11 +2,6 @@
 
 Ce qui reste à produire ou à faire confirmer avant ou après la mise en ligne. Un point réglé est retiré de la liste : l'historique Git garde la trace.
 
-## À produire
-
-### Image de partage
-- [ ] Créer une image pour les réseaux sociaux (1200 × 630 px) avant la mise en ligne.
-
 ## À demander au client
 
 ### Témoignages (priorité haute)
