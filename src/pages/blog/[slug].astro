@@ -1,0 +1,113 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import FinalCta from '../../components/FinalCta.astro';
+import Footer from '../../components/Footer.astro';
+import { articles, dateIso, dateLisible, tempsDeLecture, type Article } from '../../lib/blog';
+
+export async function getStaticPaths() {
+  return (await articles()).map((article) => ({ params: { slug: article.id }, props: { article } }));
+}
+
+const { article } = Astro.props as { article: Article };
+const { data } = article;
+const { Content } = await render(article);
+const site = Astro.site!;
+const url = new URL(`/blog/${article.id}/`, site).href;
+
+// Le champ headline doit rester identique au <h1> visible : un balisage divergent est pénalisé.
+const donnees = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: data.title,
+    description: data.description,
+    inLanguage: 'fr-FR',
+    datePublished: dateIso(data.date),
+    dateModified: dateIso(data.miseAJour ?? data.date),
+    mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+    author: { '@type': 'Person', name: data.auteur, jobTitle: 'Chef pâtissier', url: site.href },
+    publisher: { '@type': 'Organization', name: 'Knead', url: site.href },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Accueil', item: site.href },
+      { '@type': 'ListItem', position: 2, name: 'Blog', item: new URL('/blog/', site).href },
+      { '@type': 'ListItem', position: 3, name: data.titreCourt, item: url },
+    ],
+  },
+];
+---
+<Base title={data.seoTitle ?? `${data.title} — Knead`} description={data.description} type="article">
+  {donnees.map((d) => <script type="application/ld+json" slot="head" set:html={JSON.stringify(d)} />)}
+
+  <Header />
+  <main id="contenu">
+    <article class="wrap">
+      <nav class="ariane" aria-label="Fil d'Ariane">
+        <a href="/">Accueil</a><span aria-hidden="true">/</span><a href="/blog/">Blog</a><span aria-hidden="true">/</span><span aria-current="page">{data.titreCourt}</span>
+      </nav>
+
+      <header class="tete">
+        <p class="eyebrow">{data.categorie}</p>
+        <h1>{data.title}</h1>
+        <p class="meta">
+          <span>Par {data.auteur}, chef pâtissier</span>
+          <span aria-hidden="true">·</span>
+          <time datetime={dateIso(data.date)}>{dateLisible(data.date)}</time>
+          <span aria-hidden="true">·</span>
+          <span>{tempsDeLecture(article)}</span>
+        </p>
+        <p class="chapeau">{data.chapeau}</p>
+      </header>
+
+      <div class="corps">
+        <Content />
+      </div>
+
+      <p class="signature">Hubert, chef pâtissier depuis 17 ans, fondateur de Knead. <span>Tu pâtisses, Knead compte.</span></p>
+    </article>
+    <FinalCta />
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  article { --mesure: 42rem; padding-block: 32px 24px; }
+  article > * { max-width: var(--mesure); margin-inline: auto; }
+
+  .ariane { display: flex; flex-wrap: wrap; gap: 4px 10px; font-size: .9375rem; color: var(--ink-2); }
+  .ariane a { text-underline-offset: 3px; text-decoration-color: transparent; transition: text-decoration-color .18s ease; }
+  .ariane a:hover { color: var(--navy); text-decoration-color: currentColor; }
+  .ariane span[aria-hidden] { opacity: .5; }
+
+  .tete { margin-top: 48px; padding-bottom: 32px; border-bottom: 1px solid var(--line); }
+  .eyebrow { margin-bottom: 16px; font-size: .8125rem; font-weight: 600; letter-spacing: .09em; line-height: 1.4; text-transform: uppercase; color: var(--gold-ink); }
+  h1 { font-size: clamp(2.125rem, 4vw, 3rem); line-height: 1.1; }
+  .meta { display: flex; flex-wrap: wrap; gap: 4px 10px; margin-top: 20px; font-size: .9375rem; color: var(--ink-2); }
+  .meta span[aria-hidden] { opacity: .5; }
+  .chapeau { margin-top: 28px; font-size: 1.25rem; line-height: 1.55; color: var(--ink-2); }
+
+  /* Texte de l'article, issu du Markdown. */
+  .corps { padding-top: 8px; }
+  .corps :global(h2) { max-width: none; margin: 56px 0 18px; font-size: clamp(1.625rem, 2.6vw, 2rem); line-height: 1.18; text-align: left; }
+  .corps :global(h3) { margin: 36px 0 12px; }
+  .corps :global(p), .corps :global(ul), .corps :global(ol) { margin-bottom: 20px; }
+  .corps :global(ul), .corps :global(ol) { padding-left: 1.25em; }
+  .corps :global(li + li) { margin-top: 8px; }
+  .corps :global(strong) { font-weight: 600; color: var(--navy); }
+  .corps :global(a) { color: var(--gold-ink); text-underline-offset: 3px; }
+  .corps :global(a:hover) { color: var(--navy); }
+
+  .signature { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--line); font-size: 1rem; font-style: italic; color: var(--ink-2); }
+  .signature span { color: var(--gold-ink); }
+
+  @media (max-width: 47.5em) {
+    .tete { margin-top: 32px; }
+    .chapeau { font-size: 1.125rem; }
+    .corps :global(h2) { margin-top: 44px; }
+  }
+</style>

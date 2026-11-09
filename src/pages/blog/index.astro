@@ -1,0 +1,120 @@
+---
+import Base from '../../layouts/Base.astro';
+import Header from '../../components/Header.astro';
+import FinalCta from '../../components/FinalCta.astro';
+import Footer from '../../components/Footer.astro';
+import { articles, dateIso, dateLisible, tempsDeLecture } from '../../lib/blog';
+
+const liste = await articles();
+const site = Astro.site!;
+
+// Chaque article publié est listé ici et dans les données structurées, automatiquement.
+const donnees = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Blog',
+    name: 'Le blog de Knead',
+    description: 'Coût de revient, prix de vente, marges et organisation de production en pâtisserie.',
+    inLanguage: 'fr-FR',
+    url: new URL('/blog/', site).href,
+    publisher: { '@type': 'Organization', name: 'Knead', url: site.href },
+    blogPost: liste.map((a) => ({
+      '@type': 'BlogPosting',
+      headline: a.data.title,
+      url: new URL(`/blog/${a.id}/`, site).href,
+      datePublished: dateIso(a.data.date),
+      author: { '@type': 'Person', name: a.data.auteur },
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Accueil', item: site.href },
+      { '@type': 'ListItem', position: 2, name: 'Blog', item: new URL('/blog/', site).href },
+    ],
+  },
+];
+---
+<Base
+  title="Le blog de Knead — gestion, coûts et prix en pâtisserie"
+  description="Les guides de Knead, écrits par un chef pâtissier : coût de revient, prix de vente, marges, organisation de production. Des méthodes concrètes, chiffrées, applicables dès demain."
+>
+  {donnees.map((d) => <script type="application/ld+json" slot="head" set:html={JSON.stringify(d)} />)}
+
+  <Header />
+  <main id="contenu">
+    <div class="wrap">
+      <nav class="ariane" aria-label="Fil d'Ariane">
+        <a href="/">Accueil</a><span aria-hidden="true">/</span><span aria-current="page">Blog</span>
+      </nav>
+
+      <header class="tete">
+        <p class="eyebrow">Le blog de Knead</p>
+        <h1>Gérer sa pâtisserie sans y laisser ses dimanches</h1>
+        <p>Coût de revient, prix de vente, marges, organisation de production&nbsp;: des méthodes concrètes et chiffrées, écrites par un chef pâtissier qui les applique depuis 17 ans.</p>
+      </header>
+
+      <ul class="liste">
+        {liste.map((a) => (
+          <li>
+            <a class="carte" href={`/blog/${a.id}/`}>
+              <p class="eyebrow">{a.data.categorie}</p>
+              <h2>{a.data.title}</h2>
+              <p class="resume">{a.data.resume}</p>
+              <p class="meta">
+                <time datetime={dateIso(a.data.date)}>{dateLisible(a.data.date)}</time>
+                <span aria-hidden="true">·</span>
+                <span>{tempsDeLecture(a)}</span>
+                <span class="lire">Lire l'article</span>
+              </p>
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <p class="note">D'autres guides arrivent. Une question de métier que vous aimeriez voir traitée&nbsp;? Écrivez-nous&nbsp;: <a href="mailto:contact@kneadmanager.com">contact@kneadmanager.com</a></p>
+    </div>
+    <FinalCta />
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .wrap { --mesure: 48rem; padding-block: 32px 24px; }
+  .wrap > * { max-width: var(--mesure); margin-inline: auto; }
+
+  .ariane { display: flex; flex-wrap: wrap; gap: 4px 10px; font-size: .9375rem; color: var(--ink-2); }
+  .ariane a { text-underline-offset: 3px; text-decoration-color: transparent; transition: text-decoration-color .18s ease; }
+  .ariane a:hover { color: var(--navy); text-decoration-color: currentColor; }
+  .ariane span[aria-hidden] { opacity: .5; }
+
+  .eyebrow { margin-bottom: 16px; font-size: .8125rem; font-weight: 600; letter-spacing: .09em; line-height: 1.4; text-transform: uppercase; color: var(--gold-ink); }
+  .tete { margin-top: 48px; margin-bottom: var(--space-heading); text-align: center; }
+  .tete h1 { font-size: clamp(2.25rem, 4.4vw, 3.5rem); }
+  .tete p:last-child { max-width: 34em; margin: 20px auto 0; font-size: 1.1875rem; color: var(--ink-2); }
+
+  .liste { display: grid; gap: 20px; list-style: none; }
+  .carte {
+    display: block; padding: 32px; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg);
+    text-decoration: none; transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+  }
+  .carte h2 { max-width: none; margin: 0; font-size: clamp(1.5rem, 2.4vw, 1.875rem); line-height: 1.18; text-align: left; }
+  .resume { margin-top: 12px; font-size: 1.0625rem; color: var(--ink-2); }
+  .meta { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; margin-top: 20px; font-size: .9375rem; color: var(--ink-2); }
+  .meta span[aria-hidden] { opacity: .5; }
+  .lire { margin-left: auto; font-weight: 600; color: var(--navy); }
+  .lire::after { content: ' →'; color: var(--gold-ink); }
+  @media (hover: hover) {
+    .carte:hover { border-color: var(--line-strong); box-shadow: 0 12px 32px rgba(15, 31, 61, .08); transform: translateY(-2px); }
+  }
+
+  .note { margin-top: 36px; text-align: center; font-size: 1rem; color: var(--ink-2); }
+  .note a { color: var(--gold-ink); text-underline-offset: 3px; }
+
+  @media (max-width: 47.5em) {
+    .tete { margin-top: 32px; }
+    .carte { padding: 24px 20px; }
+    .lire { margin-left: 0; flex-basis: 100%; }
+  }
+</style>

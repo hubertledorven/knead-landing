@@ -1,12 +1,13 @@
 ---
-Slug proposé : /blog/comment-fixer-le-prix-d-un-gateau
-Title SEO : Comment fixer le prix d'un gâteau ? La méthode d'un chef pâtissier
-Meta description : Coût de revient, temps de travail, ratés, coefficient ×2,5 : la méthode complète pour fixer le prix de vente d'un gâteau sans vendre à perte. Par un chef pâtissier, 17 ans de métier.
+title: "Comment fixer le prix d'un gâteau ? La méthode complète d'un chef pâtissier"
+titreCourt: "Fixer le prix d'un gâteau"
+seoTitle: "Comment fixer le prix d'un gâteau ? La méthode d'un chef pâtissier"
+description: "Coût de revient, temps de travail, ratés, coefficient ×2,5 : la méthode complète pour fixer le prix de vente d'un gâteau sans vendre à perte. Par un chef pâtissier, 17 ans de métier."
+resume: "Ingrédients, emballage, temps de travail, ratés, charges fixes, puis coefficient ×2,5 : la méthode complète pour fixer un prix qui couvre vos coûts et paie votre travail — avec un exemple chiffré qui révèle un entremets vendu à perte."
+categorie: "Coûts & marges"
+date: 2026-08-24
+chapeau: "Si vous fixez vos prix « au feeling », ou en regardant ce que fait la pâtisserie d'à côté, cet article est pour vous. Après 17 ans en pâtisserie, je peux vous dire que c'est l'erreur la plus répandue du métier — et la plus coûteuse. Voici la méthode complète pour fixer un prix juste : celui qui couvre vos coûts, paie votre travail, et fait vivre votre activité."
 ---
-
-# Comment fixer le prix d'un gâteau ? La méthode complète d'un chef pâtissier
-
-Si vous fixez vos prix « au feeling », ou en regardant ce que fait la pâtisserie d'à côté, cet article est pour vous. Après 17 ans en pâtisserie, je peux vous dire que c'est l'erreur la plus répandue du métier — et la plus coûteuse. Voici la méthode complète pour fixer un prix juste : celui qui couvre vos coûts, paie votre travail, et fait vivre votre activité.
 
 ## Pourquoi le « feeling » vous fait perdre de l'argent
 
@@ -49,7 +50,3 @@ Un prix juste ne le reste pas. Les matières premières ont connu des hausses hi
 ## Automatiser le calcul (et ne plus jamais y penser)
 
 Tout ce que décrit cet article peut se faire sur un tableur — c'est d'ailleurs ainsi que j'ai fait pendant des années, tous les dimanches soirs. C'est aussi pour en finir avec ces dimanches que j'ai construit Knead : vous photographiez vos factures fournisseurs, vos prix d'achat se mettent à jour, et le coût de revient complet de chaque recette — temps et pertes compris — se recalcule automatiquement, avec votre marge réelle en face. Quand le beurre augmente, vous le savez le jour même, pas au bilan.
-
-[Essayez Knead gratuitement pendant 7 jours, sans carte bancaire →](https://app.kneadmanager.com/)
-
-*Hubert, chef pâtissier depuis 17 ans, fondateur de Knead. Tu pâtisses, Knead compte.*
