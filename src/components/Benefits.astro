@@ -6,7 +6,6 @@ import semaine from '../assets/benefice-semaine.png';
 import semaineMobile from '../assets/benefice-semaine-mobile.png';
 import alerte from '../assets/benefice-alerte.png';
 import aCommander from '../assets/benefice-a-commander.png';
-import BenefitsGrille from './BenefitsGrille.astro';
 
 const signup = 'https://app.kneadmanager.com/#signup';
 const aussi = ['Seuil de rentabilité', 'Devis et factures', 'Suivi des pertes', 'Hygiène et PMS', 'Assistant intégré'];
@@ -78,8 +77,6 @@ const tailles = '(max-width: 1000px) 720px, 680px';
       </article>
     </div>
 
-    <BenefitsGrille />
-
     <div class="after">
       <p class="aussi" data-reveal>Et aussi</p>
       <ul class="pills">
@@ -93,8 +90,7 @@ const tailles = '(max-width: 1000px) 720px, 680px';
 <script is:inline>
   (function () {
     var pile = document.querySelector('.benefits .stack');
-    // Rien à régler ni à jouer quand la grille est affichée à la place de la pile.
-    if (!pile || getComputedStyle(pile).display === 'none') return;
+    if (!pile) return;
     var cartes = pile.querySelectorAll('.card');
 
     // Empilement seulement si chaque carte tient à l'écran : sinon le bas d'une carte serait caché par la suivante.
@@ -150,7 +146,6 @@ const tailles = '(max-width: 1000px) 720px, 680px';
   h2 { max-width: 16em; margin-bottom: var(--space-heading); }
   /* Cartes empilées : chacune se pose sur la précédente et laisse dépasser son bord. Activé par le script si elles tiennent à l'écran. */
   .stack { display: grid; gap: 24px; }
-  :global(html[data-benefices="grille"]) .stack { display: none; }
   .card {
     display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: 40px; align-items: stretch;
     padding: 24px 24px 24px 48px; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg);

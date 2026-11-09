@@ -7,7 +7,6 @@ import Proof from '../components/Proof.astro';
 import Problem from '../components/Problem.astro';
 import Guide from '../components/Guide.astro';
 import Plan from '../components/Plan.astro';
-import PlanFiche from '../components/PlanFiche.astro';
 import Benefits from '../components/Benefits.astro';
 import Testimonials from '../components/Testimonials.astro';
 import Pricing from '../components/Pricing.astro';
@@ -20,21 +19,12 @@ import Footer from '../components/Footer.astro';
   description="Maquette de travail de la refonte de la landing Knead."
   noindex
 >
-  <script is:inline>
-    (function () {
-      var q = new URLSearchParams(location.search), d = document.documentElement;
-      if (q.get('benefices') === 'grille') d.dataset.benefices = 'grille';
-      if (q.get('etapes') === 'captures') d.dataset.etapes = 'captures';
-    })();
-  </script>
-
   <Header />
   <main id="contenu">
     <HeroCentre />
     <Proof apercu />
     <Problem />
     <Benefits />
-    <PlanFiche />
     <Plan />
     <Guide />
     <Testimonials apercu />
@@ -43,67 +33,5 @@ import Footer from '../components/Footer.astro';
     <FinalCta />
   </main>
   <Footer />
-
-  <!-- Chaque choix est une adresse : on peut envoyer directement une proposition au client. -->
-  <details class="switcher">
-    <summary>Options</summary>
-    <div class="options" role="group" aria-label="Comparer les propositions">
-      <div class="row">
-        <span>Bénéfices</span>
-        <a href="#" data-option="benefices" data-valeur="pile">Empilées</a>
-        <a href="#" data-option="benefices" data-valeur="grille">Grille</a>
-      </div>
-      <div class="row">
-        <span>Étapes</span>
-        <a href="#" data-option="etapes" data-valeur="fiche">Fiche</a>
-        <a href="#" data-option="etapes" data-valeur="captures">Captures</a>
-      </div>
-    </div>
-  </details>
-  <script is:inline>
-    (function () {
-      var d = document.documentElement, defaut = { benefices: 'pile', etapes: 'fiche' };
-      var liens = document.querySelectorAll('.switcher a');
-      function marquer() {
-        liens.forEach(function (a) {
-          a.setAttribute('aria-current', (d.dataset[a.dataset.option] || defaut[a.dataset.option]) === a.dataset.valeur ? 'true' : 'false');
-        });
-      }
-      liens.forEach(function (a) {
-        a.addEventListener('click', function (e) {
-          e.preventDefault();
-          // L'adresse garde chaque choix, pour pouvoir envoyer une combinaison précise au client.
-          var q = new URLSearchParams(location.search);
-          q.set(a.dataset.option, a.dataset.valeur);
-          var adresse = location.pathname + '?' + q.toString();
-          // Changer de disposition recharge la page ; le reste s'applique sur place.
-          if (a.dataset.option === 'benefices') { location.href = adresse + '#benefices'; return; }
-          d.dataset[a.dataset.option] = a.dataset.valeur;
-          history.replaceState(null, '', adresse);
-          marquer();
-        });
-      });
-      marquer();
-    })();
-  </script>
 </Base>
 
-<style is:global>
-  .switcher { position: fixed; right: 16px; bottom: 16px; z-index: 10; font-size: .875rem; font-weight: 600; color: var(--ink-2); white-space: nowrap; }
-  .switcher summary {
-    display: flex; align-items: center; min-height: 44px; padding-inline: 16px;
-    background: var(--navy); border-radius: 10px; color: #fff; cursor: pointer; list-style: none;
-    box-shadow: 0 8px 28px rgba(15, 31, 61, .28);
-  }
-  .switcher summary::-webkit-details-marker { display: none; }
-  .switcher .options {
-    position: absolute; right: 0; bottom: calc(100% + 8px); padding: 10px 12px;
-    background: #fff; border: 1px solid var(--line); border-radius: 10px;
-    box-shadow: 0 8px 28px rgba(15, 31, 61, .18);
-  }
-  .switcher .options { display: flex; flex-direction: column; gap: 6px; }
-  .switcher .row { display: flex; align-items: center; gap: 4px; }
-  .switcher .row span { width: 76px; }
-  .switcher a { display: grid; place-items: center; height: 36px; padding-inline: 10px; border-radius: 6px; color: var(--navy); text-decoration: none; }
-  .switcher a[aria-current="true"] { background: var(--navy); color: #fff; }
-</style>
