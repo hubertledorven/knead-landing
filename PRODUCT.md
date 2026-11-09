@@ -34,7 +34,7 @@ Knead réunit deux choses indissociables :
 - L'alternative habituelle est un tableur Excel ou des calculs faits à la main.
 - Le travail commence par une facture fournisseur, à photographier.
 - Knead s'utilise dans le navigateur, sans installation, sur `app.kneadmanager.com`.
-- Ce dépôt contient le site vitrine `kneadmanager.com`. L'application est ailleurs.
+- Ce dépôt contient le site vitrine `kneadmanager.com` : la page d'accueil et le blog. L'application est ailleurs.
 
 ## Capabilities and Constraints
 
@@ -55,7 +55,7 @@ Formules :
 
 Données : base hébergée à Paris. Certains prestataires (paiement, e-mails, IA, hébergement applicatif) sont établis hors de l'Union européenne.
 
-À confirmer : `elements-a-recuperer.md` tient la liste à jour des fonctions, conditions commerciales et décisions encore ouvertes. Tout ce qui y figure reste une question, pas un fait acquis.
+À confirmer : `points-ouverts.md` tient la liste à jour des fonctions, conditions commerciales et décisions encore ouvertes. Tout ce qui y figure reste une question, pas un fait acquis.
 
 ## Brand Commitments
 
@@ -68,15 +68,15 @@ Données : base hébergée à Paris. Certains prestataires (paiement, e-mails, I
 
 - Deux témoignages réels, publiés avec l'accord de leurs autrices sous leur compte Instagram : @clemp_patisserie et @delyss.patisserie (`src/data/temoignages.ts`). Un troisième est attendu.
 - L'histoire et la photo d'Hubert (`src/assets/hubert.jpg`). La version raccourcie reste à faire valider.
-- L'article sur le prix d'un gâteau et son exemple d'entremets (`_sources/article-prix-gateau.md`). Sa recommandation de prix contredit le coefficient ×2,5 et doit être corrigée.
+- L'article sur le prix d'un gâteau et son exemple d'entremets (`src/content/blog/comment-fixer-le-prix-d-un-gateau.md`). Sa recommandation de prix contredit le coefficient ×2,5 et doit être corrigée.
 
 Ne pas inventer ni réutiliser sans preuve :
 
 - aucun chiffre vérifié n'existe : pâtissiers inscrits, factures scannées, note moyenne, temps gagné ;
 - « 2h par semaine » et « Le plus choisi » ont été retirés faute de preuve ;
-- la citation d'« Anthony » et ses chiffres (5 h par semaine, +4 % de marge) dans `idees-structure-copy.md` ne sont pas vérifiés ;
+- la citation d'« Anthony » et ses chiffres (5 h par semaine, +4 % de marge), issus d'un premier jet de textes, ne sont pas vérifiés ;
 - les prix et marges d'exemple de la page sont illustratifs et restent à faire relire par Hubert ;
-- la capture actuelle du tableau de bord est provisoire, en attendant un compte de démo crédible.
+- la capture actuelle du hero est provisoire, en attendant un compte de démo crédible.
 
 ## Product Principles
 

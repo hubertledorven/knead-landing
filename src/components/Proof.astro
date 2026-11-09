@@ -3,11 +3,6 @@ import { Image } from 'astro:assets';
 import InstagramIcon from './InstagramIcon.astro';
 import { temoignages } from '../data/temoignages';
 
-interface Props {
-  /** Affiche un emplacement explicite tant qu'aucun témoignage réel n'est disponible. */
-  apercu?: boolean;
-}
-const { apercu = false } = Astro.props;
 const t = temoignages.find((x) => x.enAvant) ?? temoignages[0];
 // Reprend les trois bénéfices de la citation : chacun se surligne dans le texte quand son élément du bandeau apparaît.
 const avantages = [
@@ -43,17 +38,7 @@ const morceaux = (t?.extrait ?? t?.citation ?? '').split(new RegExp(`(${avantage
       </ul>
     </div>
   </section>
-) : apercu && (
-  <section class="proof">
-    <div class="wrap">
-      <div class="slot">
-        <span class="tag">Emplacement à remplir, visible seulement sur la maquette</span>
-        <p class="slot-quote">Citation du client&nbsp;: un résultat concret, en une ou deux phrases.</p>
-        <p class="slot-who"><span class="slot-photo" aria-hidden="true"></span>Prénom Nom, boutique, ville</p>
-      </div>
-    </div>
-  </section>
-)}
+) : null}
 
 <script is:inline>
   // Un seul fil pour le bandeau et la citation : chaque élément s'affiche avec son passage, l'un après l'autre.
@@ -87,13 +72,12 @@ const morceaux = (t?.extrait ?? t?.citation ?? '').split(new RegExp(`(${avantage
 <style>
   /* Un peu plus d'air qu'ailleurs : la section suivante est aussi sur fond blanc, rien d'autre ne les sépare. */
   .proof { padding-block: calc(var(--space-section) * 1.25); text-align: center; }
-  figure, .slot { max-width: 860px; margin-inline: auto; }
-  blockquote, .slot-quote { font-family: var(--title); font-size: clamp(1.5rem, 2.4vw, 1.875rem); font-weight: 500; letter-spacing: var(--title-track); line-height: 1.25; color: var(--navy); }
+  figure { max-width: 860px; margin-inline: auto; }
+  blockquote { font-family: var(--title); font-size: clamp(1.5rem, 2.4vw, 1.875rem); font-weight: 500; letter-spacing: var(--title-track); line-height: 1.25; color: var(--navy); }
   blockquote { text-wrap: balance; }
-  figcaption, .slot-who { display: flex; justify-content: center; align-items: center; gap: 12px; margin-top: 24px; font-size: .875rem; color: var(--ink-2); }
+  figcaption { display: flex; justify-content: center; align-items: center; gap: 12px; margin-top: 24px; font-size: .875rem; color: var(--ink-2); }
   figcaption strong { color: var(--navy); font-weight: 500; }
-  figcaption img, .slot-photo { flex: none; width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
-  .slot-photo { border: 1.5px dashed var(--line-dashed); }
+  figcaption img { flex: none; width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
   /* Surligné doré, balayé de gauche à droite, y compris quand le passage court sur deux lignes. */
   .surligne { background: linear-gradient(#F3E9CB, #F3E9CB) no-repeat 0 90% / 100% 26%; }
   :global(html.anime) .surligne { background-size: 0 26%; }
@@ -117,6 +101,4 @@ const morceaux = (t?.extrait ?? t?.citation ?? '').split(new RegExp(`(${avantage
     .band li { padding: 20px 0; }
   }
 
-  .slot { padding: 32px 24px 40px; border: 1.5px dashed var(--line-dashed); border-radius: var(--radius); }
-  .tag { display: block; margin-bottom: 20px; font-size: .875rem; font-weight: 600; color: var(--gold-ink); }
 </style>
