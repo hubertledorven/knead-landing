@@ -66,7 +66,7 @@ Données : base hébergée à Paris. Certains prestataires (paiement, e-mails, I
 
 ## Evidence on Hand
 
-- Deux témoignages réels, publiés avec l'accord de leurs autrices sous leur compte Instagram : @clemp_patisserie et @delyss.patisserie (`src/data/temoignages.ts`). Un troisième est attendu.
+- Quatre témoignages réels, publiés avec l'accord de leurs autrices sous leur compte Instagram : @clemp_patisserie, @delyss.patisserie, @maison.sucree.emilie et @sorenza_patisserie (`src/data/temoignages.ts`). Les deux derniers sont des versions raccourcies.
 - L'histoire et la photo d'Hubert (`src/assets/hubert.jpg`). La version raccourcie reste à faire valider.
 - L'article sur le prix d'un gâteau et son exemple d'entremets (`src/content/blog/comment-fixer-le-prix-d-un-gateau.md`). Sa recommandation de prix contredit le coefficient ×2,5 et doit être corrigée.
 

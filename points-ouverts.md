@@ -4,15 +4,6 @@ Ce qui reste à produire ou à faire confirmer avant ou après la mise en ligne.
 
 ## À demander au client
 
-### Témoignages (priorité haute)
-- [ ] 4 ou 5 autres citations pour le mur de témoignages (2 affichées pour l'instant, @clemp_patisserie et @delyss.patisserie, et une 3e attendue). Chaque nouvelle citation demande l'accord de son auteur·rice.
-
-Pour obtenir de bonnes réponses, lui faire poser ces questions :
-1. Comment calculiez-vous vos coûts avant Knead ?
-2. Qu'est-ce qui vous a décidé à essayer, et qu'est-ce qui vous faisait hésiter ?
-3. Qu'avez-vous découvert ou changé grâce à Knead (un prix revu, une marge corrigée) ?
-4. Combien de temps gagnez-vous par semaine, si vous l'avez mesuré ?
-
 ### Chiffres de preuve
 - [ ] De vrais chiffres, s'il y en a : nombre de pâtissiers inscrits, factures scannées, recettes suivies, note moyenne. Une ligne de chiffres sera ajoutée sous la citation seulement s'ils sont réels et parlants.
 
