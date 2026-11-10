@@ -5,14 +5,14 @@ import { temoignages } from '../data/temoignages';
 
 const signup = 'https://app.kneadmanager.com/#signup';
 
-// Le mur s'adapte au nombre de citations : pas de colonnes vides avec une ou deux citations.
-const colonnes = Math.min(temoignages.length, 3);
+// Avec une ou deux citations, pas de panneau : les cartes restent côte à côte.
+const panneau = temoignages.length >= 4;
 ---
 {temoignages.length > 0 && (
   <section class="testimonials">
     <div class="wrap">
       <h2 data-reveal>Ce qu'en disent celles et ceux qui l'utilisent</h2>
-      <div class:list={['wall', `cols-${colonnes}`]}>
+      <div class:list={['wall', { panneau }]}>
         {temoignages.map((t) => (
           <figure class="item" data-reveal>
             <blockquote>{t.citation}</blockquote>
@@ -37,23 +37,28 @@ const colonnes = Math.min(temoignages.length, 3);
 <style>
   .testimonials { padding-block: var(--space-section); background: var(--paper); }
   h2 { max-width: 16em; margin-bottom: var(--space-heading); }
-  /* Cartes de même taille, quelle que soit la longueur des citations. Le nom reste aligné en bas. */
-  .wall { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-auto-rows: 1fr; gap: 16px; margin-inline: auto; }
-  .cols-1 { grid-template-columns: minmax(0, 1fr); max-width: 640px; }
-  .cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 860px; }
-  .item { display: flex; flex-direction: column; padding: 28px; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); }
-  blockquote { font-size: 1.125rem; line-height: 1.5; color: var(--ink); }
-  blockquote { margin-bottom: 20px; }
+  /* Panneau d'affichage : des rangées de deux cartes aux largeurs alternées, qui forment ensemble un bloc rectangulaire.
+     Rangée 1 : large puis étroite. Rangée 2 : étroite puis large. Le motif se répète. */
+  .wall { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+  .wall.panneau { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .panneau .item { grid-column: span 2; }
+  .panneau .item:nth-child(4n+1), .panneau .item:nth-child(4n) { grid-column: span 3; }
+  .item { display: flex; flex-direction: column; padding: 32px; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); }
+  blockquote { margin-bottom: 24px; font-size: 1.0625rem; line-height: 1.6; color: var(--ink); }
   figcaption { display: flex; align-items: center; gap: 12px; margin-top: auto; font-size: .9375rem; line-height: 1.4; color: var(--ink-2); }
   figcaption strong { color: var(--navy); font-weight: 600; }
   figcaption img { flex: none; width: 44px; height: 44px; border-radius: 50%; object-fit: cover; }
   .action { margin-top: var(--space-after); text-align: center; }
   .action p { margin-bottom: 20px; font-family: var(--title); font-size: clamp(1.375rem, 2vw, 1.625rem); font-weight: 400; letter-spacing: var(--title-track); line-height: 1.25; color: var(--navy); }
 
-  @media (max-width: 960px) { .cols-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  /* Tablette : deux colonnes égales. */
+  @media (max-width: 960px) {
+    .wall.panneau { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .panneau .item:nth-child(n) { grid-column: auto; }
+  }
   @media (max-width: 640px) {
-    /* Sur une seule colonne, chaque carte garde la hauteur de son texte. */
-    .wall { grid-template-columns: minmax(0, 1fr); grid-auto-rows: auto; }
+    .wall, .wall.panneau { grid-template-columns: minmax(0, 1fr); }
+    .panneau .item:nth-child(n) { grid-column: auto; }
     .item { padding: 22px; }
     .action .btn { width: 100%; }
   }
