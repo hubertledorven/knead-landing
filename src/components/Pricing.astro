@@ -1,5 +1,7 @@
 ---
 const signup = 'https://app.kneadmanager.com/#signup';
+// Lien de paiement Stripe permanent (Payment Link) de la formule Équipe, avec le mois offert.
+const paiementEquipe = 'https://buy.stripe.com/6oUaEX3Pybn9cJCfwE9k405';
 const check = 'M20 6L9 17l-5-5';
 const formules = [
   {
@@ -20,7 +22,7 @@ const formules = [
     offre: "Offre de lancement : 1 mois offert",
     pointsForts: ['Toutes les fonctionnalités Solo', '20 scans IA par jour (factures et recettes)', 'Comptes pour votre équipe', 'Support prioritaire'],
     cta: 'Commencer, 1 mois offert',
-    href: signup,
+    href: paiementEquipe,
     note: 'Carte bancaire demandée à la souscription. Aucun débit avant 30 jours, annulation en un clic.',
   },
   {
