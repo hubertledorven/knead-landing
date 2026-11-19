@@ -1,0 +1,42 @@
+---
+// Bandeau Black Friday, caché par défaut et affiché par le script ci-dessous
+// pendant la fenêtre (src/data/blackFriday.ts). Sans JavaScript, il reste
+// caché : l'offre ne s'affiche jamais hors de ses dates.
+// Le même script affiche tous les éléments [data-bf] de la page (les montants
+// remisés de la section Tarifs) et envoie les boutons [data-bf-href] vers le
+// lien de l'application, qui applique le code au paiement. Les boutons
+// [data-bf-cta] prennent leur libellé Black Friday, les éléments
+// [data-bf-cache] (« 1 mois offert », notes d'essai) sont masqués : avec le
+// code, pas d'essai Stripe, paiement immédiat (décision du 18/11/2026).
+import { BF_CODE, BF_LIEN } from '../data/blackFriday';
+interface Props { variante?: 'haut' | 'tarifs' }
+const { variante = 'haut' } = Astro.props;
+---
+<div class:list={['bf', variante]} data-bf hidden role="note">
+  <p>
+    <strong>Black Friday</strong> : −50&nbsp;% sur votre première facture avec le code <strong class="code">{BF_CODE}</strong>, jusqu'au 30&nbsp;novembre.
+  </p>
+  <a href={BF_LIEN} class="bf-btn">Profiter de l'offre</a>
+</div>
+
+<script>
+  import { blackFridayActif, BF_LIEN } from '../data/blackFriday';
+  if (blackFridayActif()) {
+    document.querySelectorAll<HTMLElement>('[data-bf]').forEach((el) => { el.hidden = false; });
+    document.querySelectorAll<HTMLAnchorElement>('a[data-bf-href]').forEach((a) => { a.href = BF_LIEN; });
+    document.querySelectorAll<HTMLElement>('[data-bf-cta]').forEach((el) => { el.textContent = el.dataset.bfCta ?? el.textContent; });
+    // Avec le code, pas d'essai Stripe : les promesses de jours offerts disparaissent.
+    document.querySelectorAll<HTMLElement>('[data-bf-cache]').forEach((el) => { el.hidden = true; });
+  }
+</script>
+
+<style>
+  .bf { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px 20px; padding: 12px var(--gutter); background: var(--navy); color: #fff; text-align: center; font-size: 1rem; line-height: 1.45; }
+  .bf[hidden] { display: none; }
+  .bf strong { color: var(--gold); }
+  .bf .code { letter-spacing: .04em; }
+  .bf-btn { display: inline-block; padding: 8px 16px; border-radius: var(--radius); background: var(--gold); color: var(--navy); font-weight: 600; text-decoration: none; white-space: nowrap; }
+  .bf-btn:hover { filter: brightness(1.05); }
+  /* Dans la section Tarifs : un encart, pas une barre pleine largeur. */
+  .tarifs { margin-top: var(--space-heading); border-radius: var(--radius-lg); }
+</style>
