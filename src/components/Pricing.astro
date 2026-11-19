@@ -4,18 +4,20 @@ import BlackFriday from './BlackFriday.astro';
 // boutons envoyés vers l'application par le script de BlackFriday.astro.
 // Avec le code, pas d'essai Stripe (paiement immédiat, décision du 18/11/2026) :
 // pendant la fenêtre, « 1 mois offert » et les notes d'essai sont masqués
-// ([data-bf-cache]) et les boutons disent « S'abonner à −50 % » ([data-bf-cta]).
+// ([data-bf-cache]) et les boutons disent « Profiter du −50 % » ([data-bf-cta]).
+// Libellés des montants et du bouton : texte du fondateur du 19/11/2026.
 const signup = 'https://app.kneadmanager.com/#signup';
 // Lien de paiement Stripe permanent (Payment Link) de la formule Équipe, avec le mois offert.
 const paiementEquipe = 'https://buy.stripe.com/6oUaEX3Pybn9cJCfwE9k405';
 const check = 'M20 6L9 17l-5-5';
+const bfCta = 'Profiter du −50\u00a0%';
 const formules = [
   {
     nom: 'Solo',
     etiquette: 'Populaire',
     prix: '49',
     annuel: 'ou 470 €/an, soit −20 %',
-    blackFriday: ['24,50 € le premier mois (au lieu de 49 €)', '235 € la première année (au lieu de 470 €)'],
+    blackFriday: 'Black Friday : 235 € la première année au lieu de 470 €, ou 24,50 € le premier mois',
     pointsForts: ['1 utilisateur', '15 scans IA par mois (factures et recettes)', 'Recettes, coûts et marges', 'Import des commandes Shopify en un clic', 'Support par email'],
     cta: 'Essai gratuit 7 jours',
     href: signup,
@@ -26,7 +28,7 @@ const formules = [
     nom: 'Équipe',
     prix: '89',
     annuel: 'ou 854 €/an, soit −20 %',
-    blackFriday: ['44,50 € le premier mois (au lieu de 89 €)', '427 € la première année (au lieu de 854 €)'],
+    blackFriday: 'Black Friday : 427 € la première année au lieu de 854 €, ou 44,50 € le premier mois',
     offre: "Offre de lancement : 1 mois offert",
     pointsForts: ['Toutes les fonctionnalités Solo', '20 scans IA par jour (factures et recettes)', 'Comptes pour votre équipe', 'Support prioritaire'],
     cta: 'Commencer, 1 mois offert',
@@ -60,7 +62,7 @@ const formules = [
             {f.offre && <p class="offer" data-bf-cache={f.blackFriday ? '' : undefined}>{f.offre}</p>}
             {f.blackFriday && (
               <p class="bf-prix" data-bf hidden>
-                {f.blackFriday.map((l) => <span>{l}</span>)}
+                <span>{f.blackFriday}</span>
                 <span class="bf-mode">Code BLACKFRIDAY appliqué automatiquement, paiement aujourd'hui.</span>
               </p>
             )}
@@ -74,7 +76,7 @@ const formules = [
             ))}
           </ul>
           <div class="foot">
-            <a href={f.href} data-bf-href={f.blackFriday ? '' : undefined} data-bf-cta={f.blackFriday ? "S'abonner à −50 %" : undefined} class:list={['btn', { 'btn-gold': f.vedette, 'btn-line': !f.vedette }]}>{f.cta}</a>
+            <a href={f.href} data-bf-href={f.blackFriday ? '' : undefined} data-bf-cta={f.blackFriday ? bfCta : undefined} class:list={['btn', { 'btn-gold': f.vedette, 'btn-line': !f.vedette }]}>{f.cta}</a>
             {f.note && <p class="note" data-bf-cache={f.blackFriday ? '' : undefined}>{f.note}</p>}
           </div>
         </article>
