@@ -1,4 +1,10 @@
 ---
+import BlackFriday from './BlackFriday.astro';
+// Black Friday (20/11 → 30/11, heure de Paris) : montants remisés affichés et
+// boutons envoyés vers l'application par le script de BlackFriday.astro.
+// Avec le code, pas d'essai Stripe (paiement immédiat, décision du 18/11/2026) :
+// pendant la fenêtre, « 1 mois offert » et les notes d'essai sont masqués
+// ([data-bf-cache]) et les boutons disent « S'abonner à −50 % » ([data-bf-cta]).
 const signup = 'https://app.kneadmanager.com/#signup';
 // Lien de paiement Stripe permanent (Payment Link) de la formule Équipe, avec le mois offert.
 const paiementEquipe = 'https://buy.stripe.com/6oUaEX3Pybn9cJCfwE9k405';
@@ -9,6 +15,7 @@ const formules = [
     etiquette: 'Populaire',
     prix: '49',
     annuel: 'ou 470 €/an, soit −20 %',
+    blackFriday: ['24,50 € le premier mois (au lieu de 49 €)', '235 € la première année (au lieu de 470 €)'],
     pointsForts: ['1 utilisateur', '15 scans IA par mois (factures et recettes)', 'Recettes, coûts et marges', 'Import des commandes Shopify en un clic', 'Support par email'],
     cta: 'Essai gratuit 7 jours',
     href: signup,
@@ -19,6 +26,7 @@ const formules = [
     nom: 'Équipe',
     prix: '89',
     annuel: 'ou 854 €/an, soit −20 %',
+    blackFriday: ['44,50 € le premier mois (au lieu de 89 €)', '427 € la première année (au lieu de 854 €)'],
     offre: "Offre de lancement : 1 mois offert",
     pointsForts: ['Toutes les fonctionnalités Solo', '20 scans IA par jour (factures et recettes)', 'Comptes pour votre équipe', 'Support prioritaire'],
     cta: 'Commencer, 1 mois offert',
@@ -37,6 +45,7 @@ const formules = [
 <section class="pricing" id="tarifs">
   <div class="wrap">
     <h2 data-reveal>Commencez seul, ajoutez votre équipe quand vous voulez</h2>
+    <BlackFriday variante="tarifs" />
 
     <div class="grid">
       {formules.map((f) => (
@@ -48,7 +57,13 @@ const formules = [
               ? <p class="price">{f.prix}&nbsp;€<small>/mois</small></p>
               : <p class="price quote">Sur devis</p>}
             <p class="year">{f.annuel}</p>
-            {f.offre && <p class="offer">{f.offre}</p>}
+            {f.offre && <p class="offer" data-bf-cache={f.blackFriday ? '' : undefined}>{f.offre}</p>}
+            {f.blackFriday && (
+              <p class="bf-prix" data-bf hidden>
+                {f.blackFriday.map((l) => <span>{l}</span>)}
+                <span class="bf-mode">Code BLACKFRIDAY appliqué automatiquement, paiement aujourd'hui.</span>
+              </p>
+            )}
           </div>
           <ul>
             {f.pointsForts.map((p) => (
@@ -59,8 +74,8 @@ const formules = [
             ))}
           </ul>
           <div class="foot">
-            <a href={f.href} class:list={['btn', { 'btn-gold': f.vedette, 'btn-line': !f.vedette }]}>{f.cta}</a>
-            {f.note && <p class="note">{f.note}</p>}
+            <a href={f.href} data-bf-href={f.blackFriday ? '' : undefined} data-bf-cta={f.blackFriday ? "S'abonner à −50 %" : undefined} class:list={['btn', { 'btn-gold': f.vedette, 'btn-line': !f.vedette }]}>{f.cta}</a>
+            {f.note && <p class="note" data-bf-cache={f.blackFriday ? '' : undefined}>{f.note}</p>}
           </div>
         </article>
       ))}
@@ -80,6 +95,9 @@ const formules = [
   .price small { font-family: var(--sans); font-size: 1.0625rem; font-weight: 400; letter-spacing: 0; color: var(--ink-2); }
   .quote { font-size: 2.5rem; line-height: 1.3; }
   .year { margin-top: 6px; font-size: 1rem; color: var(--ink-2); }
+  .bf-prix { display: flex; flex-direction: column; gap: 2px; margin-top: 12px; padding: 8px 12px; border: 1px solid var(--gold); border-radius: var(--radius); font-size: .9375rem; font-weight: 600; line-height: 1.4; color: var(--navy); background: #fff; }
+  .bf-prix[hidden] { display: none; }
+  .bf-mode { font-size: .8125rem; font-weight: 400; color: var(--ink-2); }
   .offer { margin-top: 12px; font-size: 1rem; font-weight: 600; color: var(--gold-ink); }
   .head { padding-bottom: 24px; }
   ul { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; padding-top: 24px; border-top: 1px solid var(--line); }
