@@ -9,6 +9,10 @@ export const BF_FIN = '2026-12-01T00:00:00+01:00'; // exclusif : le 30/11 est in
 export const BF_CODE = 'BLACKFRIDAY';
 // Le lien de l'application : Tarifs avec le bandeau, code appliqué au paiement.
 export const BF_LIEN = 'https://app.kneadmanager.com/#pricing?offre=blackfriday';
+// Les boutons des cartes Tarifs (20/11/2026) : inscription puis Checkout
+// automatique de l'annuel, code appliqué (lib/checkoutDirect.js de l'app).
+export const bfLienSignup = (plan: 'solo' | 'team') =>
+  `https://app.kneadmanager.com/#signup?plan=${plan}&billing=yearly&offre=blackfriday`;
 
 export function blackFridayActif(now: number = Date.now()): boolean {
   return Number.isFinite(now) && now >= Date.parse(BF_DEBUT) && now < Date.parse(BF_FIN);

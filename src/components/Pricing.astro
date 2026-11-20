@@ -1,14 +1,20 @@
 ---
 import BlackFriday from './BlackFriday.astro';
+import { bfLienSignup } from '../data/blackFriday';
 // Black Friday (19/11 → 30/11, heure de Paris) : montants remisés affichés et
 // boutons envoyés vers l'application par le script de BlackFriday.astro.
 // Avec le code, pas d'essai Stripe (paiement immédiat, décision du 18/11/2026) :
 // pendant la fenêtre, « 1 mois offert » et les notes d'essai sont masqués
 // ([data-bf-cache]) et les boutons disent « Profiter du −50 % » ([data-bf-cta]).
 // Libellés des montants et du bouton : texte du fondateur du 19/11/2026.
+// 20/11/2026 : pendant la fenêtre, « soit −20 % » de l'annuel est masqué (seule
+// la remise −50 % se lit, le prix annuel reste) ; les boutons vont à
+// l'inscription puis au Checkout annuel remisé (#signup?plan=…&offre=blackfriday).
+// Hors fenêtre, Équipe passe aussi par l'inscription puis le Checkout
+// automatique (mois offert) : plus de Payment Link Stripe, qui rattachait le
+// paiement au compte par l'email seul.
 const signup = 'https://app.kneadmanager.com/#signup';
-// Lien de paiement Stripe permanent (Payment Link) de la formule Équipe, avec le mois offert.
-const paiementEquipe = 'https://buy.stripe.com/6oUaEX3Pybn9cJCfwE9k405';
+const signupEquipe = `${signup}?plan=team&billing=monthly`;
 const check = 'M20 6L9 17l-5-5';
 const bfCta = 'Profiter du −50\u00a0%';
 const formules = [
@@ -16,23 +22,27 @@ const formules = [
     nom: 'Solo',
     etiquette: 'Populaire',
     prix: '49',
-    annuel: 'ou 470 €/an, soit −20 %',
+    annuel: 'ou 470 €/an',
+    remiseAnnuelle: ', soit −20 %',
     blackFriday: 'Black Friday : 235 € la première année au lieu de 470 €, ou 24,50 € le premier mois',
     pointsForts: ['1 utilisateur', '15 scans IA par mois (factures et recettes)', 'Recettes, coûts et marges', 'Import des commandes Shopify en un clic', 'Support par email'],
     cta: 'Essai gratuit 7 jours',
     href: signup,
+    hrefBlackFriday: bfLienSignup('solo'),
     note: "Aucune carte bancaire pour l'essai de 7 jours.",
     vedette: true,
   },
   {
     nom: 'Équipe',
     prix: '89',
-    annuel: 'ou 854 €/an, soit −20 %',
+    annuel: 'ou 854 €/an',
+    remiseAnnuelle: ', soit −20 %',
     blackFriday: 'Black Friday : 427 € la première année au lieu de 854 €, ou 44,50 € le premier mois',
     offre: "Offre de lancement : 1 mois offert",
     pointsForts: ['Toutes les fonctionnalités Solo', '20 scans IA par jour (factures et recettes)', 'Comptes pour votre équipe', 'Support prioritaire'],
     cta: 'Commencer, 1 mois offert',
-    href: paiementEquipe,
+    href: signupEquipe,
+    hrefBlackFriday: bfLienSignup('team'),
     note: 'Carte bancaire demandée à la souscription. Aucun débit avant 30 jours, annulation en un clic.',
   },
   {
@@ -58,7 +68,7 @@ const formules = [
             {f.prix
               ? <p class="price">{f.prix}&nbsp;€<small>/mois</small></p>
               : <p class="price quote">Sur devis</p>}
-            <p class="year">{f.annuel}</p>
+            <p class="year">{f.annuel}{f.remiseAnnuelle && <span data-bf-cache>{f.remiseAnnuelle}</span>}</p>
             {f.offre && <p class="offer" data-bf-cache={f.blackFriday ? '' : undefined}>{f.offre}</p>}
             {f.blackFriday && (
               <p class="bf-prix" data-bf hidden>
@@ -76,7 +86,7 @@ const formules = [
             ))}
           </ul>
           <div class="foot">
-            <a href={f.href} data-bf-href={f.blackFriday ? '' : undefined} data-bf-cta={f.blackFriday ? bfCta : undefined} class:list={['btn', { 'btn-gold': f.vedette, 'btn-line': !f.vedette }]}>{f.cta}</a>
+            <a href={f.href} data-bf-href={f.hrefBlackFriday} data-bf-cta={f.blackFriday ? bfCta : undefined} class:list={['btn', { 'btn-gold': f.vedette, 'btn-line': !f.vedette }]}>{f.cta}</a>
             {f.note && <p class="note" data-bf-cache={f.blackFriday ? '' : undefined}>{f.note}</p>}
           </div>
         </article>
